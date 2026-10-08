@@ -1,0 +1,50 @@
+{
+  "api-bugs-2026-10-07.json": {
+    "bytes": 9256,
+    "sha256": "ab3a362bfaf89e0f5b26d153959dc75ff4364672adc386ba6f6c40ba6c33f69a"
+  },
+  "axe-carrinho.json": {
+    "bytes": 133834,
+    "sha256": "d029bbdd4ed6292196dd2c184acb7e361ab5369c7ac58512bd558c55c903a673"
+  },
+  "bug-001-com-cupom.png": {
+    "bytes": 76569,
+    "sha256": "b10974be36a0f97e8caf40a82849e73073ab05ae08ced40bee9f996c3a02bacd"
+  },
+  "bug-001-sem-cupom.png": {
+    "bytes": 80070,
+    "sha256": "8c95657b17b2f0e8fafa4f373017775aa89ee12dccb38d1e13ef9c184c2bab62"
+  },
+  "bug-001-trace.zip": {
+    "bytes": 10818,
+    "sha256": "d50dcbc30ece6ec83069ba8e7d381e11e6eb7a00a72e5d610c5cee3996925587"
+  },
+  "bug-002-trace.zip": {
+    "bytes": 10539,
+    "sha256": "a5f8297591798fb6d695e419273b79d87bf971392ebe30ca1b0b6cdf8cd3b399"
+  },
+  "cupom-removido.png": {
+    "bytes": 81484,
+    "sha256": "d0d7da2a9e2d65ccdac41d7df2f0ea5ecc141ba8e36ba35ec01492365b2b123d"
+  },
+  "cupom-valido.png": {
+    "bytes": 84162,
+    "sha256": "f9ce7dd0aa34bbac3bf47e8147ea40b1de884f80593152d9aafe7fcf78971109"
+  },
+  "execucao-2026-10-07.log": {
+    "bytes": 63801,
+    "sha256": "528c35865e5b8505bfdddc9eb9565a304fcd282f0b710c5053984760bfe33d9c"
+  },
+  "execucao-2026-10-07.md": {
+    "bytes": 12957,
+    "sha256": "03ce343882c75cbe373dbba0ad40b98cc68a75aaa2cf8572fd159790ae63fdf3"
+  },
+  "exploracao-manual-2026-10-07.md": {
+    "bytes": 4179,
+    "sha256": "456fbaca0e68a2100edb69d8de3edc41e20663423bb7e3504d72ace901b47061"
+  },
+  "resultados-2026-10-07.json": {
+    "bytes": 418145,
+    "sha256": "0f78b8c1f195ae0c05f51d16417680d1351c0ad028b4dba212d0f025159e8984"
+  }
+}

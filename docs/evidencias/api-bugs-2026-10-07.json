@@ -1,0 +1,346 @@
+{
+  "ambiente": "https://verzel-store.qa-test-verzel-store.workers.dev",
+  "documentacao": "https://verzel-store.qa-test-verzel-store.workers.dev/documentacao",
+  "versaoDocumentacao": "2.3.0",
+  "geradoEmUTC": "2026-10-07T22:21:56.472Z",
+  "observacao": "Sondagens funcionais focadas. API stateless; pedidos fictícios não são armazenados, não enviam e-mail nem geram cobrança. Cliente gerado pela factory com domínio reservado .invalid.",
+  "sondagens": [
+    {
+      "criterio": "CA08",
+      "descricao": "Subtotal acima do limite, reduzido pelo desconto para abaixo de R$ 200.",
+      "timestampUTC": "2026-10-07T22:21:08.432Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P001",
+              "quantidade": 1
+            },
+            {
+              "produtoId": "P006",
+              "quantidade": 5
+            }
+          ],
+          "cupom": "BEMVINDO10"
+        }
+      },
+      "expected": {
+        "status": 200,
+        "fields": {
+          "subtotal": 209.4,
+          "desconto": 20.94,
+          "frete": 0,
+          "freteGratis": true,
+          "valorFaltanteFreteGratis": 0,
+          "total": 188.46
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P001",
+              "nome": "Camiseta Essencial",
+              "precoUnitario": 59.9,
+              "quantidade": 1,
+              "total": 59.9
+            },
+            {
+              "produtoId": "P006",
+              "nome": "Kit 3 Pares de Meias",
+              "precoUnitario": 29.9,
+              "quantidade": 5,
+              "total": 149.5
+            }
+          ],
+          "subtotal": 209.4,
+          "desconto": 20.94,
+          "frete": 0,
+          "freteGratis": true,
+          "valorFaltanteFreteGratis": 0,
+          "total": 188.46,
+          "cupom": {
+            "codigo": "BEMVINDO10",
+            "aplicado": true,
+            "mensagem": "Cupom aplicado: 10% de desconto nos produtos."
+          }
+        }
+      },
+      "matchesExpected": true,
+      "divergencias": [],
+      "id": "CONTROLE-CA08",
+      "classificacao": "Controle aprovado: regra usa o subtotal antes do desconto."
+    },
+    {
+      "bugId": "BUG-001",
+      "criterio": "CA06",
+      "descricao": "Frete grátis no limite inclusivo de R$ 200, sem cupom.",
+      "timestampUTC": "2026-10-07T22:21:08.674Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P005",
+              "quantidade": 2
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": 200,
+        "fields": {
+          "subtotal": 200,
+          "desconto": 0,
+          "frete": 0,
+          "freteGratis": true,
+          "valorFaltanteFreteGratis": 0,
+          "total": 200
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P005",
+              "nome": "Mochila Urbana 20L",
+              "precoUnitario": 100,
+              "quantidade": 2,
+              "total": 200
+            }
+          ],
+          "subtotal": 200,
+          "desconto": 0,
+          "frete": 19.9,
+          "freteGratis": false,
+          "valorFaltanteFreteGratis": 0,
+          "total": 219.9,
+          "cupom": null
+        }
+      },
+      "matchesExpected": false,
+      "divergencias": [
+        {
+          "campo": "frete",
+          "esperado": 0,
+          "atual": 19.9
+        },
+        {
+          "campo": "freteGratis",
+          "esperado": true,
+          "atual": false
+        },
+        {
+          "campo": "total",
+          "esperado": 200,
+          "atual": 219.9
+        }
+      ]
+    },
+    {
+      "bugId": "BUG-002",
+      "criterio": "CA10",
+      "descricao": "Cálculo deve rejeitar seis unidades do mesmo produto.",
+      "timestampUTC": "2026-10-07T22:21:08.725Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P001",
+              "quantidade": 6
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": 422,
+        "errorCode": "QUANTIDADE_MAXIMA_EXCEDIDA"
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P001",
+              "nome": "Camiseta Essencial",
+              "precoUnitario": 59.9,
+              "quantidade": 6,
+              "total": 359.4
+            }
+          ],
+          "subtotal": 359.4,
+          "desconto": 0,
+          "frete": 0,
+          "freteGratis": true,
+          "valorFaltanteFreteGratis": 0,
+          "total": 359.4,
+          "cupom": null
+        }
+      },
+      "matchesExpected": false,
+      "divergencias": [
+        {
+          "campo": "status",
+          "esperado": 422,
+          "atual": 200
+        },
+        {
+          "campo": "erro.codigo",
+          "esperado": "QUANTIDADE_MAXIMA_EXCEDIDA",
+          "atual": null
+        }
+      ]
+    },
+    {
+      "bugId": "BUG-002",
+      "criterio": "CA10",
+      "descricao": "Confirmação fictícia deve rejeitar seis unidades do mesmo produto.",
+      "timestampUTC": "2026-10-07T22:21:08.787Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/pedidos",
+        "body": {
+          "cliente": {
+            "nome": "Cliente Teste",
+            "email": "qa.72fafe11-1259-47e4-85b2-b89c09b1c337@example.invalid",
+            "cep": "01310-100"
+          },
+          "itens": [
+            {
+              "produtoId": "P001",
+              "quantidade": 6
+            }
+          ]
+        }
+      },
+      "expected": {
+        "status": 422,
+        "errorCode": "QUANTIDADE_MAXIMA_EXCEDIDA"
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "numero": "VZ-559803",
+          "criadoEm": "2026-10-07T22:21:08.979Z",
+          "cliente": {
+            "nome": "Cliente Teste",
+            "email": "qa.72fafe11-1259-47e4-85b2-b89c09b1c337@example.invalid",
+            "cep": "01310100"
+          },
+          "itens": [
+            {
+              "produtoId": "P001",
+              "nome": "Camiseta Essencial",
+              "precoUnitario": 59.9,
+              "quantidade": 6,
+              "total": 359.4
+            }
+          ],
+          "subtotal": 359.4,
+          "desconto": 0,
+          "frete": 0,
+          "freteGratis": true,
+          "valorFaltanteFreteGratis": 0,
+          "total": 359.4,
+          "cupom": null
+        }
+      },
+      "matchesExpected": false,
+      "divergencias": [
+        {
+          "campo": "status",
+          "esperado": 422,
+          "atual": 201
+        },
+        {
+          "campo": "erro.codigo",
+          "esperado": "QUANTIDADE_MAXIMA_EXCEDIDA",
+          "atual": null
+        }
+      ]
+    },
+    {
+      "bugId": "BUG-001",
+      "criterio": "CA06",
+      "criteriosRelacionados": [
+        "CA08"
+      ],
+      "descricao": "Mesmo defeito do limite inclusivo de R$ 200 com cupom. O controle acima do limite passou e distingue esta falha de uma regra de frete calculada após desconto.",
+      "timestampUTC": "2026-10-07T22:21:56.273Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P005",
+              "quantidade": 2
+            }
+          ],
+          "cupom": "BEMVINDO10"
+        }
+      },
+      "expected": {
+        "status": 200,
+        "fields": {
+          "subtotal": 200,
+          "desconto": 20,
+          "frete": 0,
+          "freteGratis": true,
+          "valorFaltanteFreteGratis": 0,
+          "total": 180
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P005",
+              "nome": "Mochila Urbana 20L",
+              "precoUnitario": 100,
+              "quantidade": 2,
+              "total": 200
+            }
+          ],
+          "subtotal": 200,
+          "desconto": 20,
+          "frete": 19.9,
+          "freteGratis": false,
+          "valorFaltanteFreteGratis": 0,
+          "total": 199.9,
+          "cupom": {
+            "codigo": "BEMVINDO10",
+            "aplicado": true,
+            "mensagem": "Cupom aplicado: 10% de desconto nos produtos."
+          }
+        }
+      },
+      "matchesExpected": false,
+      "divergencias": [
+        {
+          "campo": "frete",
+          "esperado": 0,
+          "atual": 19.9
+        },
+        {
+          "campo": "freteGratis",
+          "esperado": true,
+          "atual": false
+        },
+        {
+          "campo": "total",
+          "esperado": 180,
+          "atual": 199.9
+        }
+      ]
+    }
+  ]
+}
