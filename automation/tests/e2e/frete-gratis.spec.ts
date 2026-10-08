@@ -3,18 +3,18 @@ import { produtos } from '../../pages/vitrine.page';
 import { settings } from '../../support/env';
 
 test.describe('Frete e quantidade @regression', () => {
-  test('CT-CA06-001 frete grátis em R$ 200 antes e depois do cupom @smoke', async ({ vitrinePage, carrinhoPage }, testInfo) => {
+  test('CT-CA08-001 frete grátis em R$ 200 antes e depois do cupom @smoke', async ({ vitrinePage, carrinhoPage }, testInfo) => {
     testInfo.annotations.push({ type: 'issue', description: 'BUG-001' });
     await vitrinePage.abrir();
     await vitrinePage.adicionar('P005', 2);
     await vitrinePage.irAoCarrinho();
     await carrinhoPage.aguardarCalculo();
-    await carrinhoPage.anexarEvidencia(testInfo, 'CT-CA06-001-sem-cupom');
+    await carrinhoPage.anexarEvidencia(testInfo, 'CT-CA08-001-sem-cupom');
     // As duas etapas são verificadas mesmo quando o frete inicial falha.
     await carrinhoPage.esperarResumo({ subtotal: 200, desconto: 0, frete: 0, total: 200 }, true);
     await carrinhoPage.aplicarCupom(settings.cupomValido);
     await carrinhoPage.esperarCupomAplicado(settings.cupomValido.toUpperCase());
-    await carrinhoPage.anexarEvidencia(testInfo, 'CT-CA06-001-com-cupom');
+    await carrinhoPage.anexarEvidencia(testInfo, 'CT-CA08-001-com-cupom');
     await carrinhoPage.esperarResumo({ subtotal: 200, desconto: 20, frete: 0, total: 180 }, true);
   });
 

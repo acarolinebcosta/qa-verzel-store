@@ -1,5 +1,5 @@
 # Uso de IA
 
-Codex apoiou análise, implementação, documentação e execução da suíte. A exploração de interface foi conduzida pelo agente, e está identificada nos registros; não representa execução humana. As expectativas seguem os critérios oficiais e as falhas têm evidências reais.
+Codex apoiou análise, implementação, documentação e execução da suíte. A exploração manual de interface foi conduzida pelo agente e está identificada nos registros; não representa execução humana. Expectativas seguem o contrato oficial, e os resultados têm evidências reais.
 
-Rodada final 08/10/2026:58 testes,51 aprovados,7 reprovados pelos dois bugs documentados. A revisão final humana permanece NÃO EXECUTADA. Não há comentários de autoria por IA no código.
+A revisão humana da entrega permanece NÃO EXECUTADO. A documentação de apoio fica nesta página; não há comentários de autoria por IA no código.

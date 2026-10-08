@@ -3,16 +3,17 @@ import { criarCliente } from '../../factories/cliente.factory';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { schemaErro, schemaPedido } from '../../schemas/api.schema';
 import { settings } from '../../support/env';
+import { esperarResumoAPI } from '../../support/monetary';
 
 test.describe('Confirmação fictícia de pedidos na API @regression', () => {
   const itens = [{ produtoId: 'P005', quantidade: 1 }];
 
-  test('CT-CA01-203 confirma pedido válido com cliente fictício e CEP normalizado @smoke', async ({ request }) => {
+  test('CT-CLI-004 confirma pedido válido com cupom e CEP normalizado @smoke', async ({ request }) => {
     const cliente = criarCliente();
     const response = await new CarrinhoService(request).criarPedido({ cliente, itens, cupom: settings.cupomValido });
     expect(response.status()).toBe(201);
     const pedido = schemaPedido.parse(await response.json());
-    expect(pedido).toMatchObject({
+    esperarResumoAPI(pedido, {
       cliente: { nome: cliente.nome, email: cliente.email, cep: '01310100' },
       subtotal: 100, desconto: 10, frete: 19.9, total: 109.9,
       cupom: { aplicado: true, codigo: settings.cupomValido.toUpperCase() },
@@ -20,10 +21,12 @@ test.describe('Confirmação fictícia de pedidos na API @regression', () => {
     // O número é fictício e o pedido não é armazenado; não existe GET de pedidos.
   });
 
-  test('CT-CA09-202 confirma pedido sem cupom', async ({ request }) => {
+  test('CT-CLI-006 confirma pedido sem cupom e CEP sem hífen', async ({ request }) => {
     const response = await new CarrinhoService(request).criarPedido({ cliente: criarCliente({ cep: '01310100' }), itens });
     expect(response.status()).toBe(201);
-    expect(schemaPedido.parse(await response.json())).toMatchObject({ desconto: 0, total: 119.9, cupom: null });
+    esperarResumoAPI(schemaPedido.parse(await response.json()), {
+      cliente: { cep: '01310100' }, subtotal: 100, desconto: 0, frete: 19.9, total: 119.9, cupom: null,
+    });
   });
 
   test('CT-CA08-203 CA06/CA08: pedido de R$ 200 com cupom confirma com frete grátis', async ({ request }) => {
@@ -32,28 +35,29 @@ test.describe('Confirmação fictícia de pedidos na API @regression', () => {
       cliente: criarCliente(), itens: [{ produtoId: 'P005', quantidade: 2 }], cupom: settings.cupomValido,
     });
     expect(response.status()).toBe(201);
-    expect(schemaPedido.parse(await response.json())).toMatchObject({
+    esperarResumoAPI(schemaPedido.parse(await response.json()), {
       subtotal: 200, desconto: 20, frete: 0, freteGratis: true, total: 180,
     });
   });
 
-  for (const [cupom, codigo] of [
-    [settings.cupomInvalido, 'CUPOM_INVALIDO'],
-    [settings.cupomExpirado, 'CUPOM_EXPIRADO'],
+  for (const { id, cupom, codigo } of [
+    { id: 'CT-CA03-220', cupom: settings.cupomInvalido, codigo: 'CUPOM_INVALIDO' },
+    { id: 'CT-CA04-220', cupom: settings.cupomExpirado, codigo: 'CUPOM_EXPIRADO' },
   ]) {
-    test(`CT-${codigo === 'CUPOM_EXPIRADO' ? 'CA04' : 'CA03'}-220 pedido com ${cupom} responde 422 ${codigo}`, async ({ request }) => {
+    test(`${id} pedido com ${cupom} responde 422 ${codigo}`, async ({ request }) => {
       const response = await new CarrinhoService(request).criarPedido({ cliente: criarCliente(), itens, cupom });
       expect(response.status()).toBe(422);
       expect(schemaErro.parse(await response.json()).erro.codigo).toBe(codigo);
     });
   }
 
-  for (const [indice, { campo, override }] of [
-    { campo: 'cliente.nome', override: { nome: 'Cliente' } },
-    { campo: 'cliente.email', override: { email: 'email-invalido' } },
-    { campo: 'cliente.cep', override: { cep: '123' } },
-  ].entries()) {
-    test(`CT-CA10-${222 + indice} rejeita ${campo} inválido com detalhe do campo`, async ({ request }) => {
+  for (const { id, campo, override } of [
+    { id: 'CT-CLI-001', campo: 'cliente.nome', override: { nome: 'Maria' } },
+    { id: 'CT-CLI-002', campo: 'cliente.email', override: { email: 'maria@exemplo' } },
+    { id: 'CT-CLI-003', campo: 'cliente.cep', override: { cep: '0131010' } },
+    { id: 'CT-CLI-005', campo: 'cliente.cep', override: { cep: '01310 100' } },
+  ]) {
+    test(`${id} rejeita ${campo} inválido ${JSON.stringify(override)} com detalhe do campo`, async ({ request }) => {
       const response = await new CarrinhoService(request).criarPedido({ cliente: criarCliente(override), itens });
       expect(response.status()).toBe(422);
       const erro = schemaErro.parse(await response.json()).erro;
@@ -71,7 +75,7 @@ test.describe('Confirmação fictícia de pedidos na API @regression', () => {
     expect(schemaErro.parse(await response.json()).erro.codigo).toBe('QUANTIDADE_MAXIMA_EXCEDIDA');
   });
 
-  test('CT-CA10-221 pedido rejeita produto duplicado', async ({ request }) => {
+  test('CT-API-013 pedido rejeita produto duplicado', async ({ request }) => {
     const response = await new CarrinhoService(request).criarPedido({
       cliente: criarCliente(), itens: [{ produtoId: 'P001', quantidade: 1 }, { produtoId: 'P001', quantidade: 1 }],
     });

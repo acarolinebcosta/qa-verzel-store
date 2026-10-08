@@ -1,0 +1,831 @@
+
+> qa-verzel-store@1.0.0 pretest
+> npm run bddgen
+
+
+> qa-verzel-store@1.0.0 bddgen
+> bddgen
+
+
+> qa-verzel-store@1.0.0 test
+> playwright test
+
+
+Running 70 tests using 2 workers
+
+(node:58424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:58425) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/api/carrinho.spec.ts:31:9 › Frete e cálculo do carrinho na API @regression › CT-CA07-203 fronteira de subtotal R$ 100.00 sem cupom @smoke (181ms)
+  ✓   2 [chromium] › tests/api/carrinho.spec.ts:31:9 › Frete e cálculo do carrinho na API @regression › CT-CA07-201 fronteira de subtotal R$ 199.80 sem cupom @smoke (176ms)
+  ✓   3 [chromium] › tests/api/carrinho.spec.ts:31:9 › Frete e cálculo do carrinho na API @regression › CT-CA07-202 fronteira de subtotal R$ 199.90 sem cupom @smoke (139ms)
+  ✓   5 [chromium] › tests/api/carrinho.spec.ts:31:9 › Frete e cálculo do carrinho na API @regression › CT-CA06-202 fronteira de subtotal R$ 209.40 sem cupom @smoke (123ms)
+  ✘   4 [chromium] › tests/api/carrinho.spec.ts:31:9 › Frete e cálculo do carrinho na API @regression › CT-CA06-201 fronteira de subtotal R$ 200.00 sem cupom @smoke (283ms)
+  ✘   6 [chromium] › tests/api/carrinho.spec.ts:50:9 › Frete e cálculo do carrinho na API @regression › CT-CA08-201 CA08: cupom preserva regra de frete sobre subtotal R$ 200.00 (147ms)
+(node:58433) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:58439) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   7 [chromium] › tests/api/carrinho.spec.ts:31:9 › Frete e cálculo do carrinho na API @regression › CT-CA06-201 fronteira de subtotal R$ 200.00 sem cupom @smoke (retry #1) (181ms)
+(node:58440) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   8 [chromium] › tests/api/carrinho.spec.ts:50:9 › Frete e cálculo do carrinho na API @regression › CT-CA08-201 CA08: cupom preserva regra de frete sobre subtotal R$ 200.00 (retry #1) (519ms)
+(node:58441) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 [chromium] › tests/api/carrinho.spec.ts:50:9 › Frete e cálculo do carrinho na API @regression › CT-CA08-204 CA08: cupom preserva regra de frete sobre subtotal R$ 199.90 (191ms)
+  ✘  11 [chromium] › tests/api/carrinho.spec.ts:63:7 › Frete e cálculo do carrinho na API @regression › CT-CA04-202 cupom expirado no limite mantém cálculo 200 sem desconto (143ms)
+(node:58442) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [chromium] › tests/api/carrinho.spec.ts:50:9 › Frete e cálculo do carrinho na API @regression › CT-CA08-202 CA08: cupom preserva regra de frete sobre subtotal R$ 209.40 (1.2s)
+  ✓  13 [chromium] › tests/api/carrinho.spec.ts:73:7 › Frete e cálculo do carrinho na API @regression › CT-CA10-201 CA10: aceita exatamente cinco unidades por produto (130ms)
+  ✘  12 [chromium] › tests/api/carrinho.spec.ts:63:7 › Frete e cálculo do carrinho na API @regression › CT-CA04-202 cupom expirado no limite mantém cálculo 200 sem desconto (retry #1) (174ms)
+  ✓  14 [chromium] › tests/api/carrinho.spec.ts:85:7 › Frete e cálculo do carrinho na API @regression › CT-CA11-201 CA11: arredonda subtotal, desconto e total para centavos (132ms)
+(node:58445) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  15 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-003 rejeita carrinho vazio com erro documentado (132ms)
+  ✓  16 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-004 rejeita itens nulos com erro documentado (283ms)
+  ✓  17 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-002 rejeita itens ausentes com erro documentado (160ms)
+  ✘  18 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-005 rejeita item sem produtoId com erro documentado (136ms)
+  ✘  19 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-006 rejeita item sem quantidade com erro documentado (137ms)
+(node:58451) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:58453) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  20 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-005 rejeita item sem produtoId com erro documentado (retry #1) (159ms)
+  ✘  21 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-006 rejeita item sem quantidade com erro documentado (retry #1) (161ms)
+(node:58454) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:58455) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  22 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-012 rejeita item sem objeto com erro documentado (186ms)
+  ✓  23 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-007 rejeita produto inexistente com erro documentado (154ms)
+  ✓  25 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-CA10-207 rejeita quantidade zero com erro documentado (116ms)
+  ✘  24 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-CA10-206 rejeita CA10: seis unidades com erro documentado (129ms)
+(node:58456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  27 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-CA10-206 rejeita CA10: seis unidades com erro documentado (retry #1) (168ms)
+(node:58459) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  28 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-CA10-209 rejeita quantidade fracionária com erro documentado (160ms)
+  ✓  26 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-CA10-208 rejeita quantidade negativa com erro documentado (1.1s)
+  ✓  29 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-CA10-210 rejeita quantidade textual com erro documentado (129ms)
+  ✓  30 [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-008 rejeita produto duplicado com erro documentado (125ms)
+  ✓  31 [chromium] › tests/api/carrinho.spec.ts:132:7 › Frete e cálculo do carrinho na API @regression › CT-API-001 JSON malformado responde 400 (125ms)
+  ✓  33 [chromium] › tests/api/cupom.spec.ts:33:9 › Cupons na API @regression › CT-CA02-201 CA02: normaliza caixa e espaços em "bemvindo10" (132ms)
+  ✓  32 [chromium] › tests/api/cupom.spec.ts:12:7 › Cupons na API @regression › CT-CA01-201 CA01/CA09: 10% sobre produtos mantém frete de R$ 19,90 @smoke (288ms)
+  ✓  34 [chromium] › tests/api/cupom.spec.ts:33:9 › Cupons na API @regression › CT-CA02-202 CA02: normaliza caixa e espaços em "  BEMVINDO10  " (131ms)
+  ✓  35 [chromium] › tests/api/cupom.spec.ts:33:9 › Cupons na API @regression › CT-CA02-203 CA02: normaliza caixa e espaços em "\tbemvindo10\n" (126ms)
+  ✓  36 [chromium] › tests/api/cupom.spec.ts:33:9 › Cupons na API @regression › CT-CA02-204 CA02: normaliza caixa e espaços em "  BeMvInDo10  " (133ms)
+  ✓  37 [chromium] › tests/api/cupom.spec.ts:51:9 › Cupons na API @regression › CT-CA03-201 CA03: CUPOM_INEXISTENTE_999 calcula sem desconto e informa o motivo (134ms)
+  ✓  38 [chromium] › tests/api/cupom.spec.ts:51:9 › Cupons na API @regression › CT-CA04-201 CA04: VERAO2026 calcula sem desconto e informa o motivo (133ms)
+  ✓  40 [chromium] › tests/api/cupom.spec.ts:77:7 › Cupons na API @regression › CT-CA05-202 CA05: dois códigos em um campo não acumulam cupons (137ms)
+  ✓  39 [chromium] › tests/api/cupom.spec.ts:61:7 › Cupons na API @regression › CT-CA05-201 CA05: requisições independentes removem e reaplicam o cupom sem acumular desconto entre chamadas (254ms)
+  ✓  41 [chromium] › tests/api/cupom.spec.ts:88:7 › Cupons na API @regression › CT-CA01-202 cupom não exige valor mínimo para desconto (134ms)
+  ✓  42 [chromium] › tests/api/cupom.spec.ts:98:7 › Cupons na API @regression › CT-CA09-203 desconto exclui frete cobrado em subtotal de R$ 150,00 (132ms)
+  ✓  43 [chromium] › tests/api/pedidos.spec.ts:11:7 › Confirmação fictícia de pedidos na API @regression › CT-CLI-004 confirma pedido válido com cupom e CEP normalizado @smoke (135ms)
+  ✓  44 [chromium] › tests/api/pedidos.spec.ts:24:7 › Confirmação fictícia de pedidos na API @regression › CT-CLI-006 confirma pedido sem cupom e CEP sem hífen (150ms)
+  ✘  45 [chromium] › tests/api/pedidos.spec.ts:32:7 › Confirmação fictícia de pedidos na API @regression › CT-CA08-203 CA06/CA08: pedido de R$ 200 com cupom confirma com frete grátis (137ms)
+  ✓  46 [chromium] › tests/api/pedidos.spec.ts:47:9 › Confirmação fictícia de pedidos na API @regression › CT-CA03-220 pedido com CUPOM_INEXISTENTE_999 responde 422 CUPOM_INVALIDO (136ms)
+  ✓  47 [chromium] › tests/api/pedidos.spec.ts:47:9 › Confirmação fictícia de pedidos na API @regression › CT-CA04-220 pedido com VERAO2026 responde 422 CUPOM_EXPIRADO (135ms)
+(node:58461) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  48 [chromium] › tests/api/pedidos.spec.ts:60:9 › Confirmação fictícia de pedidos na API @regression › CT-CLI-001 rejeita cliente.nome inválido {"nome":"Maria"} com detalhe do campo (130ms)
+  ✓  49 [chromium] › tests/api/pedidos.spec.ts:60:9 › Confirmação fictícia de pedidos na API @regression › CT-CLI-002 rejeita cliente.email inválido {"email":"maria@exemplo"} com detalhe do campo (144ms)
+  ✘  50 [chromium] › tests/api/pedidos.spec.ts:32:7 › Confirmação fictícia de pedidos na API @regression › CT-CA08-203 CA06/CA08: pedido de R$ 200 com cupom confirma com frete grátis (retry #1) (178ms)
+  ✓  51 [chromium] › tests/api/pedidos.spec.ts:60:9 › Confirmação fictícia de pedidos na API @regression › CT-CLI-003 rejeita cliente.cep inválido {"cep":"0131010"} com detalhe do campo (142ms)
+  ✘  52 [chromium] › tests/api/pedidos.spec.ts:69:7 › Confirmação fictícia de pedidos na API @regression › CT-CA10-220 CA10: pedido rejeita seis unidades do mesmo produto (137ms)
+(node:58462) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:58463) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  53 [chromium] › tests/api/pedidos.spec.ts:60:9 › Confirmação fictícia de pedidos na API @regression › CT-CLI-005 rejeita cliente.cep inválido {"cep":"01310 100"} com detalhe do campo (159ms)
+  ✓  55 [chromium] › tests/api/pedidos.spec.ts:78:7 › Confirmação fictícia de pedidos na API @regression › CT-API-013 pedido rejeita produto duplicado (136ms)
+  ✘  54 [chromium] › tests/api/pedidos.spec.ts:69:7 › Confirmação fictícia de pedidos na API @regression › CT-CA10-220 CA10: pedido rejeita seis unidades do mesmo produto (retry #1) (173ms)
+  ✓  56 [chromium] › tests/api/produtos.spec.ts:5:7 › Catálogo público › CT-CA11-290 lista o catálogo sem credenciais @smoke @regression (133ms)
+(node:58466) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  57 [chromium] › tests/api/produtos.spec.ts:27:7 › Catálogo público › CT-API-009 produto inexistente responde 404 com contrato de erro @regression (140ms)
+  ✓  58 [chromium] › tests/api/produtos.spec.ts:33:7 › Catálogo público › CT-API-010 método POST no catálogo responde 405 @regression (147ms)
+  ✓  59 [chromium] › tests/api/produtos.spec.ts:19:7 › Catálogo público › CT-CA11-291 consulta um produto público pelo ID @regression (152ms)
+  ✓  60 [chromium] › tests/api/produtos.spec.ts:39:7 › Catálogo público › CT-API-011 rota inexistente responde 404 @regression (124ms)
+(node:58468) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:58469) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  61 [chromium] › tests/e2e/cupom.spec.ts:5:7 › Cupom na interface @regression › CT-CA01-001 cupom válido abaixo do limite @smoke (1.3s)
+  ✓  62 [chromium] › tests/e2e/acessibilidade.spec.ts:4:5 › CT-CA05-090 carrinho sem violações críticas de acessibilidade @regression (1.4s)
+  ✓  63 [chromium] › tests/e2e/cupom.spec.ts:17:9 › Cupom na interface @regression › CT-CA03-001 rejeita cupom sem alterar o total @smoke (778ms)
+  ✓  64 [chromium] › tests/e2e/cupom.spec.ts:17:9 › Cupom na interface @regression › CT-CA04-001 rejeita cupom sem alterar o total @smoke (847ms)
+  ✓  65 [chromium] › tests/e2e/cupom.spec.ts:25:7 › Cupom na interface @regression › CT-CA02-001 normaliza caixa mista e espaços (769ms)
+  ✓  66 [chromium] › tests/e2e/cupom.spec.ts:32:7 › Cupom na interface @regression › CT-CA05-001 remove cupom e permite reaplicar (1.1s)
+  ✓  67 [chromium] › tests/e2e/cupom.spec.ts:43:7 › Cupom na interface @regression › CT-HIP-001 observa resposta ao campo só com espaços (644ms)
+  ✓  68 [chromium] › tests/e2e/cupom.spec.ts:50:7 › Cupom na interface @regression › CT-CA09-001 desconto exclui frete no subtotal de R$ 150 @smoke (900ms)
+  ✓  69 [chromium] › tests/e2e/cupom.spec.ts:60:7 › Cupom na interface @regression › CT-CA11-002 apresenta centavos com formatação brasileira (874ms)
+  ✓  71 [chromium] › tests/e2e/frete-gratis.spec.ts:21:7 › Frete e quantidade @regression › CT-CA07-001 R$ 199,80 sem cupom informa faltante de R$ 0,20 @smoke (924ms)
+  ✓  72 [chromium] › tests/e2e/frete-gratis.spec.ts:30:7 › Frete e quantidade @regression › CT-CA07-002 remoção de produto recalcula frete e faltante (871ms)
+  ✓  73 [chromium] › tests/e2e/frete-gratis.spec.ts:42:7 › Frete e quantidade @regression › CT-CA10-001 limita cinco unidades na vitrine e carrinho (691ms)
+(node:58515) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  74 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:6:7 › Transições do estado do cupom › CT-CA05-101 Impedir segundo cupom antes de remover o atual @regression @cupom (1.5s)
+  ✘  70 [chromium] › tests/e2e/frete-gratis.spec.ts:6:7 › Frete e quantidade @regression › CT-CA08-001 frete grátis em R$ 200 antes e depois do cupom @smoke (5.4s)
+  ✓  75 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:17:7 › Transições do estado do cupom › CT-CA11-101 Recalcular centavos ao alterar quantidade com cupom @regression @cupom (904ms)
+(node:58525) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  76 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:6:7 › Reavaliar a elegibilidade do frete › CT-CA08-101 Atravessar o limite nos dois sentidos com cupom @regression @frete (972ms)
+  ✓  78 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:17:7 › Reavaliar a elegibilidade do frete › CT-HIP-002 Observar descarte do cupom ao esvaziar carrinho @regression @frete @hipotese (1.3s)
+  ✓  79 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:27:7 › Reavaliar a elegibilidade do frete › CT-CA07-101 Remover produto com cupom reavalia desconto e frete @regression @frete (1.2s)
+  ✘  77 [chromium] › tests/e2e/frete-gratis.spec.ts:6:7 › Frete e quantidade @regression › CT-CA08-001 frete grátis em R$ 200 antes e depois do cupom @smoke (retry #1) (5.3s)
+
+
+  1) [chromium] › tests/api/carrinho.spec.ts:31:9 › Frete e cálculo do carrinho na API @regression › CT-CA06-201 fronteira de subtotal R$ 200.00 sem cupom @smoke 
+
+    Error: Valor financeiro de frete
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 0
+    Received: 19.9
+
+    Expected precision:    2
+    Expected difference: < 0.005
+    Received difference:   19.9
+
+       at ../support/monetary.ts:12
+
+      10 |     const valorEsperado = esperado[campo];
+      11 |     if (typeof valorEsperado === 'number') {
+    > 12 |       expect(resumo[campo], `Valor financeiro de ${campo}`).toBeCloseTo(valorEsperado, 2);
+         |                                                             ^
+      13 |       delete demaisCampos[campo];
+      14 |     }
+      15 |   }
+        at esperarResumoAPI (/Users/anacosta/Documents/ChatGPT/Verzel/automation/support/monetary.ts:12:61)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:36:23
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-df169-al-R-200-00-sem-cupom-smoke-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: Valor financeiro de frete
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 0
+    Received: 19.9
+
+    Expected precision:    2
+    Expected difference: < 0.005
+    Received difference:   19.9
+
+       at ../support/monetary.ts:12
+
+      10 |     const valorEsperado = esperado[campo];
+      11 |     if (typeof valorEsperado === 'number') {
+    > 12 |       expect(resumo[campo], `Valor financeiro de ${campo}`).toBeCloseTo(valorEsperado, 2);
+         |                                                             ^
+      13 |       delete demaisCampos[campo];
+      14 |     }
+      15 |   }
+        at esperarResumoAPI (/Users/anacosta/Documents/ChatGPT/Verzel/automation/support/monetary.ts:12:61)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:36:23
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-df169-al-R-200-00-sem-cupom-smoke-chromium-retry1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/api-carrinho-Frete-e-cálcu-df169-al-R-200-00-sem-cupom-smoke-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/api-carrinho-Frete-e-cálcu-df169-al-R-200-00-sem-cupom-smoke-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/api/carrinho.spec.ts:50:9 › Frete e cálculo do carrinho na API @regression › CT-CA08-201 CA08: cupom preserva regra de frete sobre subtotal R$ 200.00 
+
+    Error: Valor financeiro de frete
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 0
+    Received: 19.9
+
+    Expected precision:    2
+    Expected difference: < 0.005
+    Received difference:   19.9
+
+       at ../support/monetary.ts:12
+
+      10 |     const valorEsperado = esperado[campo];
+      11 |     if (typeof valorEsperado === 'number') {
+    > 12 |       expect(resumo[campo], `Valor financeiro de ${campo}`).toBeCloseTo(valorEsperado, 2);
+         |                                                             ^
+      13 |       delete demaisCampos[campo];
+      14 |     }
+      15 |   }
+        at esperarResumoAPI (/Users/anacosta/Documents/ChatGPT/Verzel/automation/support/monetary.ts:12:61)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:55:23
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-feecc-ete-sobre-subtotal-R-200-00-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: Valor financeiro de frete
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 0
+    Received: 19.9
+
+    Expected precision:    2
+    Expected difference: < 0.005
+    Received difference:   19.9
+
+       at ../support/monetary.ts:12
+
+      10 |     const valorEsperado = esperado[campo];
+      11 |     if (typeof valorEsperado === 'number') {
+    > 12 |       expect(resumo[campo], `Valor financeiro de ${campo}`).toBeCloseTo(valorEsperado, 2);
+         |                                                             ^
+      13 |       delete demaisCampos[campo];
+      14 |     }
+      15 |   }
+        at esperarResumoAPI (/Users/anacosta/Documents/ChatGPT/Verzel/automation/support/monetary.ts:12:61)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:55:23
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-feecc-ete-sobre-subtotal-R-200-00-chromium-retry1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/api-carrinho-Frete-e-cálcu-feecc-ete-sobre-subtotal-R-200-00-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/api-carrinho-Frete-e-cálcu-feecc-ete-sobre-subtotal-R-200-00-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/api/carrinho.spec.ts:63:7 › Frete e cálculo do carrinho na API @regression › CT-CA04-202 cupom expirado no limite mantém cálculo 200 sem desconto 
+
+    Error: Valor financeiro de frete
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 0
+    Received: 19.9
+
+    Expected precision:    2
+    Expected difference: < 0.005
+    Received difference:   19.9
+
+       at ../support/monetary.ts:12
+
+      10 |     const valorEsperado = esperado[campo];
+      11 |     if (typeof valorEsperado === 'number') {
+    > 12 |       expect(resumo[campo], `Valor financeiro de ${campo}`).toBeCloseTo(valorEsperado, 2);
+         |                                                             ^
+      13 |       delete demaisCampos[campo];
+      14 |     }
+      15 |   }
+        at esperarResumoAPI (/Users/anacosta/Documents/ChatGPT/Verzel/automation/support/monetary.ts:12:61)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:67:21
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-1c0ea-ém-cálculo-200-sem-desconto-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: Valor financeiro de frete
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 0
+    Received: 19.9
+
+    Expected precision:    2
+    Expected difference: < 0.005
+    Received difference:   19.9
+
+       at ../support/monetary.ts:12
+
+      10 |     const valorEsperado = esperado[campo];
+      11 |     if (typeof valorEsperado === 'number') {
+    > 12 |       expect(resumo[campo], `Valor financeiro de ${campo}`).toBeCloseTo(valorEsperado, 2);
+         |                                                             ^
+      13 |       delete demaisCampos[campo];
+      14 |     }
+      15 |   }
+        at esperarResumoAPI (/Users/anacosta/Documents/ChatGPT/Verzel/automation/support/monetary.ts:12:61)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:67:21
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-1c0ea-ém-cálculo-200-sem-desconto-chromium-retry1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/api-carrinho-Frete-e-cálcu-1c0ea-ém-cálculo-200-sem-desconto-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/api-carrinho-Frete-e-cálcu-1c0ea-ém-cálculo-200-sem-desconto-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-005 rejeita item sem produtoId com erro documentado 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "ITEM_INVALIDO"
+    Received: "PRODUTO_NAO_ENCONTRADO"
+
+      126 |       const response = await new CarrinhoService(request).calcularPayload(payload);
+      127 |       expect(response.status()).toBe(422);
+    > 128 |       expect(schemaErro.parse(await response.json()).erro.codigo).toBe(codigo);
+          |                                                                   ^
+      129 |     });
+      130 |   }
+      131 |
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:128:67
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-b4c65-dutoId-com-erro-documentado-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "ITEM_INVALIDO"
+    Received: "PRODUTO_NAO_ENCONTRADO"
+
+      126 |       const response = await new CarrinhoService(request).calcularPayload(payload);
+      127 |       expect(response.status()).toBe(422);
+    > 128 |       expect(schemaErro.parse(await response.json()).erro.codigo).toBe(codigo);
+          |                                                                   ^
+      129 |     });
+      130 |   }
+      131 |
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:128:67
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-b4c65-dutoId-com-erro-documentado-chromium-retry1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/api-carrinho-Frete-e-cálcu-b4c65-dutoId-com-erro-documentado-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/api-carrinho-Frete-e-cálcu-b4c65-dutoId-com-erro-documentado-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-006 rejeita item sem quantidade com erro documentado 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "ITEM_INVALIDO"
+    Received: "QUANTIDADE_INVALIDA"
+
+      126 |       const response = await new CarrinhoService(request).calcularPayload(payload);
+      127 |       expect(response.status()).toBe(422);
+    > 128 |       expect(schemaErro.parse(await response.json()).erro.codigo).toBe(codigo);
+          |                                                                   ^
+      129 |     });
+      130 |   }
+      131 |
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:128:67
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-70aa9-tidade-com-erro-documentado-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "ITEM_INVALIDO"
+    Received: "QUANTIDADE_INVALIDA"
+
+      126 |       const response = await new CarrinhoService(request).calcularPayload(payload);
+      127 |       expect(response.status()).toBe(422);
+    > 128 |       expect(schemaErro.parse(await response.json()).erro.codigo).toBe(codigo);
+          |                                                                   ^
+      129 |     });
+      130 |   }
+      131 |
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:128:67
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-70aa9-tidade-com-erro-documentado-chromium-retry1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/api-carrinho-Frete-e-cálcu-70aa9-tidade-com-erro-documentado-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/api-carrinho-Frete-e-cálcu-70aa9-tidade-com-erro-documentado-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-CA10-206 rejeita CA10: seis unidades com erro documentado 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 422
+    Received: 200
+
+      125 |       }
+      126 |       const response = await new CarrinhoService(request).calcularPayload(payload);
+    > 127 |       expect(response.status()).toBe(422);
+          |                                 ^
+      128 |       expect(schemaErro.parse(await response.json()).erro.codigo).toBe(codigo);
+      129 |     });
+      130 |   }
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:127:33
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-bfdbb-idades-com-erro-documentado-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 422
+    Received: 200
+
+      125 |       }
+      126 |       const response = await new CarrinhoService(request).calcularPayload(payload);
+    > 127 |       expect(response.status()).toBe(422);
+          |                                 ^
+      128 |       expect(schemaErro.parse(await response.json()).erro.codigo).toBe(codigo);
+      129 |     });
+      130 |   }
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/carrinho.spec.ts:127:33
+
+    Error Context: test-results/api-carrinho-Frete-e-cálcu-bfdbb-idades-com-erro-documentado-chromium-retry1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/api-carrinho-Frete-e-cálcu-bfdbb-idades-com-erro-documentado-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/api-carrinho-Frete-e-cálcu-bfdbb-idades-com-erro-documentado-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [chromium] › tests/api/pedidos.spec.ts:32:7 › Confirmação fictícia de pedidos na API @regression › CT-CA08-203 CA06/CA08: pedido de R$ 200 com cupom confirma com frete grátis 
+
+    Error: Valor financeiro de frete
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 0
+    Received: 19.9
+
+    Expected precision:    2
+    Expected difference: < 0.005
+    Received difference:   19.9
+
+       at ../support/monetary.ts:12
+
+      10 |     const valorEsperado = esperado[campo];
+      11 |     if (typeof valorEsperado === 'number') {
+    > 12 |       expect(resumo[campo], `Valor financeiro de ${campo}`).toBeCloseTo(valorEsperado, 2);
+         |                                                             ^
+      13 |       delete demaisCampos[campo];
+      14 |     }
+      15 |   }
+        at esperarResumoAPI (/Users/anacosta/Documents/ChatGPT/Verzel/automation/support/monetary.ts:12:61)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/pedidos.spec.ts:38:21
+
+    Error Context: test-results/api-pedidos-Confirmação-fi-c08ae-m-confirma-com-frete-grátis-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: Valor financeiro de frete
+
+    expect(received).toBeCloseTo(expected, precision)
+
+    Expected: 0
+    Received: 19.9
+
+    Expected precision:    2
+    Expected difference: < 0.005
+    Received difference:   19.9
+
+       at ../support/monetary.ts:12
+
+      10 |     const valorEsperado = esperado[campo];
+      11 |     if (typeof valorEsperado === 'number') {
+    > 12 |       expect(resumo[campo], `Valor financeiro de ${campo}`).toBeCloseTo(valorEsperado, 2);
+         |                                                             ^
+      13 |       delete demaisCampos[campo];
+      14 |     }
+      15 |   }
+        at esperarResumoAPI (/Users/anacosta/Documents/ChatGPT/Verzel/automation/support/monetary.ts:12:61)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/pedidos.spec.ts:38:21
+
+    Error Context: test-results/api-pedidos-Confirmação-fi-c08ae-m-confirma-com-frete-grátis-chromium-retry1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/api-pedidos-Confirmação-fi-c08ae-m-confirma-com-frete-grátis-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/api-pedidos-Confirmação-fi-c08ae-m-confirma-com-frete-grátis-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [chromium] › tests/api/pedidos.spec.ts:69:7 › Confirmação fictícia de pedidos na API @regression › CT-CA10-220 CA10: pedido rejeita seis unidades do mesmo produto 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 422
+    Received: 201
+
+      72 |       cliente: criarCliente(), itens: [{ produtoId: 'P001', quantidade: 6 }],
+      73 |     });
+    > 74 |     expect(response.status()).toBe(422);
+         |                               ^
+      75 |     expect(schemaErro.parse(await response.json()).erro.codigo).toBe('QUANTIDADE_MAXIMA_EXCEDIDA');
+      76 |   });
+      77 |
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/pedidos.spec.ts:74:31
+
+    Error Context: test-results/api-pedidos-Confirmação-fi-88f97-s-unidades-do-mesmo-produto-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 422
+    Received: 201
+
+      72 |       cliente: criarCliente(), itens: [{ produtoId: 'P001', quantidade: 6 }],
+      73 |     });
+    > 74 |     expect(response.status()).toBe(422);
+         |                               ^
+      75 |     expect(schemaErro.parse(await response.json()).erro.codigo).toBe('QUANTIDADE_MAXIMA_EXCEDIDA');
+      76 |   });
+      77 |
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/api/pedidos.spec.ts:74:31
+
+    Error Context: test-results/api-pedidos-Confirmação-fi-88f97-s-unidades-do-mesmo-produto-chromium-retry1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/api-pedidos-Confirmação-fi-88f97-s-unidades-do-mesmo-produto-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/api-pedidos-Confirmação-fi-88f97-s-unidades-do-mesmo-produto-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [chromium] › tests/e2e/frete-gratis.spec.ts:6:7 › Frete e quantidade @regression › CT-CA08-001 frete grátis em R$ 200 antes e depois do cupom @smoke 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+    Expected: "Grátis"
+    Received: "R$ 19,90"
+    Timeout:  1000ms
+
+    Call log:
+      - Expect "soft toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 1000ms
+      - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+        12 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+           - unexpected value "R$ 19,90"
+
+
+       at ../pages/carrinho.page.ts:72
+
+      70 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+      71 |     );
+    > 72 |     await verificar(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+         |                                          ^
+      73 |     await verificar(this.valor('Total')).toHaveText(moeda(esperado.total));
+      74 |   }
+      75 |
+        at CarrinhoPage.esperarResumo (/Users/anacosta/Documents/ChatGPT/Verzel/automation/pages/carrinho.page.ts:72:42)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/e2e/frete-gratis.spec.ts:14:5
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition')
+    Expected: "R$ 200,00"
+    Received: "R$ 219,90"
+    Timeout:  1000ms
+
+    Call log:
+      - Expect "soft toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition') with timeout 1000ms
+      - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition')
+        11 × locator resolved to <dd data-valor="total">R$ 219,90</dd>
+           - unexpected value "R$ 219,90"
+
+
+       at ../pages/carrinho.page.ts:73
+
+      71 |     );
+      72 |     await verificar(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+    > 73 |     await verificar(this.valor('Total')).toHaveText(moeda(esperado.total));
+         |                                          ^
+      74 |   }
+      75 |
+      76 |   async esperarFaltante(valor: number) {
+        at CarrinhoPage.esperarResumo (/Users/anacosta/Documents/ChatGPT/Verzel/automation/pages/carrinho.page.ts:73:42)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/e2e/frete-gratis.spec.ts:14:5
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+    Expected: "Grátis"
+    Received: "R$ 19,90"
+    Timeout:  1000ms
+
+    Call log:
+      - Expect "soft toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 1000ms
+      - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+        11 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+           - unexpected value "R$ 19,90"
+
+
+       at ../pages/carrinho.page.ts:72
+
+      70 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+      71 |     );
+    > 72 |     await verificar(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+         |                                          ^
+      73 |     await verificar(this.valor('Total')).toHaveText(moeda(esperado.total));
+      74 |   }
+      75 |
+        at CarrinhoPage.esperarResumo (/Users/anacosta/Documents/ChatGPT/Verzel/automation/pages/carrinho.page.ts:72:42)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/e2e/frete-gratis.spec.ts:18:5
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition')
+    Expected: "R$ 180,00"
+    Received: "R$ 199,90"
+    Timeout:  1000ms
+
+    Call log:
+      - Expect "soft toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition') with timeout 1000ms
+      - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition')
+        12 × locator resolved to <dd data-valor="total">R$ 199,90</dd>
+           - unexpected value "R$ 199,90"
+
+
+       at ../pages/carrinho.page.ts:73
+
+      71 |     );
+      72 |     await verificar(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+    > 73 |     await verificar(this.valor('Total')).toHaveText(moeda(esperado.total));
+         |                                          ^
+      74 |   }
+      75 |
+      76 |   async esperarFaltante(valor: number) {
+        at CarrinhoPage.esperarResumo (/Users/anacosta/Documents/ChatGPT/Verzel/automation/pages/carrinho.page.ts:73:42)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/e2e/frete-gratis.spec.ts:18:5
+
+    attachment #1: CT-CA08-001-sem-cupom (image/png) ───────────────────────────────────────────────
+    test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium/attachments/CT-CA08-001-sem-cupom-bb8f0d751cc34ee17f7dc17c5c7f059e4ce5912b.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: CT-CA08-001-com-cupom (image/png) ───────────────────────────────────────────────
+    test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium/attachments/CT-CA08-001-com-cupom-55114f7ae0f3db2fd24fc336746123208240ccc1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+    Expected: "Grátis"
+    Received: "R$ 19,90"
+    Timeout:  1000ms
+
+    Call log:
+      - Expect "soft toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 1000ms
+      - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+        11 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+           - unexpected value "R$ 19,90"
+
+
+       at ../pages/carrinho.page.ts:72
+
+      70 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+      71 |     );
+    > 72 |     await verificar(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+         |                                          ^
+      73 |     await verificar(this.valor('Total')).toHaveText(moeda(esperado.total));
+      74 |   }
+      75 |
+        at CarrinhoPage.esperarResumo (/Users/anacosta/Documents/ChatGPT/Verzel/automation/pages/carrinho.page.ts:72:42)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/e2e/frete-gratis.spec.ts:14:5
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition')
+    Expected: "R$ 200,00"
+    Received: "R$ 219,90"
+    Timeout:  1000ms
+
+    Call log:
+      - Expect "soft toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition') with timeout 1000ms
+      - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition')
+        12 × locator resolved to <dd data-valor="total">R$ 219,90</dd>
+           - unexpected value "R$ 219,90"
+
+
+       at ../pages/carrinho.page.ts:73
+
+      71 |     );
+      72 |     await verificar(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+    > 73 |     await verificar(this.valor('Total')).toHaveText(moeda(esperado.total));
+         |                                          ^
+      74 |   }
+      75 |
+      76 |   async esperarFaltante(valor: number) {
+        at CarrinhoPage.esperarResumo (/Users/anacosta/Documents/ChatGPT/Verzel/automation/pages/carrinho.page.ts:73:42)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/e2e/frete-gratis.spec.ts:14:5
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+    Expected: "Grátis"
+    Received: "R$ 19,90"
+    Timeout:  1000ms
+
+    Call log:
+      - Expect "soft toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 1000ms
+      - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+        11 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+           - unexpected value "R$ 19,90"
+
+
+       at ../pages/carrinho.page.ts:72
+
+      70 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+      71 |     );
+    > 72 |     await verificar(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+         |                                          ^
+      73 |     await verificar(this.valor('Total')).toHaveText(moeda(esperado.total));
+      74 |   }
+      75 |
+        at CarrinhoPage.esperarResumo (/Users/anacosta/Documents/ChatGPT/Verzel/automation/pages/carrinho.page.ts:72:42)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/e2e/frete-gratis.spec.ts:18:5
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition')
+    Expected: "R$ 180,00"
+    Received: "R$ 199,90"
+    Timeout:  1000ms
+
+    Call log:
+      - Expect "soft toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition') with timeout 1000ms
+      - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Total$/ }).locator('..').getByRole('definition')
+        11 × locator resolved to <dd data-valor="total">R$ 199,90</dd>
+           - unexpected value "R$ 199,90"
+
+
+       at ../pages/carrinho.page.ts:73
+
+      71 |     );
+      72 |     await verificar(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+    > 73 |     await verificar(this.valor('Total')).toHaveText(moeda(esperado.total));
+         |                                          ^
+      74 |   }
+      75 |
+      76 |   async esperarFaltante(valor: number) {
+        at CarrinhoPage.esperarResumo (/Users/anacosta/Documents/ChatGPT/Verzel/automation/pages/carrinho.page.ts:73:42)
+        at /Users/anacosta/Documents/ChatGPT/Verzel/automation/tests/e2e/frete-gratis.spec.ts:18:5
+
+    attachment #1: CT-CA08-001-sem-cupom (image/png) ───────────────────────────────────────────────
+    test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium-retry1/attachments/CT-CA08-001-sem-cupom-f87e404229449886178bfa518d1e181c2ecd17e8.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: CT-CA08-001-com-cupom (image/png) ───────────────────────────────────────────────
+    test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium-retry1/attachments/CT-CA08-001-com-cupom-09812145d8a6eff2f9a17e4181a044ee0a33741e.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium-retry1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #4: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium-retry1/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium-retry1/error-context.md
+
+    attachment #6: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/e2e-frete-gratis-Frete-e-q-a7ba4-tes-e-depois-do-cupom-smoke-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9 failed
+    [chromium] › tests/api/carrinho.spec.ts:31:9 › Frete e cálculo do carrinho na API @regression › CT-CA06-201 fronteira de subtotal R$ 200.00 sem cupom @smoke 
+    [chromium] › tests/api/carrinho.spec.ts:50:9 › Frete e cálculo do carrinho na API @regression › CT-CA08-201 CA08: cupom preserva regra de frete sobre subtotal R$ 200.00 
+    [chromium] › tests/api/carrinho.spec.ts:63:7 › Frete e cálculo do carrinho na API @regression › CT-CA04-202 cupom expirado no limite mantém cálculo 200 sem desconto 
+    [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-005 rejeita item sem produtoId com erro documentado 
+    [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-API-006 rejeita item sem quantidade com erro documentado 
+    [chromium] › tests/api/carrinho.spec.ts:122:9 › Frete e cálculo do carrinho na API @regression › CT-CA10-206 rejeita CA10: seis unidades com erro documentado 
+    [chromium] › tests/api/pedidos.spec.ts:32:7 › Confirmação fictícia de pedidos na API @regression › CT-CA08-203 CA06/CA08: pedido de R$ 200 com cupom confirma com frete grátis 
+    [chromium] › tests/api/pedidos.spec.ts:69:7 › Confirmação fictícia de pedidos na API @regression › CT-CA10-220 CA10: pedido rejeita seis unidades do mesmo produto 
+    [chromium] › tests/e2e/frete-gratis.spec.ts:6:7 › Frete e quantidade @regression › CT-CA08-001 frete grátis em R$ 200 antes e depois do cupom @smoke 
+  61 passed (25.7s)
