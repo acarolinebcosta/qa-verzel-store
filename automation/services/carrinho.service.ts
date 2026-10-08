@@ -1,5 +1,5 @@
 import type { APIRequestContext, APIResponse } from '@playwright/test';
-import type { UsuarioTeste } from '../factories/usuario.factory';
+import type { ClienteTeste } from '../factories/cliente.factory';
 
 export interface ItemCarrinho {
   produtoId: string;
@@ -7,7 +7,7 @@ export interface ItemCarrinho {
 }
 
 export interface PedidoEntrada {
-  cliente: UsuarioTeste;
+  cliente: ClienteTeste;
   itens: ItemCarrinho[];
   cupom?: string;
 }

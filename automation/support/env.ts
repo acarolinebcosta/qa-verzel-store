@@ -14,7 +14,7 @@ if (valorMinimo !== 200) {
 export const settings = Object.freeze({
   baseURL: baseURL.replace(/\/$/, ''),
   cupomValido: process.env.CUPOM_VALIDO || 'BEMVINDO10',
-  cupomInvalido: process.env.CUPOM_INVALIDO || 'CUPOM_INVALIDO',
+  cupomInvalido: process.env.CUPOM_INVALIDO || 'CUPOM_INEXISTENTE_999',
   cupomExpirado: process.env.CUPOM_EXPIRADO || 'VERAO2026',
   valorMinimo,
 });

@@ -43,4 +43,5 @@ jobs:
             automation/playwright-report/
             automation/test-results/
             docs/execucao-automatica.md
+            docs/evidencias/
           if-no-files-found: warn

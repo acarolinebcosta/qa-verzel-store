@@ -1,10 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { politicaAutenticacao } from '../../services/auth.service';
 import { schemaErro, schemaProduto, schemaProdutos } from '../../schemas/api.schema';
 
-test.describe('API pública — autenticação fora do escopo documentado', () => {
-  test('lista o catálogo sem credenciais @smoke @regression', async ({ request }) => {
-    expect(politicaAutenticacao.exigeAutenticacao).toBe(false);
+test.describe('Catálogo público', () => {
+  test('CT-CA11-290 lista o catálogo sem credenciais @smoke @regression', async ({ request }) => {
     const response = await request.get('/api/produtos');
     expect(response.status()).toBe(200);
     expect(response.headers()['content-type']).toContain('application/json');
@@ -16,7 +14,7 @@ test.describe('API pública — autenticação fora do escopo documentado', () =
     });
   });
 
-  test('consulta um produto público pelo ID @regression', async ({ request }) => {
+  test('CT-CA11-291 consulta um produto público pelo ID @regression', async ({ request }) => {
     const response = await request.get('/api/produtos/P001');
     expect(response.status()).toBe(200);
     expect(schemaProduto.parse(await response.json())).toMatchObject({
@@ -24,7 +22,7 @@ test.describe('API pública — autenticação fora do escopo documentado', () =
     });
   });
 
-  test('produto inexistente responde 404 com contrato de erro @regression', async ({ request }) => {
+  test('CT-CA10-290 produto inexistente responde 404 com contrato de erro @regression', async ({ request }) => {
     const response = await request.get('/api/produtos/P999');
     expect(response.status()).toBe(404);
     expect(schemaErro.parse(await response.json()).erro.codigo).toBe('PRODUTO_NAO_ENCONTRADO');

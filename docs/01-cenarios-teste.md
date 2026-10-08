@@ -1,298 +1,273 @@
-# Cenários de teste — VZS-142
+# Cenários e rastreabilidade — VZS-142
 
-Fonte: [documentação 2.3.0](https://verzel-store.qa-test-verzel-store.workers.dev/documentacao), publicada em 30/09/2026. Os exemplos do pedido inicial foram ajustados às regras disponíveis no ambiente. Os cenários abaixo servem como roteiro; as features executáveis ficam em `automation/features/`.
+Fonte: [documentação oficial 2.3.0](https://verzel-store.qa-test-verzel-store.workers.dev/documentacao), publicada 30/09/2026 e conferida 08/10/2026.
 
-## Dados e placeholders
+## Regras e dados concretos
 
-| Placeholder | Valor concreto e interpretação |
+| CA | Regra |
 | --- | --- |
-| `<CUPOM_VALIDO>` | `BEMVINDO10`, desconto de 10% nos produtos |
-| `<CUPOM_INVALIDO>` | `CUPOM_INVALIDO`, código inexistente usado como dado negativo |
-| `<CUPOM_EXPIRADO>` | `VERAO2026`, validade encerrada em 31/03/2026 |
-| `<VALOR_MINIMO>` | R$ 200,00, mínimo de frete grátis; não é mínimo de cupom |
-| `<FRETE_FIXO>` | R$ 19,90 abaixo do mínimo de frete grátis |
-| `<CUPOM_FRETE_GRATIS>` | Não existe no contrato; usar `<CUPOM_VALIDO>` com subtotal ≥ R$ 200,00 |
+| CA01 | Cupom válido aplica 10% ao subtotal |
+| CA02 | Normalizar caixa e espaços nas extremidades |
+| CA03 | Cupom inválido sem desconto e mensagem correta |
+| CA04 | Cupom expirado sem desconto e mensagem correta |
+| CA05 | Somente um cupom por vez |
+| CA06 | Frete grátis com subtotal ≥ 200 inclusive |
+| CA07 | Frete 19,90 abaixo de 200 e faltante correto |
+| CA08 | Frete usa subtotal anterior ao desconto |
+| CA09 | Desconto não incide sobre frete |
+| CA10 | Até cinco unidades por produto na UI/API |
+| CA11 | Arredondamento de valores a duas casas decimais |
 
-Os placeholders devem ser ajustados se a documentação ou o ambiente mudarem. Nas features executáveis, os exemplos usam dados concretos. Valores em tabelas representam reais com duas casas decimais.
+`BEMVINDO10`:10%; `VERAO2026`:15%, expirado 31/03/2026; negativo:`CUPOM_INEXISTENTE_999`. Frete fixo 19,90; mínimo de frete 200,00. Não há mínimo para cupom nem cupom exclusivo de frete. Total=subtotal−desconto+frete.
 
-| Carrinho | Composição | Subtotal |
-| --- | --- | ---: |
-| Abaixo do mínimo | P005×1 | 100,00 |
-| Imediatamente abaixo | P005×1 + P004×1 + P008×1 | 199,90 |
-| No mínimo | P005×2 | 200,00 |
-| Acima do mínimo mais próximo possível | P006×5 + P001×1 | 209,40 |
-| Com centavos para desconto | P002×1 + P004×2 | 239,70 |
+R$ 199,80 é P001×1+P002×1 e é o caso prioritário solicitado. O maior subtotal alcançável abaixo de 200 é 199,90 (P005+P004+P008); o menor acima é 209,40 (P001+P006×5). Mantemos essas fronteiras na API e não simulamos 200,01/200,10.
 
-R$ 200,01 e R$ 200,10 não podem ser montados com o catálogo fixo e a restrição de até cinco unidades de cada produto. A fronteira superior usa R$ 209,40. Não se altera preço nem se envia um subtotal artificial: a API calcula o subtotal pelos itens.
+## Matriz de decisão frete × cupom
 
-## Cupons e cálculo
+| Subtotal | Cupom | Desconto | Frete | Total | Composição |
+| ---: | --- | ---: | ---: | ---: | --- |
+|100,00|Nenhum|0,00|19,90|119,90|P005×1|
+|100,00|BEMVINDO10|10,00|19,90|109,90|P005×1|
+|199,80|Nenhum|0,00|19,90|219,70|P001+P002|
+|200,00|Nenhum|0,00|0,00|200,00|P005×2|
+|200,00|BEMVINDO10|20,00|0,00|180,00|P005×2|
+|200,00|VERAO2026|0,00|0,00|200,00|P005×2|
+|239,70|BEMVINDO10|23,97|0,00|215,73|P002+P004×2|
+
+A linha expirada corresponde ao cálculo HTTP 200 com mensagem “Cupom expirado.”. `/api/pedidos` rejeita o mesmo cupom com 422 `CUPOM_EXPIRADO`. Cálculo não é sempre 200: dados/itens inválidos têm 422 e JSON malformado 400 na documentação oficial. Cupom inválido/expirado em itens válidos mantém 200.
+
+## Racional da priorização
+
+P0 cobre risco financeiro e regras centrais: desconto, frete, centavos, mensagem de cupom recusado e acúmulo. P1 cobre normalização, limite de quantidade e contratos/validações de API. P2 cobre acessibilidade complementar e investigação exploratória. Severidade mede impacto; prioridade define ordem de análise/correção.
+
+Particionamento separa cupons válidos/inexistentes/expirados e entradas válidas/inválidas. Valores-limite cobrem 199,80/199,90/200/209,40 e quantidades 5/6. A tabela de decisão cruza cupom e frete; testes negativos exercitam rejeição; transição de estados cobre aplicar/remover, quantidade e carrinho vazio.
+
+A API cobre combinações financeiras e validações. A UI confirma mensagens, controles e os três fluxos prioritários. BDD cobre quatro transições distintas, evitando repetir os cenários E 2 E. Asserções de valores semelhantes entre API e UI verificam contratos e apresentação em camadas diferentes.
+
+## Matriz de rastreabilidade — execução final
+
+Cada ID identifica um caso concreto. Sufixos 001–090: UI;101–102: BDD;201–291: API. Casos complementares conservam a convenção de IDs, mas a coluna CA declara “Complementar”: catálogo, acessibilidade e validação de cliente não são critérios oficiais adicionais. Não inferimos execução humana a partir da automação.
+
+| ID | CA | Objetivo | Risco | Prioridade (P0/P1/P2) | Técnica | Tipo | Resultado obtido | Evidência |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CT-CA09-201 | CA09 | CT-CA09-201 fronteira de subtotal R$  100.00 sem cupom @smoke | Desconto incorreto sobre frete | P0 | Tabela de decisão | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca09-201) |
+| CT-CA07-201 | CA07 | CT-CA07-201 fronteira de subtotal R$  199.80 sem cupom @smoke | Frete/faltante incorretos | P0 | Análise de valores-limite | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca07-201) |
+| CT-CA07-202 | CA07 | CT-CA07-202 fronteira de subtotal R$  199.90 sem cupom @smoke | Frete/faltante incorretos | P0 | Análise de valores-limite | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca07-202) |
+| CT-CA06-201 | CA06 | CT-CA06-201 fronteira de subtotal R$  200.00 sem cupom @smoke | Cobrança indevida de frete | P0 | Análise de valores-limite | API | REPROVADO — BUG-001 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca06-201) |
+| CT-CA06-202 | CA06 | CT-CA06-202 fronteira de subtotal R$  209.40 sem cupom @smoke | Cobrança indevida de frete | P0 | Análise de valores-limite | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca06-202) |
+| CT-CA08-201 | CA08 | CT-CA08-201 CA08: cupom preserva regra de frete sobre subtotal R$  200.00 | Elegibilidade calculada sobre total errado | P0 | Tabela de decisão | API | REPROVADO — BUG-001 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca08-201) |
+| CT-CA08-202 | CA08 | CT-CA08-202 CA08: cupom preserva regra de frete sobre subtotal R$  209.40 | Elegibilidade calculada sobre total errado | P0 | Tabela de decisão | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca08-202) |
+| CT-CA04-202 | CA04,CA06 | CT-CA04-202 cupom expirado no limite mantém cálculo 200 sem desconto | Promoção vencida aceita | P0 | Particionamento de equivalência + testes negativos | API | REPROVADO — BUG-001 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca04-202) |
+| CT-CA10-201 | CA10 | CT-CA10-201 CA10: aceita exatamente cinco unidades por produto | Pedido fora do limite de quantidade | P1 | Análise de valores-limite | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-201) |
+| CT-CA11-201 | CA11 | CT-CA11-201 CA11: arredonda subtotal, desconto e total para centavos | Diferença financeira de centavos | P0 | Tabela de decisão | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca11-201) |
+| CT-CA10-202 | Complementar | CT-CA10-202 rejeita itens ausentes com erro documentado | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-202) |
+| CT-CA10-203 | Complementar | CT-CA10-203 rejeita carrinho vazio com erro documentado | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-203) |
+| CT-CA10-204 | Complementar | CT-CA10-204 rejeita item sem objeto com erro documentado | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-204) |
+| CT-CA10-205 | Complementar | CT-CA10-205 rejeita produto inexistente com erro documentado | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-205) |
+| CT-CA10-206 | CA10 | CT-CA10-206 rejeita CA10: seis unidades com erro documentado | Pedido fora do limite de quantidade | P1 | Análise de valores-limite + testes negativos | API | REPROVADO — BUG-002 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-206) |
+| CT-CA10-207 | CA10 | CT-CA10-207 rejeita quantidade zero com erro documentado | Pedido fora do limite de quantidade | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-207) |
+| CT-CA10-208 | CA10 | CT-CA10-208 rejeita quantidade negativa com erro documentado | Pedido fora do limite de quantidade | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-208) |
+| CT-CA10-209 | CA10 | CT-CA10-209 rejeita quantidade fracionária com erro documentado | Pedido fora do limite de quantidade | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-209) |
+| CT-CA10-210 | CA10 | CT-CA10-210 rejeita quantidade textual com erro documentado | Pedido fora do limite de quantidade | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-210) |
+| CT-CA10-211 | Complementar | CT-CA10-211 rejeita produto duplicado com erro documentado | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-211) |
+| CT-CA10-212 | Complementar | CT-CA10-212 JSON malformado responde 400 | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-212) |
+| CT-CA01-201 | CA01,CA09 | CT-CA01-201 CA01/CA09: 10% sobre produtos mantém frete de R$  19,90 @smoke | Desconto/total incorretos | P0 | Tabela de decisão | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca01-201) |
+| CT-CA02-201 | CA02 | CT-CA02-201 CA02: normaliza caixa e espaços em "bemvindo 10" | Código válido recusado | P1 | Particionamento de equivalência | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca02-201) |
+| CT-CA02-202 | CA02 | CT-CA02-202 CA02: normaliza caixa e espaços em "  bemvindo 10  " | Código válido recusado | P1 | Particionamento de equivalência | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca02-202) |
+| CT-CA02-203 | CA02 | CT-CA02-203 CA02: normaliza caixa e espaços em "\tbemvindo 10\n" | Código válido recusado | P1 | Particionamento de equivalência | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca02-203) |
+| CT-CA03-201 | CA03 | CT-CA03-201 CA03: CUPOM_INEXISTENTE_999 calcula sem desconto e informa o motivo | Desconto indevido | P0 | Particionamento de equivalência + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca03-201) |
+| CT-CA04-201 | CA04 | CT-CA04-201 CA04: VERAO2026 calcula sem desconto e informa o motivo | Promoção vencida aceita | P0 | Particionamento de equivalência + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca04-201) |
+| CT-CA05-201 | CA05 | CT-CA05-201 CA05: requisições independentes removem e reaplicam o cupom sem acumular desconto entre chamadas | Desconto duplicado ou residual | P0 | Transição de estados | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-201) |
+| CT-CA05-202 | CA05 | CT-CA05-202 CA05: dois códigos em um campo não acumulam cupons | Desconto duplicado ou residual | P0 | Particionamento de equivalência | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-202) |
+| CT-CA01-202 | CA01 | CT-CA01-202 cupom não exige valor mínimo para desconto | Desconto/total incorretos | P0 | Tabela de decisão | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca01-202) |
+| CT-CA01-203 | CA01 | CT-CA01-203 confirma pedido válido com cliente fictício e CEP normalizado @smoke | Desconto/total incorretos | P0 | Tabela de decisão | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca01-203) |
+| CT-CA09-202 | CA09 | CT-CA09-202 confirma pedido sem cupom | Desconto incorreto sobre frete | P0 | Tabela de decisão | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca09-202) |
+| CT-CA08-203 | CA01,CA06,CA08 | CT-CA08-203 CA06/CA08: pedido de R$  200 com cupom confirma com frete grátis | Elegibilidade calculada sobre total errado | P0 | Tabela de decisão | API | REPROVADO — BUG-001 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca08-203) |
+| CT-CA03-220 | CA03 | CT-CA03-220 pedido com CUPOM_INEXISTENTE_999 responde 422 CUPOM_INVALIDO | Desconto indevido | P0 | Particionamento de equivalência + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca03-220) |
+| CT-CA04-220 | CA04 | CT-CA04-220 pedido com VERAO2026 responde 422 CUPOM_EXPIRADO | Promoção vencida aceita | P0 | Particionamento de equivalência + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca04-220) |
+| CT-CA10-222 | Complementar | CT-CA10-222 rejeita cliente.nome inválido com detalhe do campo | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-222) |
+| CT-CA10-223 | Complementar | CT-CA10-223 rejeita cliente.email inválido com detalhe do campo | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-223) |
+| CT-CA10-224 | Complementar | CT-CA10-224 rejeita cliente.cep inválido com detalhe do campo | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-224) |
+| CT-CA10-220 | CA10 | CT-CA10-220 CA10: pedido rejeita seis unidades do mesmo produto | Pedido fora do limite de quantidade | P1 | Análise de valores-limite + testes negativos | API | REPROVADO — BUG-002 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-220) |
+| CT-CA10-221 | Complementar | CT-CA10-221 pedido rejeita produto duplicado | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite + testes negativos | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-221) |
+| CT-CA11-290 | Complementar | CT-CA11-290 lista o catálogo sem credenciais @smoke @regression | Contrato/catálogo/checkout impedem concluir a compra | P1 | Tabela de decisão | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca11-290) |
+| CT-CA11-291 | Complementar | CT-CA11-291 consulta um produto público pelo ID @regression | Contrato/catálogo/checkout impedem concluir a compra | P1 | Tabela de decisão | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca11-291) |
+| CT-CA10-290 | Complementar | CT-CA10-290 produto inexistente responde 404 com contrato de erro @regression | Contrato/catálogo/checkout impedem concluir a compra | P1 | Análise de valores-limite | API | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-290) |
+| CT-CA05-090 | Complementar | CT-CA05-090 carrinho sem violações críticas de acessibilidade @regression | Contrato/catálogo/checkout impedem concluir a compra | P2 | Particionamento de equivalência | E 2 E | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-090) |
+| CT-CA01-001 | CA01,CA07,CA09 | CT-CA01-001 cupom válido abaixo do limite @smoke | Desconto/total incorretos | P0 | Tabela de decisão | E 2 E | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca01-001) |
+| CT-CA03-001 | CA03 | CT-CA03-001 rejeita cupom sem alterar o total @smoke | Desconto indevido | P0 | Particionamento de equivalência + testes negativos | E 2 E | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca03-001) |
+| CT-CA04-001 | CA04 | CT-CA04-001 rejeita cupom sem alterar o total @smoke | Promoção vencida aceita | P0 | Particionamento de equivalência + testes negativos | E 2 E | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca04-001) |
+| CT-CA02-001 | CA02 | CT-CA02-001 normaliza caixa e espaços | Código válido recusado | P1 | Particionamento de equivalência | E 2 E | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca02-001) |
+| CT-CA05-001 | CA05 | CT-CA05-001 remove cupom e permite reaplicar | Desconto duplicado ou residual | P0 | Transição de estados | E 2 E | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-001) |
+| CT-CA03-002 | CA03 | CT-CA03-002 exige código preenchido | Desconto indevido | P0 | Particionamento de equivalência + testes negativos | E 2 E | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca03-002) |
+| CT-CA06-001 | CA06,CA08 | CT-CA06-001 frete grátis em R$  200 antes e depois do cupom @smoke | Cobrança indevida de frete | P0 | Análise de valores-limite | E 2 E | REPROVADO — BUG-001 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca06-001) |
+| CT-CA07-001 | CA07,CA11 | CT-CA07-001 R$  199,80 sem cupom informa faltante de R$  0,20 @smoke | Frete/faltante incorretos | P0 | Análise de valores-limite | E 2 E | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca07-001) |
+| CT-CA07-002 | CA07 | CT-CA07-002 remoção de produto recalcula frete e faltante | Frete/faltante incorretos | P0 | Transição de estados | E 2 E | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca07-002) |
+| CT-CA10-001 | CA10 | CT-CA10-001 limita cinco unidades na vitrine e carrinho | Pedido fora do limite de quantidade | P1 | Análise de valores-limite | E 2 E | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-001) |
+| CT-CA05-101 | CA05 | CT-CA05-101 Impedir segundo cupom antes de remover o atual | Desconto duplicado ou residual | P0 | Transição de estados | BDD | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-101) |
+| CT-CA11-101 | CA01,CA11 | CT-CA11-101 Recalcular centavos ao alterar quantidade com cupom | Diferença financeira de centavos | P0 | Transição de estados | BDD | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca11-101) |
+| CT-CA08-101 | CA01,CA07,CA08 | CT-CA08-101 Atravessar o limite nos dois sentidos com cupom | Elegibilidade calculada sobre total errado | P0 | Transição de estados | BDD | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca08-101) |
+| CT-CA05-102 | CA05 | CT-CA05-102 Esvaziar carrinho descarta o cupom aplicado | Desconto duplicado ou residual | P0 | Transição de estados | BDD | APROVADO | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-102) |
+
+### Cobertura por critério
+
+| CA | Casos automatizados relacionados |
+| --- | --- |
+| CA01 | CT-CA01-201, CT-CA01-202, CT-CA01-203, CT-CA08-203, CT-CA01-001, CT-CA11-101, CT-CA08-101 |
+| CA02 | CT-CA02-201, CT-CA02-202, CT-CA02-203, CT-CA02-001 |
+| CA03 | CT-CA03-201, CT-CA03-220, CT-CA03-001, CT-CA03-002 |
+| CA04 | CT-CA04-202, CT-CA04-201, CT-CA04-220, CT-CA04-001 |
+| CA05 | CT-CA05-201, CT-CA05-202, CT-CA05-001, CT-CA05-101, CT-CA05-102 |
+| CA06 | CT-CA06-201, CT-CA06-202, CT-CA04-202, CT-CA08-203, CT-CA06-001 |
+| CA07 | CT-CA07-201, CT-CA07-202, CT-CA01-001, CT-CA07-001, CT-CA07-002, CT-CA08-101 |
+| CA08 | CT-CA08-201, CT-CA08-202, CT-CA08-203, CT-CA06-001, CT-CA08-101 |
+| CA09 | CT-CA09-201, CT-CA01-201, CT-CA09-202, CT-CA01-001 |
+| CA10 | CT-CA10-201, CT-CA10-206, CT-CA10-207, CT-CA10-208, CT-CA10-209, CT-CA10-210, CT-CA10-220, CT-CA10-001 |
+| CA11 | CT-CA11-201, CT-CA07-001, CT-CA11-101 |
+
+## Cenários em Gherkin
+
+Os três prioritários são implementados nos `.spec.ts`; as quatro transições executáveis ficam em `automation/features/`. Os roteiros abaixo descrevem valores esperados, mesmo quando o produto falha.
 
 ```gherkin
 # language: pt
-Funcionalidade: Cupom de desconto no carrinho
-  Como cliente da Verzel Store
-  Quero aplicar ou remover um cupom
-  Para pagar o valor correto pelos produtos e pelo frete
-
-  Cenário: CT01 - Aplicar cupom válido
-    Dado que o carrinho contém 1 unidade de P005 e subtotal de 100,00
-    Quando aplico o cupom "<CUPOM_VALIDO>"
-    Então o cupom deve ser aplicado com desconto de 10,00
-    E o frete deve ser 19,90
-    E o total deve ser 109,90
-
-  Cenário: CT02 - Recusar cupom inválido
-    Dado que o carrinho contém 1 unidade de P005
-    Quando aplico o cupom "<CUPOM_INVALIDO>"
-    Então devo ver a mensagem "Cupom inválido."
-    E nenhum cupom deve ser aplicado
-    E o desconto deve ser 0,00
-    E o total deve ser 119,90
-
-  Cenário: CT03 - Recusar cupom expirado
-    Dado que o carrinho contém 1 unidade de P005
-    Quando aplico o cupom "<CUPOM_EXPIRADO>"
-    Então devo ver a mensagem "Cupom expirado."
-    E nenhum cupom deve ser aplicado
-    E o desconto deve ser 0,00
-
-  Cenário: CT04 - Aplicar cupom abaixo do mínimo de frete grátis
-    Dado que o subtotal dos produtos é 100,00
-    E esse valor é menor que "<VALOR_MINIMO>"
-    Quando aplico o cupom "<CUPOM_VALIDO>"
+Funcionalidade: Cupom e frete da promoção VZS-142
+  Cenário: CT-CA01-001 Cupom válido abaixo do limiar
+    Dado que o carrinho contém P005 com quantidade 1 e subtotal 100,00
+    Quando aplico "BEMVINDO10"
     Então o desconto deve ser 10,00
-    E o frete deve ser "<FRETE_FIXO>"
-    E o carrinho deve informar que faltam 100,00 para o frete grátis
-
-  Cenário: CT05 - Remover cupom aplicado
-    Dado que o carrinho contém 2 unidades de P005
-    E o cupom "<CUPOM_VALIDO>" está aplicado
-    Quando removo o cupom
-    Então o desconto deve ser 0,00
-    E o subtotal deve continuar sendo 200,00
-    E o frete deve continuar grátis
-    E o total deve ser 200,00
-
-  Cenário: CT08 - Impedir tentativa de acumular cupons na interface
-    Dado que o cupom "<CUPOM_VALIDO>" está aplicado
-    Quando verifico os controles de cupom
-    Então não deve ser possível aplicar um segundo cupom enquanto o atual estiver aplicado
-    Quando removo o cupom atual
-    E aplico novamente o cupom "<CUPOM_VALIDO>"
-    Então deve haver apenas um desconto de 10% sobre o subtotal
-
-  Esquema do Cenário: CT09 - Normalizar maiúsculas, minúsculas e espaços nas extremidades
-    Dado que o carrinho contém 1 unidade de P005
-    Quando aplico o código "<codigo>"
-    Então o cupom "BEMVINDO10" deve ser aplicado
-    E o desconto deve ser 10,00
-    Exemplos:
-      | codigo          |
-      | BEMVINDO10      |
-      | bemvindo10      |
-      | BeMvInDo10      |
-      |   BEMVINDO10    |
-
-  Cenário: CT10 - Recalcular desconto após alterar quantidade
-    Dado que o carrinho contém 1 unidade de P005
-    E o cupom "<CUPOM_VALIDO>" está aplicado
-    Quando aumento a quantidade de P005 para 2
-    Então o subtotal deve ser 200,00
-    E o desconto deve ser 20,00
-
-  Cenário: CT11 - Aplicar desconto apenas aos produtos
-    Dado que o carrinho contém 1 unidade de P005
-    Quando aplico o cupom "<CUPOM_VALIDO>"
-    Então o desconto deve ser 10% de 100,00
-    E o frete de 19,90 não deve receber desconto
+    E o frete deve ser 19,90
     E o total deve ser 109,90
 
-  Cenário: CT12 - Preservar precisão monetária
-    Dado que o carrinho contém 1 unidade de P002 e 2 unidades de P004
-    Quando aplico o cupom "<CUPOM_VALIDO>"
-    Então o subtotal deve ser 239,70
-    E o desconto deve ser 23,97
-    E o frete deve ser 0,00
-    E o total deve ser 215,73
-    E a interface deve exibir os valores com duas casas decimais
-```
-
-Para CT09, digite também literalmente `"  BEMVINDO10  "`: tabelas Gherkin removem espaços periféricos de células, portanto a verificação de espaços exige esse dado explícito na automação ou na execução manual. A regra de normalização é das extremidades; não se presume aceitação de espaços internos ao código.
-
-## Frete grátis
-
-```gherkin
-# language: pt
-Funcionalidade: Frete calculado pelo subtotal antes do desconto
-
-  Cenário: CT06 - Manter frete grátis com cupom quando o total cai abaixo do mínimo
-    Dado que o carrinho contém 2 unidades de P005 e subtotal de 200,00
-    Quando aplico o cupom "<CUPOM_VALIDO>"
+  Cenário: CT-CA06-001 Frete no mínimo antes e depois do desconto
+    Dado que o carrinho contém P005 com quantidade 2
+    Então o subtotal deve ser 200,00, o frete 0,00 e o total 200,00
+    Quando aplico "BEMVINDO10"
     Então o desconto deve ser 20,00
+    E o frete deve continuar 0,00
     E o total deve ser 180,00
-    E o frete deve ser grátis
-    E o valor faltante para frete grátis deve ser 0,00
 
-  Esquema do Cenário: CT07 - Avaliar as fronteiras do mínimo sem cupom
-    Dado que o carrinho tem a composição "<itens>"
-    Quando calculo o carrinho sem cupom
-    Então o subtotal deve ser <subtotal>
-    E o frete deve ser <frete>
-    E o valor faltante para frete grátis deve ser <faltante>
-    E o total deve ser <total>
+  Cenário: CT-CA07-001 Subtotal 199,80 sem cupom
+    Dado que adiciono P001 e P002 com quantidade 1 cada
+    Quando abro o carrinho sem cupom
+    Então o subtotal deve ser 199,80
+    E o desconto deve ser 0,00, o frete 19,90 e o total 219,70
+    E deve faltar 0,20 para frete grátis
+
+  Esquema do Cenário: Recusar cupom na UI sem desconto
+    Dado que possuo P005 com quantidade 1
+    Quando aplico "<cupom>"
+    Então devo ver "<mensagem>"
+    E o desconto deve ser 0,00 e o total 119,90
     Exemplos:
-      | itens             | subtotal | frete | faltante | total  |
-      | P005x1 P004x1 P008x1 | 199,90 | 19,90 | 0,10    | 219,80 |
-      | P005x2            | 200,00   | 0,00  | 0,00     | 200,00 |
-      | P006x5 P001x1     | 209,40   | 0,00  | 0,00     | 209,40 |
+      | ID          | cupom                  | mensagem        |
+      | CT-CA03-001 | CUPOM_INEXISTENTE_999   | Cupom inválido. |
+      | CT-CA04-001 | VERAO2026              | Cupom expirado. |
 
-  Esquema do Cenário: CT13 - Avaliar as fronteiras com cupom válido
-    Dado que o carrinho tem a composição "<itens>"
-    Quando calculo o carrinho com o cupom "<CUPOM_VALIDO>"
-    Então o desconto deve ser <desconto>
-    E o frete deve ser <frete>
-    E o total deve ser <total>
+  Cenário: CT-CA02-001 Normalizar cupom
+    Dado que possuo P005 com quantidade 1
+    Quando aplico o código literal "  bemvindo 10  "
+    Então BEMVINDO10 deve estar aplicado com desconto 10,00 e total 109,90
+
+  Cenário: CT-CA05-001 Remover e reaplicar
+    Dado que BEMVINDO10 está aplicado em subtotal 100,00
+    Quando removo o cupom
+    Então o desconto deve ser 0,00 e o total 119,90
+    Quando reaplico BEMVINDO10
+    Então deve haver um desconto 10,00 e total 109,90
+
+  Cenário: CT-CA07-002 Remover produto reavalia frete
+    Dado que possuo P005 com quantidade 2 e P008 com quantidade 1
+    E o subtotal é 250,00 e o frete é 0,00
+    Quando removo o produto P005
+    Então o subtotal deve ser 50,00, o frete 19,90 e o total 69,90
+    E deve faltar 150,00 para frete grátis
+
+  Cenário: CT-CA10-001 Limitar quantidade na UI
+    Dado que adiciono 5 unidades de P008
+    Então adicionar na vitrine e aumentar no carrinho devem estar desabilitados
+    E a quantidade deve ser 5 e o subtotal 250,00
+
+  Cenário: CT-CA11-201 Arredondar valores da API
+    Dado que envio P002 com quantidade 1 e P004 com quantidade 2
+    Quando calculo com BEMVINDO10
+    Então devo receber 200 com subtotal 239,70, desconto 23,97, frete 0,00 e total 215,73
+
+  Esquema do Cenário: Rejeitar quantidade 6 em cálculo e pedido
+    Dado que envio P001 com quantidade 6 e dados fictícios válidos
+    Quando faço POST em "<rota>"
+    Então devo receber 422 QUANTIDADE_MAXIMA_EXCEDIDA
     Exemplos:
-      | itens               | desconto | frete | total  |
-      | P005x1 P004x1 P008x1 | 19,99    | 19,90 | 199,81 |
-      | P005x2              | 20,00    | 0,00  | 180,00 |
-      | P006x5 P001x1       | 20,94    | 0,00  | 188,46 |
+      | ID          | rota                  |
+      | CT-CA10-206 | /api/carrinho/calcular |
+      | CT-CA10-220 | /api/pedidos           |
 
-  Cenário: CT14 - Reavaliar o frete após reduzir quantidade
-    Dado que o carrinho contém 5 unidades de P005 sem cupom
-    E o subtotal é 500,00 e o frete é grátis
-    Quando reduzo a quantidade de P005 para 1
-    Então o subtotal deve ser 100,00
-    E o frete deve ser 19,90
-    E o total deve ser 119,90
-    E o carrinho deve informar que faltam 100,00 para o frete grátis
+  Esquema do Cenário: Diferenciar cupom recusado no cálculo e pedido
+    Dado que envio P005 com quantidade 1 e cliente fictício válido
+    Quando envio o cupom "<cupom>"
+    Então calcular deve retornar 200 sem desconto e mensagem "<mensagem>"
+    E pedidos deve retornar 422 com "<codigo>"
+    Exemplos:
+      | cupom                | mensagem        | codigo         |
+      | CUPOM_INEXISTENTE_999 | Cupom inválido. | CUPOM_INVALIDO |
+      | VERAO2026            | Cupom expirado. | CUPOM_EXPIRADO |
 
-  Cenário: CT25 - Reavaliar o frete após remover um produto
-    Dado que o carrinho contém 2 unidades de P005 e 1 unidade de P008 sem cupom
-    E o subtotal é 250,00 e o frete é grátis
-    Quando reduzo a quantidade de P005 para 1
-    Então o subtotal deve ser 150,00 e o frete deve ser 19,90
-    Quando removo o produto P008
-    Então o subtotal deve ser 100,00
-    E o frete deve ser 19,90
-    E o total deve ser 119,90
-    E o carrinho deve informar que faltam 100,00 para o frete grátis
+  Cenário: CT-CA01-203 Confirmar pedido e normalizar CEP
+    Dado que possuo P005 com quantidade 1 e cupom BEMVINDO10
+    E envio nome/sobrenome, e-mail fictício válido e CEP 01310-100
+    Quando confirmo o pedido
+    Então devo receber 201, número no formato VZ-000000 e CEP 01310100
+    E o total deve ser 109,90
 ```
 
-## Quantidades, contrato e pedido
+Validações negativas adicionais estão individualizadas na matriz e nos testes: itens ausentes/vazios, itemnão objeto, inexistente/duplicado, quantidade 0/negativa/fracionária/textual, JSON malformado, nome/e-mail/CEP inválidos. Não há login, cadastro, estoque ou consulta de pedidos.
+
+## Roteiros negativos e catálogo
 
 ```gherkin
 # language: pt
-Funcionalidade: Integridade do carrinho e confirmação do pedido
-
-  Cenário: CT15 - Aceitar o máximo de cinco unidades por produto
-    Dado que o carrinho contém 5 unidades de P005
-    Quando calculo o carrinho
-    Então a API deve aceitar o cálculo
-    E a quantidade deve ser 5
-    E a interface deve impedir adicionar a sexta unidade
-
-  Cenário: CT16 - Rejeitar quantidade acima do máximo na API
-    Quando envio 6 unidades de P001 para calcular o carrinho
-    Então a resposta deve ter status 422
-    E o código de erro deve ser "QUANTIDADE_MAXIMA_EXCEDIDA"
-
-  Esquema do Cenário: CT17 - Rejeitar itens inválidos sem calcular totais
-    Quando envio um carrinho com "<entrada>"
-    Então a resposta deve ter status 422
-    E o código de erro deve ser "<erro>"
+Funcionalidade: Contratos públicos e entradas inválidas
+  Esquema do Cenário: Validar catálogo sem credenciais
+    Quando consulto "<rota>"
+    Então devo receber "<status>" e o contrato "<contrato>"
     Exemplos:
-      | entrada                         | erro                   |
-      | lista vazia                     | ITENS_OBRIGATORIOS     |
-      | item sem produtoId              | ITEM_INVALIDO         |
-      | produto inexistente             | PRODUTO_NAO_ENCONTRADO |
-      | P005 repetido em dois itens      | ITEM_DUPLICADO         |
-      | quantidade zero                 | QUANTIDADE_INVALIDA   |
-      | quantidade negativa             | QUANTIDADE_INVALIDA   |
-      | quantidade fracionária           | QUANTIDADE_INVALIDA   |
-      | quantidade como texto            | QUANTIDADE_INVALIDA   |
+      | ID          | rota               | status | contrato                       |
+      | CT-CA11-290 | /api/produtos      | 200    | 8 produtos com preços oficiais |
+      | CT-CA11-291 | /api/produtos/P001 | 200    | produto P001 com preço 59,90    |
+      | CT-CA10-290 | /api/produtos/P999 | 404    | PRODUTO_NAO_ENCONTRADO          |
 
-  Esquema do Cenário: CT18 - Informar erro de cupom no cálculo com HTTP 200
-    Dado que o carrinho contém 1 unidade de P005
-    Quando envio o cupom "<codigo>" para "/api/carrinho/calcular"
-    Então a resposta deve ter status 200
-    E cupom.aplicado deve ser falso
-    E cupom.mensagem deve ser "<mensagem>"
-    E o desconto deve ser 0,00
+  Esquema do Cenário: Rejeitar dados inválidos de cálculo
+    Quando envio "<entrada>" para calcular
+    Então devo receber 422 e "<codigo>"
     Exemplos:
-      | codigo         | mensagem        |
-      | CUPOM_INVALIDO | Cupom inválido. |
-      | VERAO2026      | Cupom expirado. |
+      | ID          | entrada             | codigo                 |
+      | CT-CA10-202 | itens ausentes      | ITENS_OBRIGATORIOS     |
+      | CT-CA10-203 | itens vazios        | ITENS_OBRIGATORIOS     |
+      | CT-CA10-204 | item nulo           | ITEM_INVALIDO          |
+      | CT-CA10-205 | produto P999        | PRODUTO_NAO_ENCONTRADO |
+      | CT-CA10-207 | quantidade zero     | QUANTIDADE_INVALIDA   |
+      | CT-CA10-208 | quantidade negativa | QUANTIDADE_INVALIDA   |
+      | CT-CA10-209 | quantidade 1,5      | QUANTIDADE_INVALIDA   |
+      | CT-CA10-210 | quantidade textual  | QUANTIDADE_INVALIDA   |
+      | CT-CA10-211 | P001 duplicado      | ITEM_DUPLICADO         |
 
-  Cenário: CT19 - Confirmar pedido com cupom válido
-    Dado um cliente com nome e sobrenome, e-mail válido e CEP de oito dígitos
-    E um carrinho com 2 unidades de P005 e cupom "<CUPOM_VALIDO>"
-    Quando envio o pedido para "/api/pedidos"
-    Então a resposta deve ter status 201
-    E o número do pedido deve seguir o formato "VZ-000000"
-    E o CEP deve estar normalizado sem hífen
-    E o resumo deve manter subtotal de 200,00, desconto de 20,00 e frete de 0,00
-    E o total deve ser 180,00
+  Cenário: CT-CA10-212 Rejeitar JSON malformado
+    Quando envio JSON incompleto para calcular
+    Então devo receber 400 JSON_INVALIDO
 
-  Esquema do Cenário: CT20 - Rejeitar cupom inválido ou expirado na confirmação
-    Dado um cliente com dados válidos e um carrinho com 1 unidade de P005
-    Quando envio um pedido com o cupom "<codigo>"
-    Então a resposta deve ter status 422
-    E o código de erro deve ser "<erro>"
+  Esquema do Cenário: Rejeitar dados de cliente no pedido
+    Dado que possuo um carrinho válido
+    Quando envio "<entrada>" como dado do cliente
+    Então devo receber 422 DADOS_INVALIDOS com detalhe de "<campo>"
     Exemplos:
-      | codigo         | erro           |
-      | CUPOM_INVALIDO | CUPOM_INVALIDO |
-      | VERAO2026      | CUPOM_EXPIRADO |
+      | ID          | entrada        | campo         |
+      | CT-CA10-222 | Cliente        | cliente.nome  |
+      | CT-CA10-223 | email-invalido | cliente.email |
+      | CT-CA10-224 | CEP 123        | cliente.cep   |
 
-  Esquema do Cenário: CT21 - Validar os dados do cliente no pedido
-    Dado um carrinho válido
-    Quando envio um pedido com "<entrada>"
-    Então a resposta deve ter status 422
-    E o código de erro deve ser "DADOS_INVALIDOS"
-    E o erro deve identificar o campo inválido
-    Exemplos:
-      | entrada                     |
-      | nome sem sobrenome          |
-      | e-mail sem formato válido   |
-      | CEP com três dígitos        |
-
-  Cenário: CT22 - Concluir compra pela interface
-    Dado um carrinho com 1 unidade de P005 e cupom "<CUPOM_VALIDO>"
-    Quando preencho nome e sobrenome, e-mail válido e CEP válido
-    E confirmo a compra
-    Então devo ver a confirmação com número de pedido fictício
-    E o subtotal confirmado deve ser 100,00
-    E o desconto deve ser 10,00 e o frete deve ser 19,90
-    E o total confirmado deve ser 109,90
-    E o carrinho deve estar vazio ao iniciar uma nova compra
-
-  Cenário: CT23 - Começar outra aba sem carrinho
-    Dado que uma aba tem um carrinho com produtos
-    Quando inicio uma aba independente da loja
-    Então o carrinho dessa aba deve começar vazio
-
-  Cenário: CT24 - Verificar acessibilidade crítica do carrinho
-    Dado um carrinho com produto e controles de cupom visíveis
-    Quando executo a auditoria automática de acessibilidade
-    Então não deve haver violações classificadas como críticas
-    E cada violação deve identificar os elementos afetados na evidência
+  Cenário: CT-CA10-221 Rejeitar duplicação no pedido
+    Dado que envio cliente fictício válido
+    E dois itens separados com produto P001
+    Quando confirmo o pedido
+    Então devo receber 422 ITEM_DUPLICADO
 ```
-
-CT23 segue a simplificação documentada de armazenamento por aba; ausência de estoque, e-mail, pagamento online e consulta posterior de pedidos não são defeitos. A acessibilidade automática de CT24 cobre somente as regras verificadas pelo axe; teclado, foco e leitura por tecnologia assistiva também fazem parte do charter.
-
-## Rastreabilidade
-
-| Critério | Cenários |
-| --- | --- |
-| CA01 — desconto de 10% | CT01, CT04, CT06, CT10, CT12, CT13, CT19 |
-| CA02 — normalização | CT09 |
-| CA03 — cupom inexistente | CT02, CT18, CT20 |
-| CA04 — cupom expirado | CT03, CT18, CT20 |
-| CA05 — um cupom por vez | CT05, CT08 |
-| CA06/CA07 — limiar e frete fixo | CT04, CT06, CT07, CT13, CT14, CT25 |
-| CA08 — subtotal antes do desconto | CT06, CT13 |
-| CA09 — desconto fora do frete | CT01, CT04, CT11 |
-| CA10 — máximo de cinco unidades | CT15, CT16, CT17 |
-| CA11 — duas casas decimais | CT07, CT12, CT13 |
-| Regras existentes de cliente e pedido | CT19, CT20, CT21, CT22 |
-| Simplificações e acessibilidade | CT23, CT24 |

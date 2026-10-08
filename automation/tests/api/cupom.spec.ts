@@ -8,7 +8,7 @@ import { settings } from '../../support/env';
 const itens = [{ produtoId: 'P005', quantidade: 1 }];
 
 test.describe('Cupons na API @regression', () => {
-  test('CA01/CA09: 10% sobre produtos mantém frete de R$ 19,90 @smoke', async ({ request }) => {
+  test('CT-CA01-201 CA01/CA09: 10% sobre produtos mantém frete de R$ 19,90 @smoke', async ({ request }) => {
     const response = await new CupomService(request).aplicar(settings.cupomValido, itens);
     expect(response.status()).toBe(200);
     const resumo = schemaResumoCarrinho.parse(await response.json());
@@ -19,13 +19,13 @@ test.describe('Cupons na API @regression', () => {
     });
   });
 
-  for (const codigo of [
+  for (const [indice, codigo] of [
     settings.cupomValido.toLowerCase(),
     `  ${settings.cupomValido.toLowerCase()}  `,
     `\t${settings.cupomValido.toLowerCase()}\n`,
-  ]) {
-    test(`CA02: normaliza caixa e espaços em ${JSON.stringify(codigo)}`, async ({ request }) => {
-      const response = await new CupomService(request).validar(codigo, itens);
+  ].entries()) {
+    test(`CT-CA02-${201 + indice} CA02: normaliza caixa e espaços em ${JSON.stringify(codigo)}`, async ({ request }) => {
+      const response = await new CupomService(request).aplicar(codigo, itens);
       expect(response.status()).toBe(200);
       const resumo = schemaResumoCarrinho.parse(await response.json());
       expect(resumo.desconto).toBe(10);
@@ -39,7 +39,7 @@ test.describe('Cupons na API @regression', () => {
     mensagem,
   }));
   for (const { codigo, criterio, mensagem } of cuponsRejeitados) {
-    test(`${criterio}: ${codigo} calcula sem desconto e informa o motivo`, async ({ request }) => {
+    test(`CT-${criterio}-201 ${criterio}: ${codigo} calcula sem desconto e informa o motivo`, async ({ request }) => {
       const response = await new CupomService(request).aplicar(codigo, itens);
       expect(response.status()).toBe(200);
       expect(schemaResumoCarrinho.parse(await response.json())).toMatchObject({
@@ -49,7 +49,7 @@ test.describe('Cupons na API @regression', () => {
     });
   }
 
-  test('CA05: remove e reaplica o cupom sem acumular desconto entre chamadas', async ({ request }) => {
+  test('CT-CA05-201 CA05: requisições independentes removem e reaplicam o cupom sem acumular desconto entre chamadas', async ({ request }) => {
     const carrinho = new CarrinhoService(request);
     const aplicar = async () => {
       const response = await carrinho.calcular(itens, settings.cupomValido);
@@ -65,7 +65,7 @@ test.describe('Cupons na API @regression', () => {
     expect((await aplicar()).desconto).toBe(10);
   });
 
-  test('CA05: dois códigos em um campo não acumulam cupons', async ({ request }) => {
+  test('CT-CA05-202 CA05: dois códigos em um campo não acumulam cupons', async ({ request }) => {
     // A API aceita um único código, não uma lista ou uma sessão de cupons.
     const response = await new CupomService(request).aplicar(
       `${settings.cupomValido},${settings.cupomExpirado}`, itens,
@@ -76,7 +76,7 @@ test.describe('Cupons na API @regression', () => {
     });
   });
 
-  test('cupom não exige valor mínimo para desconto', async ({ request }) => {
+  test('CT-CA01-202 cupom não exige valor mínimo para desconto', async ({ request }) => {
     const response = await new CupomService(request).aplicar(
       settings.cupomValido, [{ produtoId: 'P006', quantidade: 1 }],
     );

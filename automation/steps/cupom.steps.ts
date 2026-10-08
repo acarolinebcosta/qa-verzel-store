@@ -39,20 +39,6 @@ When('aplico o cupom de situação {string}', async ({ carrinhoPage }, situacao:
   await carrinhoPage.aplicarCupom(codigos[situacao]);
 });
 
-When('aplico o cupom válido no formato {string}', async ({ carrinhoPage }, formato: string) => {
-  const codigos: Record<string, string> = {
-    minúsculas: settings.cupomValido.toLowerCase(),
-    'espaços nas pontas': `  ${settings.cupomValido}  `,
-    'caixa mista': [...settings.cupomValido].map((letra, indice) => indice % 2 ? letra.toLowerCase() : letra.toUpperCase()).join(''),
-  };
-  if (!(formato in codigos)) throw new Error(`Formato de cupom desconhecido: ${formato}`);
-  await carrinhoPage.aplicarCupom(codigos[formato]);
-});
-
-When('informo o código {string}', async ({ carrinhoPage }, codigo: string) => {
-  await carrinhoPage.aplicarCupom(codigo);
-});
-
 When('removo o cupom', async ({ carrinhoPage }) => {
   await carrinhoPage.removerCupom();
 });
@@ -63,14 +49,6 @@ When('aumento a quantidade de {string} em {int} unidades', async ({ carrinhoPage
 
 When('diminuo a quantidade de {string} em {int} unidades', async ({ carrinhoPage }, codigo: string, unidades: number) => {
   await carrinhoPage.alterarQuantidade(produtoId(codigo), 'diminuir', unidades);
-});
-
-When('diminuo o carrinho para uma camiseta', async ({ carrinhoPage, vitrinePage }) => {
-  await carrinhoPage.removerProduto('P005');
-  await expect(carrinhoPage.page.getByRole('heading', { name: 'Seu carrinho está vazio' })).toBeVisible();
-  await vitrinePage.abrir();
-  await vitrinePage.adicionar('P001');
-  await vitrinePage.irAoCarrinho();
 });
 
 Then('o cupom válido deve estar aplicado', async ({ carrinhoPage }) => {

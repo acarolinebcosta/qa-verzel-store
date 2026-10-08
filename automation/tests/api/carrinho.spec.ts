@@ -4,9 +4,11 @@ import { schemaErro, schemaResumoCarrinho } from '../../schemas/api.schema';
 import { settings } from '../../support/env';
 
 test.describe('Frete e cálculo do carrinho na API @regression', () => {
-  const fronteiras: { subtotal: number; itens: ItemCarrinho[]; frete: number; faltante: number }[] = [
+  const fronteiras: { id: string; subtotal: number; itens: ItemCarrinho[]; frete: number; faltante: number }[] = [
+    { id: 'CT-CA09-201', subtotal: 100, itens: [{ produtoId: 'P005', quantidade: 1 }], frete: 19.9, faltante: 100 },
+    { id: 'CT-CA07-201', subtotal: 199.8, itens: [{ produtoId: 'P001', quantidade: 1 }, { produtoId: 'P002', quantidade: 1 }], frete: 19.9, faltante: 0.2 },
     {
-      subtotal: 199.9,
+      id: 'CT-CA07-202', subtotal: 199.9,
       itens: [
         { produtoId: 'P005', quantidade: 1 },
         { produtoId: 'P004', quantidade: 1 },
@@ -14,18 +16,18 @@ test.describe('Frete e cálculo do carrinho na API @regression', () => {
       ],
       frete: 19.9, faltante: 0.1,
     },
-    { subtotal: 200, itens: [{ produtoId: 'P005', quantidade: 2 }], frete: 0, faltante: 0 },
+    { id: 'CT-CA06-201', subtotal: 200, itens: [{ produtoId: 'P005', quantidade: 2 }], frete: 0, faltante: 0 },
     // R$ 200,10 não pode ser formado pelos preços fixos com até 5 unidades.
     // R$ 209,40 é o menor subtotal permitido acima do limite.
     {
-      subtotal: 209.4,
+      id: 'CT-CA06-202', subtotal: 209.4,
       itens: [{ produtoId: 'P001', quantidade: 1 }, { produtoId: 'P006', quantidade: 5 }],
       frete: 0, faltante: 0,
     },
   ];
 
-  for (const { subtotal, itens, frete, faltante } of fronteiras) {
-    test(`CA06/CA07: fronteira de subtotal R$ ${subtotal.toFixed(2)} sem cupom @smoke`, async ({ request }) => {
+  for (const { id, subtotal, itens, frete, faltante } of fronteiras) {
+    test(`${id} fronteira de subtotal R$ ${subtotal.toFixed(2)} sem cupom @smoke`, async ({ request }) => {
       if (subtotal === 200) test.info().annotations.push({ type: 'issue', description: 'BUG-001' });
       expect(settings.valorMinimo).toBe(200);
       const response = await new CarrinhoService(request).calcular(itens);
@@ -38,8 +40,8 @@ test.describe('Frete e cálculo do carrinho na API @regression', () => {
     });
   }
 
-  for (const { subtotal, itens, frete, faltante } of fronteiras) {
-    test(`CA08: cupom preserva regra de frete sobre subtotal R$ ${subtotal.toFixed(2)}`, async ({ request }) => {
+  for (const [indice, { subtotal, itens, frete, faltante }] of fronteiras.filter(({ subtotal }) => subtotal >= 200).entries()) {
+    test(`CT-CA08-${201 + indice} CA08: cupom preserva regra de frete sobre subtotal R$ ${subtotal.toFixed(2)}`, async ({ request }) => {
       if (subtotal === 200) test.info().annotations.push({ type: 'issue', description: 'BUG-001' });
       const response = await new CarrinhoService(request).calcular(itens, settings.cupomValido);
       expect(response.status()).toBe(200);
@@ -52,7 +54,17 @@ test.describe('Frete e cálculo do carrinho na API @regression', () => {
     });
   }
 
-  test('CA10: aceita exatamente cinco unidades por produto', async ({ request }) => {
+  test('CT-CA04-202 cupom expirado no limite mantém cálculo 200 sem desconto', async ({ request }) => {
+    test.info().annotations.push({ type: 'issue', description: 'BUG-001' });
+    const response = await new CarrinhoService(request).calcular([{ produtoId: 'P005', quantidade: 2 }], settings.cupomExpirado);
+    expect(response.status()).toBe(200);
+    expect(schemaResumoCarrinho.parse(await response.json())).toMatchObject({
+      subtotal: 200, desconto: 0, frete: 0, total: 200, freteGratis: true,
+      cupom: { aplicado: false, mensagem: 'Cupom expirado.' },
+    });
+  });
+
+  test('CT-CA10-201 CA10: aceita exatamente cinco unidades por produto', async ({ request }) => {
     const response = await new CarrinhoService(request).calcular([{ produtoId: 'P006', quantidade: 5 }]);
     expect(response.status()).toBe(200);
     expect(schemaResumoCarrinho.parse(await response.json())).toMatchObject({
@@ -61,7 +73,7 @@ test.describe('Frete e cálculo do carrinho na API @regression', () => {
     });
   });
 
-  test('CA11: arredonda subtotal, desconto e total para centavos', async ({ request }) => {
+  test('CT-CA11-201 CA11: arredonda subtotal, desconto e total para centavos', async ({ request }) => {
     const response = await new CarrinhoService(request).calcular([
       { produtoId: 'P002', quantidade: 1 }, { produtoId: 'P004', quantidade: 2 },
     ], settings.cupomValido);
@@ -88,8 +100,8 @@ test.describe('Frete e cálculo do carrinho na API @regression', () => {
     },
   ];
 
-  for (const { nome, payload, codigo } of entradasInvalidas) {
-    test(`rejeita ${nome} com erro documentado`, async ({ request }) => {
+  for (const [indice, { nome, payload, codigo }] of entradasInvalidas.entries()) {
+    test(`CT-CA10-${202 + indice} rejeita ${nome} com erro documentado`, async ({ request }) => {
       if (codigo === 'QUANTIDADE_MAXIMA_EXCEDIDA') {
         test.info().annotations.push({ type: 'issue', description: 'BUG-002' });
       }
@@ -99,7 +111,7 @@ test.describe('Frete e cálculo do carrinho na API @regression', () => {
     });
   }
 
-  test('JSON malformado responde 400', async ({ request }) => {
+  test('CT-CA10-212 JSON malformado responde 400', async ({ request }) => {
     const response = await request.post('/api/carrinho/calcular', {
       data: '{"itens":', headers: { 'Content-Type': 'application/json' },
     });

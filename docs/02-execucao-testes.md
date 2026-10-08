@@ -1,75 +1,103 @@
 # Execução de testes
 
-Ambiente: [Verzel Store](https://verzel-store.qa-test-verzel-store.workers.dev/). Referência: documentação 2.3.0, VZS-142, publicada em 30/09/2026. Data de preparação do roteiro: 07/10/2026, fuso America/Sao_Paulo.
+Rodada final: **08/10/2026 03:35:41 a 08/10/2026 03:36:04**, America/Sao_Paulo. Loja pública, VZS-142/documentação 2.3.0, macOS arm 64; Node 26.6.0; Playwright 1.64.0; Chromium 156.0.8078.4. Comando `npm test`; `npm ci --offline --ignore-scripts`, TypeScript 5.9.3 e bddgen conferidos.
 
-Os resultados preenchidos abaixo correspondem à exploração real da interface conduzida pelo agente Codex em 07/10/2026. Cenários sem observação suficiente continuam **Pendentes**; nenhum resultado fictício é apresentado como execução. Execuções automáticas ficam também no relatório gerado `docs/execucao-automatica.md` e no HTML do Playwright.
+## Execução automática final
 
-| ID | Cenário | Tipo (Manual/Exploratório/API) | Resultado | Evidência | Bug |
-| --- | --- | --- | --- | --- | --- |
-| CT01 | Cupom válido em subtotal de R$ 100,00 | Manual | Passou | [Transcrição, etapa 4](evidencias/exploracao-manual-2026-10-07.md) e [cupom válido](evidencias/cupom-valido.png) | — |
-| CT02 | Cupom inexistente | Manual | Passou | [Transcrição, etapa 2](evidencias/exploracao-manual-2026-10-07.md) | — |
-| CT03 | Cupom expirado | Manual | Passou | [Transcrição, etapa 3](evidencias/exploracao-manual-2026-10-07.md) | — |
-| CT04 | Cupom válido abaixo do mínimo de frete | Manual | Passou | [Transcrição, etapa 4](evidencias/exploracao-manual-2026-10-07.md) | — |
-| CT05 | Remover cupom aplicado | Manual | Falhou — remoção correta, frete indevido em 200,00 | [Transcrição, etapa 7](evidencias/exploracao-manual-2026-10-07.md) | [BUG-001](03-bugs.md#bug-001--frete-cobrado-exatamente-no-subtotal-de-r-20000) |
-| CT06 | Frete grátis com cupom e subtotal de R$ 200,00 | Manual | Falhou | [Transcrição, etapa 6](evidencias/exploracao-manual-2026-10-07.md) | [BUG-001](03-bugs.md#bug-001--frete-cobrado-exatamente-no-subtotal-de-r-20000) |
-| CT07 | Frete sem cupom: R$ 199,90 / R$ 200,00 / R$ 209,40 | API | Falhou em 200,00; 199,90 e 209,40 passaram | [Relatório automático](evidencias/execucao-2026-10-07.md) e [sondagem API](evidencias/api-bugs-2026-10-07.json) | BUG-001 |
-| CT08 | Impedir aplicação de segundo cupom | Manual | Passou — controle bloqueia segunda aplicação | [Transcrição, etapa 5](evidencias/exploracao-manual-2026-10-07.md) | — |
-| CT09 | Normalização de minúsculas e espaços nas extremidades | Manual | Passou — demais variantes aguardam execução | [Transcrição, etapa 4](evidencias/exploracao-manual-2026-10-07.md) | — |
-| CT10 | Recalcular desconto após aumentar quantidade | Manual | Passou — desconto de 10,00 para 20,00 | [Transcrição, etapa 6](evidencias/exploracao-manual-2026-10-07.md) | Frete avaliado separadamente em BUG-001 |
-| CT11 | Desconto apenas no subtotal dos produtos | API | Passou | [Relatório automático](evidencias/execucao-2026-10-07.md) | — |
-| CT12 | Precisão de subtotal, desconto e total | API | Passou | [Relatório automático](evidencias/execucao-2026-10-07.md) | — |
-| CT13 | Frete com cupom nas três fronteiras realizáveis | API | Falhou em 200,00; 199,90 e 209,40 passaram | [Relatório automático](evidencias/execucao-2026-10-07.md) e [sondagem API](evidencias/api-bugs-2026-10-07.json) | BUG-001 |
-| CT14 | Reavaliar frete após reduzir quantidade | Manual | Passou | [Transcrição, etapa 10](evidencias/exploracao-manual-2026-10-07.md) | — |
-| CT15 | Aceitar cinco unidades e impedir a sexta na UI | Manual | Passou | [Transcrição, etapa 9](evidencias/exploracao-manual-2026-10-07.md) | — |
-| CT16 | Rejeitar seis unidades pela API de cálculo e pedido | API | Falhou — HTTP 200/201 em vez de 422 | [Sondagem API](evidencias/api-bugs-2026-10-07.json) | BUG-002 |
-| CT17 | Itens ausentes, duplicados e quantidades inválidas | API | Passou nos dados automatizados; variação sem produtoId pendente | [Relatório automático](evidencias/execucao-2026-10-07.md) | — |
-| CT18 | Cálculo com cupom recusado retorna HTTP 200 | API | Passou | [Relatório automático](evidencias/execucao-2026-10-07.md) | — |
-| CT19 | Pedido de R$ 200,00 com cupom: HTTP 201 e totais | API | Falhou — confirmação aceita, mas frete/total incorretos | [Relatório automático](evidencias/execucao-2026-10-07.md) | BUG-001 |
-| CT20 | Pedido com cupom inválido/expirado retorna HTTP 422 | API | Passou | [Relatório automático](evidencias/execucao-2026-10-07.md) | — |
-| CT21 | Pedido com dados de cliente inválidos | API | Passou | [Relatório automático](evidencias/execucao-2026-10-07.md) | — |
-| CT22 | Confirmação de compra na interface | Manual | Passou — subtotal 100,00, total 109,90 | [Transcrição, etapas 12–14](evidencias/exploracao-manual-2026-10-07.md) | — |
-| CT23 | Isolamento do carrinho em outra aba | Exploratório | Passou | [Transcrição, etapa 11](evidencias/exploracao-manual-2026-10-07.md) | — |
-| CT24 | Auditoria de acessibilidade crítica no carrinho | Exploratório (axe automatizado) | Passou — zero violações críticas | [Relatório automático](evidencias/execucao-2026-10-07.md) e [JSON axe](evidencias/axe-carrinho.json) | — |
-| CT25 | Remover produto e reavaliar frete | Manual | Pendente manual; variação automatizada passou | [Relatório automático](evidencias/execucao-2026-10-07.md) | — |
-| EXP01 | Sessão do charter de cupom e frete | Exploratório | Executada; missões primárias concluídas e defeito de frete reproduzido | [Transcrição da sessão](evidencias/exploracao-manual-2026-10-07.md) | BUG-001 |
+| Camada | Executados | Aprovados | Reprovados | Bloqueados |
+| --- | ---: | ---: | ---: | ---: |
+|API|43|37|6|0|
+|E 2 E|11|10|1|0|
+|BDD|4|4|0|0|
+|Total|58|51|7|0|
 
-## Como preencher após executar
+Zero ignorados/instáveis. As sete falhas são de produto; nenhum timeout, erro de automação ou indisponibilidade na rodada final. A pré-validação teve timeout de assertions suaves em CT-CA06-001; foi corrigido e reexecutado, preservando ambos os resultados. Os três obrigatórios foram implementados e executados; CT-CA06-001 falhou com expectativas corretas.
 
-1. Registre data/hora em America/Sao_Paulo, executor, navegador/versão, sistema e versão da documentação. Para testes automáticos, registre também Node.js, versão do Playwright e comando utilizado.
-2. Execute os passos do cenário com os produtos e cupons reais. Compare subtotal, desconto, frete, faltante e total; uma mensagem de sucesso isolada não valida o cálculo.
-3. Use **Passou**, **Falhou**, **Bloqueado** ou **Pendente**. Uma execução de API não prova, por si só, o resultado manual da interface. Exploração conduzida por agente deve identificar o agente executor.
-4. Salve a evidência em `docs/evidencias/`, com nome como `CT01-cupom-valido.png` ou `CT20-pedido-expirado.json`. Para API, capture método, caminho, corpo, status e resposta com dados de cliente fictícios.
-5. Substitua `—` por um link relativo para a evidência existente. Em falhas confirmadas, associe um ID de `docs/03-bugs.md`. Dúvidas de requisito ou simplificações documentadas não devem virar bugs.
-6. Se um comportamento mudar, preserve o histórico por execução em vez de apagar o resultado anterior. Reexecução deve referenciar o mesmo bug e identificar o commit ou versão avaliada.
+Valores financeiros abaixo usam ordem subtotal/desconto/frete/total. Em testes complementares, o arquivo de código contém o contrato completo assertado.
 
-## Resumo de execução
+| ID | Cenário | Esperado | Observado | Status | Ambiente/data | Evidência | Bug |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| CT-CA09-201 | CT-CA09-201 fronteira de subtotal R$  100.00 sem cupom @smoke | 100,00 / 0,00 / 19,90 / 119,90; faltante 100,00 | 100,00 / 0,00 / 19,90 / 119,90; faltante 100,00 | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca09-201) | — |
+| CT-CA07-201 | CT-CA07-201 fronteira de subtotal R$  199.80 sem cupom @smoke | 199,80 / 0,00 / 19,90 / 219,70; faltante 0,20 | 199,80 / 0,00 / 19,90 / 219,70; faltante 0,20 | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca07-201) | — |
+| CT-CA07-202 | CT-CA07-202 fronteira de subtotal R$  199.90 sem cupom @smoke | 199,90 / 0,00 / 19,90 / 219,80; faltante 0,10 | 199,90 / 0,00 / 19,90 / 219,80; faltante 0,10 | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca07-202) | — |
+| CT-CA06-201 | CT-CA06-201 fronteira de subtotal R$  200.00 sem cupom @smoke | 200,00 / 0,00 / 0,00 / 200,00 | frete 19,90; total 219,90; freteGratis: false | REPROVADO (produto) | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca06-201) | BUG-001 |
+| CT-CA06-202 | CT-CA06-202 fronteira de subtotal R$  209.40 sem cupom @smoke | 209,40 / 0,00 / 0,00 / 209,40 | 209,40 / 0,00 / 0,00 / 209,40 | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca06-202) | — |
+| CT-CA08-201 | CT-CA08-201 CA08: cupom preserva regra de frete sobre subtotal R$  200.00 | 200,00 / 20,00 / 0,00 / 180,00 | frete 19,90; total 199,90; desconto 20,00 | REPROVADO (produto) | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca08-201) | BUG-001 |
+| CT-CA08-202 | CT-CA08-202 CA08: cupom preserva regra de frete sobre subtotal R$  209.40 | 209,40 / 20,94 / 0,00 / 188,46 | 209,40 / 20,94 / 0,00 / 188,46 | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca08-202) | — |
+| CT-CA04-202 | CT-CA04-202 cupom expirado no limite mantém cálculo 200 sem desconto | HTTP 200; cupom expirado;200,00 / 0,00 / 0,00 / 200,00 | HTTP 200; expirado sem desconto; frete 19,90; total 219,90 | REPROVADO (produto) | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca04-202) | BUG-001 |
+| CT-CA10-201 | CT-CA10-201 CA10: aceita exatamente cinco unidades por produto | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-201) | — |
+| CT-CA11-201 | CT-CA11-201 CA11: arredonda subtotal, desconto e total para centavos | 239,70 / 23,97 / 0,00 / 215,73 | 239,70 / 23,97 / 0,00 / 215,73 | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca11-201) | — |
+| CT-CA10-202 | CT-CA10-202 rejeita itens ausentes com erro documentado | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-202) | — |
+| CT-CA10-203 | CT-CA10-203 rejeita carrinho vazio com erro documentado | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-203) | — |
+| CT-CA10-204 | CT-CA10-204 rejeita item sem objeto com erro documentado | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-204) | — |
+| CT-CA10-205 | CT-CA10-205 rejeita produto inexistente com erro documentado | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-205) | — |
+| CT-CA10-206 | CT-CA10-206 rejeita CA10: seis unidades com erro documentado | HTTP 422 QUANTIDADE_MAXIMA_EXCEDIDA | HTTP 200 em vez de 422; quantidade 6 aceita | REPROVADO (produto) | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-206) | BUG-002 |
+| CT-CA10-207 | CT-CA10-207 rejeita quantidade zero com erro documentado | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-207) | — |
+| CT-CA10-208 | CT-CA10-208 rejeita quantidade negativa com erro documentado | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-208) | — |
+| CT-CA10-209 | CT-CA10-209 rejeita quantidade fracionária com erro documentado | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-209) | — |
+| CT-CA10-210 | CT-CA10-210 rejeita quantidade textual com erro documentado | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-210) | — |
+| CT-CA10-211 | CT-CA10-211 rejeita produto duplicado com erro documentado | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-211) | — |
+| CT-CA10-212 | CT-CA10-212 JSON malformado responde 400 | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-212) | — |
+| CT-CA01-201 | CT-CA01-201 CA01/CA09: 10% sobre produtos mantém frete de R$  19,90 @smoke | 100,00 / 10,00 / 19,90 / 109,90 | 100,00 / 10,00 / 19,90 / 109,90 | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca01-201) | — |
+| CT-CA02-201 | CT-CA02-201 CA02: normaliza caixa e espaços em "bemvindo 10" | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca02-201) | — |
+| CT-CA02-202 | CT-CA02-202 CA02: normaliza caixa e espaços em "  bemvindo 10  " | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca02-202) | — |
+| CT-CA02-203 | CT-CA02-203 CA02: normaliza caixa e espaços em "\tbemvindo 10\n" | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca02-203) | — |
+| CT-CA03-201 | CT-CA03-201 CA03: CUPOM_INEXISTENTE_999 calcula sem desconto e informa o motivo | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca03-201) | — |
+| CT-CA04-201 | CT-CA04-201 CA04: VERAO2026 calcula sem desconto e informa o motivo | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca04-201) | — |
+| CT-CA05-201 | CT-CA05-201 CA05: requisições independentes removem e reaplicam o cupom sem acumular desconto entre chamadas | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-201) | — |
+| CT-CA05-202 | CT-CA05-202 CA05: dois códigos em um campo não acumulam cupons | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-202) | — |
+| CT-CA01-202 | CT-CA01-202 cupom não exige valor mínimo para desconto | 29,90 / 2,99 / 19,90 / 46,81 | 29,90 / 2,99 / 19,90 / 46,81 | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca01-202) | — |
+| CT-CA01-203 | CT-CA01-203 confirma pedido válido com cliente fictício e CEP normalizado @smoke | HTTP 201, VZ-000000 (formato), CEP 01310100; 100,00 / 10,00 / 19,90 / 109,90 | HTTP 201, VZ-000000 (formato), CEP 01310100; 100,00 / 10,00 / 19,90 / 109,90 | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca01-203) | — |
+| CT-CA09-202 | CT-CA09-202 confirma pedido sem cupom | HTTP 201; desconto 0,00; total 119,90; cupomnull | HTTP 201; desconto 0,00; total 119,90; cupomnull | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca09-202) | — |
+| CT-CA08-203 | CT-CA08-203 CA06/CA08: pedido de R$  200 com cupom confirma com frete grátis | HTTP 201;200,00 / 20,00 / 0,00 / 180,00 | HTTP 201; frete 19,90; total 199,90; desconto 20,00 | REPROVADO (produto) | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca08-203) | BUG-001 |
+| CT-CA03-220 | CT-CA03-220 pedido com CUPOM_INEXISTENTE_999 responde 422 CUPOM_INVALIDO | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca03-220) | — |
+| CT-CA04-220 | CT-CA04-220 pedido com VERAO2026 responde 422 CUPOM_EXPIRADO | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca04-220) | — |
+| CT-CA10-222 | CT-CA10-222 rejeita cliente.nome inválido com detalhe do campo | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-222) | — |
+| CT-CA10-223 | CT-CA10-223 rejeita cliente.email inválido com detalhe do campo | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-223) | — |
+| CT-CA10-224 | CT-CA10-224 rejeita cliente.cep inválido com detalhe do campo | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-224) | — |
+| CT-CA10-220 | CT-CA10-220 CA10: pedido rejeita seis unidades do mesmo produto | HTTP 422 QUANTIDADE_MAXIMA_EXCEDIDA | HTTP 201 em vez de 422; quantidade 6 aceita no pedido fictício | REPROVADO (produto) | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-220) | BUG-002 |
+| CT-CA10-221 | CT-CA10-221 pedido rejeita produto duplicado | HTTP 422 e código/campo documentado; ver assertivas no arquivo | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-221) | — |
+| CT-CA11-290 | CT-CA11-290 lista o catálogo sem credenciais @smoke @regression | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca11-290) | — |
+| CT-CA11-291 | CT-CA11-291 consulta um produto público pelo ID @regression | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca11-291) | — |
+| CT-CA10-290 | CT-CA10-290 produto inexistente responde 404 com contrato de erro @regression | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | API, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-290) | — |
+| CT-CA05-090 | CT-CA05-090 carrinho sem violações críticas de acessibilidade @regression | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-090) | — |
+| CT-CA01-001 | CT-CA01-001 cupom válido abaixo do limite @smoke | 100,00 / 10,00 / 19,90 / 109,90 | 100,00 / 10,00 / 19,90 / 109,90 | APROVADO | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca01-001) | — |
+| CT-CA03-001 | CT-CA03-001 rejeita cupom sem alterar o total @smoke | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca03-001) | — |
+| CT-CA04-001 | CT-CA04-001 rejeita cupom sem alterar o total @smoke | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca04-001) | — |
+| CT-CA02-001 | CT-CA02-001 normaliza caixa e espaços | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca02-001) | — |
+| CT-CA05-001 | CT-CA05-001 remove cupom e permite reaplicar | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-001) | — |
+| CT-CA03-002 | CT-CA03-002 exige código preenchido | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca03-002) | — |
+| CT-CA06-001 | CT-CA06-001 frete grátis em R$  200 antes e depois do cupom @smoke | sem cupom:200,00 / 0,00 / 0,00 / 200,00; com cupom:200,00 / 20,00 / 0,00 / 180,00 | frete 19,90; total 219,90 sem cupom e 199,90 com cupom; desconto 0,00/20,00 | REPROVADO (produto) | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca06-001) | BUG-001 |
+| CT-CA07-001 | CT-CA07-001 R$  199,80 sem cupom informa faltante de R$  0,20 @smoke | 199,80 / 0,00 / 19,90 / 219,70; faltante 0,20 | 199,80 / 0,00 / 19,90 / 219,70; faltante 0,20 | APROVADO | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca07-001) | — |
+| CT-CA07-002 | CT-CA07-002 remoção de produto recalcula frete e faltante | 250,00 →50,00; frete 0,00 →19,90; total 69,90; faltante 150,00 | 250,00 →50,00; frete 0,00 →19,90; total 69,90; faltante 150,00 | APROVADO | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca07-002) | — |
+| CT-CA10-001 | CT-CA10-001 limita cinco unidades na vitrine e carrinho | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | E 2 E, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca10-001) | — |
+| CT-CA05-101 | CT-CA05-101 Impedir segundo cupom antes de remover o atual | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | BDD, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-101) | — |
+| CT-CA11-101 | CT-CA11-101 Recalcular centavos ao alterar quantidade com cupom | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | BDD, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca11-101) | — |
+| CT-CA08-101 | CT-CA08-101 Atravessar o limite nos dois sentidos com cupom | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | BDD, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca08-101) | — |
+| CT-CA05-102 | CT-CA05-102 Esvaziar carrinho descarta o cupom aplicado | Comportamento e contrato das assertivas no arquivo de teste | Todas as assertivas de contrato/comportamento passaram | APROVADO | BDD, loja 2.3.0/macOS,08/10/2026 | [Execução](evidencias/execucao-2026-10-08.md#ct-ca05-102) | — |
 
-| Campo | Registro |
-| --- | --- |
-| Início e fim reais | Sessão inicial em 07/10/2026 antes de 19h20 e complemento por volta de 19h26, America/Sao_Paulo; início exato não coletado |
-| Executor | Agente Codex executor principal, operando a interface por CUA |
-| Navegador e sistema | Chrome no ambiente desktop macOS; versão não coletada |
-| Comandos e versões | `npm test`; Node.js 26.6.0, Playwright 1.64.0, TypeScript 5.9.3, Chromium 156.0.8078.4; `npm run typecheck` aprovado |
-| Resultado da suíte automática | Execução auditada: 77 testes, 68 aprovados, 9 falhas, 0 instáveis e 0 ignorados |
-| Resultado da exploração | Missões primárias concluídas; cupons, normalização, quantidade, frete, isolamento e confirmação verificados |
-| Bugs confirmados | BUG-001 — limite inclusivo de frete (UI/API); BUG-002 — quantidade acima de cinco (API) |
-| Revisão humana | Pendente |
+## Execução manual/exploratória
 
-A geração dos arquivos e a escrita dos cenários não contam como execução. Um teste que falha por indisponibilidade ou dependência do ambiente deve ser identificado como bloqueado, com o motivo. O exemplo de bug em `docs/03-bugs.md` não deve ser associado a nenhuma linha desta tabela.
+Executor: agente Codex operando Chrome pelo controle de interface; não é execução humana. Em 08/10, marca de controle 03:35:01 e encerramento 03:36:36 America/Sao_Paulo; início exato não coletado (primeiras interações ocorreram antes dessa marca). Chrome/macOS, versão do Chrome não coletada.
 
-## Execução automatizada auditada
+| ID | Cenário | Esperado | Observado | Status | Ambiente/data | Evidência | Bug |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|CT-CA01-001|Cupom válido em 100|Desconto 10; frete 19,90; total 109,90|10/19,90/109,90|APROVADO|Chrome/macOS,08/10|[Sessão](evidencias/exploracao-manual-2026-10-08.md)|—|
+|CT-CA02-001|Minúsculas/espaços|Aplicar BEMVINDO10|` bemvindo10 ` normalizado|APROVADO|Chrome/macOS,08/10|[Sessão](evidencias/exploracao-manual-2026-10-08.md)|—|
+|CT-CA06-001|200 com cupom|Frete 0; total 180|Frete 19,90; total 199,90|REPROVADO(produto)|Chrome/macOS,08/10|[Sessão](evidencias/exploracao-manual-2026-10-08.md)|BUG-001|
+|CT-CA05-101|Segundo cupom|Sem controle para acumular|Campo 0; botão Aplicar 0; somente Remover|APROVADO|Chrome/macOS,08/10|[Sessão](evidencias/exploracao-manual-2026-10-08.md)|—|
+|CT-CA08-101|Alterar quantidade 1→2→3→1|100/200/300/100; frete 0 em ≥ 200|Totais 109,90/199,90/270/109,90; falhaem 200|REPROVADO(produto)|Chrome/macOS,08/10|[Sessão](evidencias/exploracao-manual-2026-10-08.md)|BUG-001|
+|CT-CA05-001|Remover cupom|Total 119,90|Desconto 0; total 119,90|APROVADO|Chrome/macOS,08/10|[Sessão](evidencias/exploracao-manual-2026-10-08.md)|—|
+|CT-CA04-001|Cupom expirado apósremoção|Erro; sem desconto|“Cupom expirado.”; total 119,90|APROVADO|Chrome/macOS,08/10|[Sessão](evidencias/exploracao-manual-2026-10-08.md)|—|
+|CT-CA07-002|Remover produto 250→50|Frete 19,90; total 69,90; faltante 150|Valorescorretos|APROVADO|Chrome/macOS,08/10|[Sessão](evidencias/exploracao-manual-2026-10-08.md)|—|
+|CT-CA07-001|199,80 sem cupom manual|Frete 19,90; faltante 0,20; total 219,70|Sem execução manual nesta sessão; E 2 Epassou|NÃO EXECUTADO(manual)|Chrome/macOS,08/10|[E2E](evidencias/execucao-2026-10-08.md#ct-ca07-001)|—|
 
-Executada com `npm test` em 07/10/2026, de **19h22min59s a 19h24min02s**, America/Sao_Paulo, conforme timestamps do reporter. Node.js 26.6.0, Playwright 1.64.0, Chromium 156.0.8078.4 e macOS arm64; duração de 63,51 segundos. A verificação TypeScript (`npm run typecheck`) passou com TypeScript 5.9.3. Resultado global dos testes: **falha**, com 77 testes e 9 falhas inesperadas relacionadas a dois bugs do ambiente.
+A transição BDD 100→300→100 passou; a exploração manual também visitou 200 e reproduziu o defeito. Não generalizamos o resultado BDD para a fronteira exata.
 
-| Camada | Total | Aprovados | Falhas |
-| --- | ---: | ---: | ---: |
-| API | 41 | 36 | 5 |
-| Interface E2E | 18 | 16 | 2 |
-| BDD em Chromium | 18 | 16 | 2 |
-| Total | 77 | 68 | 9 |
+## Histórico e limitações
 
-Evidências auditadas: [relatório completo com 77 resultados](evidencias/execucao-2026-10-07.md), [JSON original](evidencias/resultados-2026-10-07.json), [log](evidencias/execucao-2026-10-07.log), [axe](evidencias/axe-carrinho.json) e [manifesto SHA-256](evidencias/manifesto-sha256.json). Os anexos negativos de cupom estão comprovados no JSON e na transcrição; não foram exportados screenshots próprios para cupom inválido/expirado.
+07/10/2026:77 testes,68 aprovados,9 reprovados,0 ignorados/instáveis. [Relatório](evidencias/execucao-2026-10-07.md),[JSON](evidencias/resultados-2026-10-07.json),[sessão manual](evidencias/exploracao-manual-2026-10-07.md). IDslegadosCT 01–CT 25 pertencem a essa rodada; a rastreabilidade atual usa CT-CAxx-NNN. Checkout fictício de 109,90 e isolamento entre abas foram observados nessa data e não repetidos manualmente em 08/10. A remoção de produto, antes pendente, foi executada em 08/10 como CT-CA07-002.
 
-Não houve teste ignorado nem resultado instável. As falhas de frete ocorrem no cálculo, confirmação e interface/BDD; a falha de quantidade ocorre nos endpoints de cálculo e pedido. Os cenários usam expectativas da documentação e não convertem esses defeitos em falhas esperadas.
+A revisão humana permanece NÃO EXECUTADA. Pipeline GitHub Actions: NÃO EXECUTADO; arquivos locais ainda não publicados. Publicação/PR/proteção/tag: BLOQUEADOS por permissões de escrita/extensão e confirmação de identidade no GitHub. Não confundir esse bloqueio de entrega com disponibilidade da loja ou resultado dos 58 testes.
 
-A primeira execução completa, de 19h20min23s a 19h21min30s, teve a mesma distribuição de resultados; a execução auditada confirmou os defeitos após ajustes de rastreabilidade dos bugs e compatibilidade TypeScript/ts-node. CT25 permanece pendente na exploração manual, com variação automatizada aprovada. A auditoria axe passou no critério de violações **críticas**; outras verificações e avaliação humana não são inferidas desse resultado.
+[Relatório final](evidencias/execucao-2026-10-08.md) · [Sondagens reais](evidencias/api-2026-10-08.json) · [Manifesto](evidencias/manifesto-2026-10-08.json).
