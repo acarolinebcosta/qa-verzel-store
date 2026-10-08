@@ -1,0 +1,10 @@
+node_modules/
+playwright-report/
+test-results/
+.features-gen/
+.env
+.env.*
+!.env.example
+docs/execucao-automatica.md
+.DS_Store
+*.tsbuildinfo

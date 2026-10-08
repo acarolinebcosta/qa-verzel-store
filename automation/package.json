@@ -1,0 +1,36 @@
+{
+  "name": "qa-verzel-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "QA da Verzel Store: API, E2E, BDD e acessibilidade",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "bddgen": "bddgen",
+    "pretest": "npm run bddgen",
+    "test": "playwright test",
+    "pretest:headed": "npm run bddgen",
+    "test:headed": "playwright test --headed",
+    "pretest:smoke": "npm run bddgen",
+    "test:smoke": "playwright test --grep @smoke",
+    "pretest:regression": "npm run bddgen",
+    "test:regression": "playwright test --grep @regression",
+    "pretest:bdd": "npm run bddgen",
+    "test:bdd": "playwright test --project chromium-bdd",
+    "test:api": "playwright test --project chromium tests/api",
+    "test:e2e": "playwright test --project chromium tests/e2e",
+    "typecheck": "tsc --noEmit",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@playwright/test": "1.64.0",
+    "@types/node": "26.6.4",
+    "dotenv": "18.0.6",
+    "playwright-bdd": "9.2.1",
+    "ts-node": "10.9.2",
+    "typescript": "5.9.3",
+    "zod": "4.6.5"
+  }
+}
