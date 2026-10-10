@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { test, expect } from '../../fixtures/base.fixture';
 
-test('carrinho sem violações críticas de acessibilidade @regression', async ({ carrinhoComProduto }, testInfo) => {
+test('CT-CA05-090 carrinho sem violações críticas de acessibilidade @regression', async ({ carrinhoComProduto }, testInfo) => {
   const resultado = await new AxeBuilder({ page: carrinhoComProduto.page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
   await testInfo.attach('axe-carrinho', {

@@ -1,0 +1,291 @@
+{
+  "geradoEmUTC": "2026-10-08T07:01:48.296Z",
+  "ambiente": "https://verzel-store.qa-test-verzel-store.workers.dev",
+  "fonteDocumentacao": "https://verzel-store.qa-test-verzel-store.workers.dev/documentacao",
+  "versao": "2.3.0",
+  "fontesConsultadas": [
+    {
+      "origem": "Documentação pública 2.3.0, regras",
+      "trecho": "O CEP precisa ter 8 dígitos, com ou sem hífen."
+    },
+    {
+      "origem": "Interface pública, dica do campo CEP",
+      "trecho": "Somente números ou no formato 00000-000."
+    },
+    {
+      "origem": "Documentação pública 2.3.0, códigos de erro",
+      "trecho": "ITEM_INVALIDO: Um item não é um objeto com produtoId e quantidade."
+    }
+  ],
+  "observacao": "Sondagens pequenas para esclarecer ambiguidades e diagnósticos de contrato. Não são execução da suíte nem report de bugs. Nenhuma hipótese sem regra explícita foi convertida em teste financeiro obrigatório.",
+  "observacoes": [
+    {
+      "id": "HIP-API-CUPOM-VAZIO",
+      "classificacao": "hipotese",
+      "timestampUTC": "2026-10-08T07:01:47.667Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P005",
+              "quantidade": 1
+            }
+          ],
+          "cupom": ""
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P005",
+              "nome": "Mochila Urbana 20L",
+              "precoUnitario": 100,
+              "quantidade": 1,
+              "total": 100
+            }
+          ],
+          "subtotal": 100,
+          "desconto": 0,
+          "frete": 19.9,
+          "freteGratis": false,
+          "valorFaltanteFreteGratis": 100,
+          "total": 119.9,
+          "cupom": null
+        }
+      },
+      "expectedDocumented": null,
+      "interpretacao": "A documentação não define cupom vazio; registrar observação sem transformar em requisito.",
+      "bugClassificado": false
+    },
+    {
+      "id": "HIP-API-CUPOM-ESPACOS",
+      "classificacao": "hipotese",
+      "timestampUTC": "2026-10-08T07:01:48.018Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P005",
+              "quantidade": 1
+            }
+          ],
+          "cupom": "   "
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P005",
+              "nome": "Mochila Urbana 20L",
+              "precoUnitario": 100,
+              "quantidade": 1,
+              "total": 100
+            }
+          ],
+          "subtotal": 100,
+          "desconto": 0,
+          "frete": 19.9,
+          "freteGratis": false,
+          "valorFaltanteFreteGratis": 100,
+          "total": 119.9,
+          "cupom": {
+            "codigo": "",
+            "aplicado": false,
+            "mensagem": "Cupom inválido."
+          }
+        }
+      },
+      "expectedDocumented": null,
+      "interpretacao": "Trim é documentado para códigos, mas código somente com espaços não tem comportamento explícito.",
+      "bugClassificado": false
+    },
+    {
+      "id": "HIP-API-CUPOM-NULL",
+      "classificacao": "hipotese",
+      "timestampUTC": "2026-10-08T07:01:48.068Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P005",
+              "quantidade": 1
+            }
+          ],
+          "cupom": null
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P005",
+              "nome": "Mochila Urbana 20L",
+              "precoUnitario": 100,
+              "quantidade": 1,
+              "total": 100
+            }
+          ],
+          "subtotal": 100,
+          "desconto": 0,
+          "frete": 19.9,
+          "freteGratis": false,
+          "valorFaltanteFreteGratis": 100,
+          "total": 119.9,
+          "cupom": null
+        }
+      },
+      "expectedDocumented": null,
+      "interpretacao": "Cupom é opcional; null explícito não tem comportamento definido.",
+      "bugClassificado": false
+    },
+    {
+      "id": "HIP-API-PRODUTO-MINUSCULO",
+      "classificacao": "hipotese",
+      "timestampUTC": "2026-10-08T07:01:48.109Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+        "body": {
+          "itens": [
+            {
+              "produtoId": "p005",
+              "quantidade": 1
+            }
+          ]
+        }
+      },
+      "response": {
+        "status": 422,
+        "body": {
+          "erro": {
+            "codigo": "PRODUTO_NAO_ENCONTRADO",
+            "mensagem": "Produto p005 não encontrado.",
+            "campo": "itens[0].produtoId"
+          }
+        }
+      },
+      "expectedDocumented": null,
+      "interpretacao": "A regra case-insensitive vale para cupons; normalização de ID de produto não foi especificada.",
+      "bugClassificado": false
+    },
+    {
+      "id": "CT-CLI-005",
+      "classificacao": "interpretacao_de_formato",
+      "timestampUTC": "2026-10-08T07:01:48.146Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/pedidos",
+        "body": {
+          "cliente": {
+            "nome": "Cliente Teste",
+            "email": "qa.5d49f651-c819-4d6a-a8a5-ff132162ff8e@example.invalid",
+            "cep": "01310 100"
+          },
+          "itens": [
+            {
+              "produtoId": "P005",
+              "quantidade": 1
+            }
+          ]
+        }
+      },
+      "response": {
+        "status": 422,
+        "body": {
+          "erro": {
+            "codigo": "DADOS_INVALIDOS",
+            "mensagem": "Existem campos inválidos no pedido.",
+            "campos": [
+              {
+                "campo": "cliente.cep",
+                "mensagem": "Informe um CEP com 8 dígitos."
+              }
+            ]
+          }
+        }
+      },
+      "expectedDocumented": {
+        "status": 422,
+        "errorCode": "DADOS_INVALIDOS",
+        "field": "cliente.cep"
+      },
+      "interpretacao": "O contrato informa 8 dígitos com ou sem hífen; a ajuda pública da interface explicita somente números ou 00000-000. Espaço interno fica fora dos dois formatos. Uma eventual divergência requer revisar essa interpretação antes de classificar bug.",
+      "bugClassificado": false
+    },
+    {
+      "id": "CT-API-005",
+      "classificacao": "diagnostico_de_requisito",
+      "timestampUTC": "2026-10-08T07:01:48.199Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+        "body": {
+          "itens": [
+            {
+              "quantidade": 1
+            }
+          ]
+        }
+      },
+      "response": {
+        "status": 422,
+        "body": {
+          "erro": {
+            "codigo": "PRODUTO_NAO_ENCONTRADO",
+            "mensagem": "Produto undefined não encontrado.",
+            "campo": "itens[0].produtoId"
+          }
+        }
+      },
+      "expectedDocumented": {
+        "status": 422,
+        "errorCode": "ITEM_INVALIDO"
+      },
+      "interpretacao": "A tabela oficial descreve ITEM_INVALIDO como item que não é objeto com produtoId e quantidade; confirmar código efetivamente retornado para ausência de produtoId.",
+      "bugClassificado": false
+    },
+    {
+      "id": "CT-API-006",
+      "classificacao": "diagnostico_de_requisito",
+      "timestampUTC": "2026-10-08T07:01:48.245Z",
+      "request": {
+        "method": "POST",
+        "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+        "body": {
+          "itens": [
+            {
+              "produtoId": "P001"
+            }
+          ]
+        }
+      },
+      "response": {
+        "status": 422,
+        "body": {
+          "erro": {
+            "codigo": "QUANTIDADE_INVALIDA",
+            "mensagem": "A quantidade deve ser um número inteiro maior ou igual a 1.",
+            "campo": "itens[0].quantidade"
+          }
+        }
+      },
+      "expectedDocumented": {
+        "status": 422,
+        "errorCode": "ITEM_INVALIDO"
+      },
+      "interpretacao": "A tabela oficial descreve ITEM_INVALIDO como item que não é objeto com produtoId e quantidade; confirmar código efetivamente retornado para ausência de quantidade.",
+      "bugClassificado": false
+    }
+  ]
+}

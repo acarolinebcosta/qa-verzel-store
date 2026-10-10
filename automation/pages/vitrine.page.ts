@@ -3,6 +3,7 @@ import { expect, type Locator, type Page } from '@playwright/test';
 /** Produtos fixos publicados na documentação v2.3.0 da loja. */
 export const produtos = {
   P001: { nome: 'Camiseta Essencial', preco: 59.9 },
+  P002: { nome: 'Calça Jeans Slim', preco: 139.9 },
   P004: { nome: 'Boné Aba Curva', preco: 49.9 },
   P005: { nome: 'Mochila Urbana 20L', preco: 100 },
   P006: { nome: 'Kit 3 Pares de Meias', preco: 29.9 },

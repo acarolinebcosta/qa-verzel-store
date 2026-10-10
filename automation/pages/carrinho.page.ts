@@ -62,14 +62,15 @@ export class CarrinhoPage {
     await this.aguardarCalculo();
   }
 
-  async esperarResumo(esperado: ResumoEsperado) {
+  async esperarResumo(esperado: ResumoEsperado, suave = false) {
+    const verificar = suave ? expect.configure({ soft: true, timeout: 1_000 }) : expect;
     await this.aguardarCalculo();
-    await expect(this.valor('Subtotal')).toHaveText(moeda(esperado.subtotal));
-    await expect(this.valor('Desconto')).toHaveText(
+    await verificar(this.valor('Subtotal')).toHaveText(moeda(esperado.subtotal));
+    await verificar(this.valor('Desconto')).toHaveText(
       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
     );
-    await expect(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
-    await expect(this.valor('Total')).toHaveText(moeda(esperado.total));
+    await verificar(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+    await verificar(this.valor('Total')).toHaveText(moeda(esperado.total));
   }
 
   async esperarFaltante(valor: number) {

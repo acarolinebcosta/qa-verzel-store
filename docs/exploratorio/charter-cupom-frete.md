@@ -2,7 +2,7 @@
 
 **Missão:** explorar a interação entre cupom, quantidade e limiar de frete para descobrir inconsistências de cálculo, mensagens ou atualização da interface, sempre comparando com os critérios VZS-142 da documentação 2.3.0.
 
-**Tempo planejado:** 45 minutos. **Tempo real e executor:** sessão conduzida pelo agente Codex em 07/10/2026, iniciada antes de 19h20 e complementada por volta de 19h26; duração exata não coletada. **Ambiente:** [Verzel Store](https://verzel-store.qa-test-verzel-store.workers.dev/), com dados fixos e isolados por aba. **Escopo:** carrinho, cupom, checkout e confirmação fictícia; sem carga, estresse ou testes de segurança.
+**Tempo planejado:** 45 minutos. **Tempo real e executor:** sessão conduzida pelo agente Codex em 07/10/2026, iniciada antes de 19 h 20 e complementada por volta de 19 h 26; duração exata não coletada. **Ambiente:** [Verzel Store](https://verzel-store.qa-test-verzel-store.workers.dev/), com dados fixos e isolados por aba. **Escopo:** carrinho, cupom, checkout e confirmação fictícia; sem carga, estresse ou testes de segurança.
 
 ## Preparação
 
@@ -42,7 +42,7 @@ Essas perguntas são hipóteses de exploração, não relatos de bugs. A afirma�
 
 | Campo | Resultado |
 | --- | --- |
-| Data, início/fim e duração real | 07/10/2026, sessão inicial antes de 19h20 e complemento por volta de 19h26, America/Sao_Paulo; duração e início exatos não coletados |
+| Data, início/fim e duração real | 07/10/2026, sessão inicial antes de 19 h 20 e complemento por volta de 19 h 26, America/Sao_Paulo; duração e início exatos não coletados |
 | Executor e ferramentas | Agente Codex executor principal, controle de interface por CUA |
 | Navegador/sistema | Chrome em macOS; versão não coletada |
 | Combinações e caminhos explorados | P005 com 1, 2, 3 e 5 unidades; cupom inexistente, VERAO2026 e ` bemvindo10 `; remover/reaplicar cupom; diminuir quantidade; outra aba; checkout com dados fictícios |
@@ -52,4 +52,25 @@ Essas perguntas são hipóteses de exploração, não relatos de bugs. A afirma�
 | Dúvidas ou áreas não cobertas | Remoção integral de produto e variantes adicionais de normalização não foram observadas manualmente; remoção e auditoria axe foram verificadas na automação. Fronteiras 199,90/209,40 foram verificadas pela API |
 | Próxima ação | Revisão humana da entrega; corrigir BUG-001/BUG-002 no produto e reexecutar os cenários associados |
 
-Ao concluir, atualizar EXP01 e os cenários correspondentes em `docs/02-execucao-testes.md`; inserir somente defeitos reais em `docs/03-bugs.md`. O número fictício de pedido, a ausência de e-mail/estoque/cobrança e a falta de consulta posterior não são bugs.
+Ao concluir, atualizar EXP-01 e os cenários correspondentes em `docs/02-execucao-testes.md`; inserir somente defeitos reais em `docs/03-bugs.md`. O número fictício de pedido, a ausência de e-mail/estoque/cobrança e a falta de consulta posterior não são bugs.
+
+## Complemento de 08/10/2026
+
+Missão executada: transições 1→2→3→1 com cupom, bloqueio do segundo cupom, remoção de cupom e remoção de produto 250→50. Marca de controle 03:35:01; encerramento 03:36:36 America/Sao_Paulo; início/duração exatos não coletados. Executor: agente na interface Chrome/macOS. Oráculos: CA01/CA05/CA06/CA07/CA08. BUG-001 reproduzido em 200; demais transições descritas passaram. Remoção de produto antes pendente foi observada. [Sessão](../evidencias/exploracao-manual-2026-10-08.md).
+
+## Heurística RCRCRC e fechamento do consolidado
+
+| Heurística | Aplicação nesta suíte | Execução / descoberta |
+| --- | --- | --- |
+| Recent — recente | Alterações de promoção VZS-142: cupom de 10% e frete inclusivo | CA01 e fronteiras executados; BUG-001 em 200,00 |
+| Core — central | Subtotal, desconto, frete e total da compra | 100/150/199,90/200/209,40/239,70 na API; três E2E mínimos executados |
+| Risky — arriscado | Ordem de cálculo, desconto sobre frete e bypass de quantidade | 209,40→188,46 e 150→154,90 passaram; API quantidade 6 reproduziu BUG-002 |
+| Configuration — configuração | Código normalizado, cupom opcional, inputs nulos e contratos HTTP | Variantes de caixa/trim passaram; vazio/null/pid minúsculo observados como hipóteses; itens incompletos reproduziram BUG-003 |
+| Repaired — corrigido | Reavaliar áreas que tiveram defeito ou ajuste da automação | BUG-001/BUG-002 seguem abertos. Timeout prévio de assertions corrigido; nova rodada sem timeout. Não alegar correção do produto |
+| Chronic — recorrente | Repetir padrões financeiros e de quantidade historicamente falhos | Execuções de 07/10, 08/10 às 03:35 e consolidada às 04:03 preservadas; falhas reproduzidas também no retry |
+
+O mapeamento acima orienta a seleção; não é uma sessão manual adicional. A exploração de interface mantém os tempos reais e limites de coleta já registrados. Sondagens API ocorreram às 04:01:47–04:01:48; a automação consolidada durou 25,732 s, às 04:03:09–04:03:35, com 70 casos. Essas durações não são somadas à sessão manual e não substituem os 45 minutos planejados por uma duração inventada.
+
+BDD confirmou remover produto com cupom (250/25/0/225 → 50/5/19,90/64,90), limite nos dois sentidos, recálculo de centavos e bloqueio de segundo cupom. O descarte do cupom ao esvaziar foi caracterizado como HIP-004 em CT-HIP-002, sem promovê-lo a requisito. [Resultados atuais](../evidencias/consolidada-2026-10-08/execucao.md) e [análise das hipóteses](../00-analise-requisitos.md).
+
+Próxima ação: revisão humana; correção dos três bugs pelo responsável pelo produto e reteste. Publicação e CI remoto dependem dos acessos descritos no relatório de entrega.

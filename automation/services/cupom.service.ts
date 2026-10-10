@@ -9,10 +9,6 @@ export class CupomService {
     this.carrinho = new CarrinhoService(request);
   }
 
-  validar(codigo: string, itens: ItemCarrinho[]): Promise<APIResponse> {
-    return this.carrinho.calcular(itens, codigo);
-  }
-
   aplicar(codigo: string, itens: ItemCarrinho[]): Promise<APIResponse> {
     return this.carrinho.calcular(itens, codigo);
   }

@@ -1,13 +1,13 @@
 import { randomUUID } from 'node:crypto';
 
-export interface UsuarioTeste {
+export interface ClienteTeste {
   nome: string;
   email: string;
   cep: string;
 }
 
 /** Dados fictícios: o domínio reservado .invalid nunca representa um cliente. */
-export function criarUsuario(overrides: Partial<UsuarioTeste> = {}): UsuarioTeste {
+export function criarCliente(overrides: Partial<ClienteTeste> = {}): ClienteTeste {
   return {
     nome: 'Cliente Teste',
     email: `qa.${randomUUID()}@example.invalid`,

@@ -1,0 +1,445 @@
+[
+  {
+    "id": "CT-CA09-201",
+    "timestampUTC": "2026-10-08T06:37:53.204063+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+    "request": {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "quantidade": 1
+        }
+      ]
+    },
+    "status": 200,
+    "response": {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "nome": "Mochila Urbana 20L",
+          "precoUnitario": 100,
+          "quantidade": 1,
+          "total": 100
+        }
+      ],
+      "subtotal": 100,
+      "desconto": 0,
+      "frete": 19.9,
+      "freteGratis": false,
+      "valorFaltanteFreteGratis": 100,
+      "total": 119.9,
+      "cupom": null
+    }
+  },
+  {
+    "id": "CT-CA01-201",
+    "timestampUTC": "2026-10-08T06:37:53.404867+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+    "request": {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "quantidade": 1
+        }
+      ],
+      "cupom": "BEMVINDO10"
+    },
+    "status": 200,
+    "response": {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "nome": "Mochila Urbana 20L",
+          "precoUnitario": 100,
+          "quantidade": 1,
+          "total": 100
+        }
+      ],
+      "subtotal": 100,
+      "desconto": 10,
+      "frete": 19.9,
+      "freteGratis": false,
+      "valorFaltanteFreteGratis": 100,
+      "total": 109.9,
+      "cupom": {
+        "codigo": "BEMVINDO10",
+        "aplicado": true,
+        "mensagem": "Cupom aplicado: 10% de desconto nos produtos."
+      }
+    }
+  },
+  {
+    "id": "CT-CA07-201",
+    "timestampUTC": "2026-10-08T06:37:53.639536+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+    "request": {
+      "itens": [
+        {
+          "produtoId": "P001",
+          "quantidade": 1
+        },
+        {
+          "produtoId": "P002",
+          "quantidade": 1
+        }
+      ]
+    },
+    "status": 200,
+    "response": {
+      "itens": [
+        {
+          "produtoId": "P001",
+          "nome": "Camiseta Essencial",
+          "precoUnitario": 59.9,
+          "quantidade": 1,
+          "total": 59.9
+        },
+        {
+          "produtoId": "P002",
+          "nome": "Calça Jeans Slim",
+          "precoUnitario": 139.9,
+          "quantidade": 1,
+          "total": 139.9
+        }
+      ],
+      "subtotal": 199.8,
+      "desconto": 0,
+      "frete": 19.9,
+      "freteGratis": false,
+      "valorFaltanteFreteGratis": 0.2,
+      "total": 219.7,
+      "cupom": null
+    }
+  },
+  {
+    "id": "CT-CA06-201",
+    "timestampUTC": "2026-10-08T06:37:53.851170+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+    "request": {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "quantidade": 2
+        }
+      ]
+    },
+    "status": 200,
+    "response": {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "nome": "Mochila Urbana 20L",
+          "precoUnitario": 100,
+          "quantidade": 2,
+          "total": 200
+        }
+      ],
+      "subtotal": 200,
+      "desconto": 0,
+      "frete": 19.9,
+      "freteGratis": false,
+      "valorFaltanteFreteGratis": 0,
+      "total": 219.9,
+      "cupom": null
+    }
+  },
+  {
+    "id": "CT-CA08-201",
+    "timestampUTC": "2026-10-08T06:37:54.086455+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+    "request": {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "quantidade": 2
+        }
+      ],
+      "cupom": "BEMVINDO10"
+    },
+    "status": 200,
+    "response": {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "nome": "Mochila Urbana 20L",
+          "precoUnitario": 100,
+          "quantidade": 2,
+          "total": 200
+        }
+      ],
+      "subtotal": 200,
+      "desconto": 20,
+      "frete": 19.9,
+      "freteGratis": false,
+      "valorFaltanteFreteGratis": 0,
+      "total": 199.9,
+      "cupom": {
+        "codigo": "BEMVINDO10",
+        "aplicado": true,
+        "mensagem": "Cupom aplicado: 10% de desconto nos produtos."
+      }
+    }
+  },
+  {
+    "id": "CT-CA04-202",
+    "timestampUTC": "2026-10-08T06:37:54.290311+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+    "request": {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "quantidade": 2
+        }
+      ],
+      "cupom": "VERAO2026"
+    },
+    "status": 200,
+    "response": {
+      "itens": [
+        {
+          "produtoId": "P005",
+          "nome": "Mochila Urbana 20L",
+          "precoUnitario": 100,
+          "quantidade": 2,
+          "total": 200
+        }
+      ],
+      "subtotal": 200,
+      "desconto": 0,
+      "frete": 19.9,
+      "freteGratis": false,
+      "valorFaltanteFreteGratis": 0,
+      "total": 219.9,
+      "cupom": {
+        "codigo": "VERAO2026",
+        "aplicado": false,
+        "mensagem": "Cupom expirado."
+      }
+    }
+  },
+  {
+    "id": "CT-CA11-201",
+    "timestampUTC": "2026-10-08T06:37:54.480392+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+    "request": {
+      "itens": [
+        {
+          "produtoId": "P002",
+          "quantidade": 1
+        },
+        {
+          "produtoId": "P004",
+          "quantidade": 2
+        }
+      ],
+      "cupom": "BEMVINDO10"
+    },
+    "status": 200,
+    "response": {
+      "itens": [
+        {
+          "produtoId": "P002",
+          "nome": "Calça Jeans Slim",
+          "precoUnitario": 139.9,
+          "quantidade": 1,
+          "total": 139.9
+        },
+        {
+          "produtoId": "P004",
+          "nome": "Boné Aba Curva",
+          "precoUnitario": 49.9,
+          "quantidade": 2,
+          "total": 99.8
+        }
+      ],
+      "subtotal": 239.7,
+      "desconto": 23.97,
+      "frete": 0,
+      "freteGratis": true,
+      "valorFaltanteFreteGratis": 0,
+      "total": 215.73,
+      "cupom": {
+        "codigo": "BEMVINDO10",
+        "aplicado": true,
+        "mensagem": "Cupom aplicado: 10% de desconto nos produtos."
+      }
+    }
+  },
+  {
+    "id": "CT-CA08-202",
+    "timestampUTC": "2026-10-08T06:37:54.695863+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+    "request": {
+      "itens": [
+        {
+          "produtoId": "P001",
+          "quantidade": 1
+        },
+        {
+          "produtoId": "P006",
+          "quantidade": 5
+        }
+      ],
+      "cupom": "BEMVINDO10"
+    },
+    "status": 200,
+    "response": {
+      "itens": [
+        {
+          "produtoId": "P001",
+          "nome": "Camiseta Essencial",
+          "precoUnitario": 59.9,
+          "quantidade": 1,
+          "total": 59.9
+        },
+        {
+          "produtoId": "P006",
+          "nome": "Kit 3 Pares de Meias",
+          "precoUnitario": 29.9,
+          "quantidade": 5,
+          "total": 149.5
+        }
+      ],
+      "subtotal": 209.4,
+      "desconto": 20.94,
+      "frete": 0,
+      "freteGratis": true,
+      "valorFaltanteFreteGratis": 0,
+      "total": 188.46,
+      "cupom": {
+        "codigo": "BEMVINDO10",
+        "aplicado": true,
+        "mensagem": "Cupom aplicado: 10% de desconto nos produtos."
+      }
+    }
+  },
+  {
+    "id": "CT-CA10-206",
+    "timestampUTC": "2026-10-08T06:37:54.867979+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+    "request": {
+      "itens": [
+        {
+          "produtoId": "P001",
+          "quantidade": 6
+        }
+      ]
+    },
+    "status": 200,
+    "response": {
+      "itens": [
+        {
+          "produtoId": "P001",
+          "nome": "Camiseta Essencial",
+          "precoUnitario": 59.9,
+          "quantidade": 6,
+          "total": 359.4
+        }
+      ],
+      "subtotal": 359.4,
+      "desconto": 0,
+      "frete": 0,
+      "freteGratis": true,
+      "valorFaltanteFreteGratis": 0,
+      "total": 359.4,
+      "cupom": null
+    }
+  },
+  {
+    "id": "CT-CA10-202",
+    "timestampUTC": "2026-10-08T06:37:55.069021+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/carrinho/calcular",
+    "request": {},
+    "status": 422,
+    "response": {
+      "erro": {
+        "codigo": "ITENS_OBRIGATORIOS",
+        "mensagem": "Informe ao menos um item.",
+        "campo": "itens"
+      }
+    }
+  },
+  {
+    "id": "CT-CA10-220",
+    "timestampUTC": "2026-10-08T06:37:55.543298+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/pedidos",
+    "request": {
+      "cliente": {
+        "nome": "Cliente Teste",
+        "email": "qa.evidencias@example.invalid",
+        "cep": "01310-100"
+      },
+      "itens": [
+        {
+          "produtoId": "P001",
+          "quantidade": 6
+        }
+      ]
+    },
+    "status": 201,
+    "response": {
+      "numero": "VZ-552321",
+      "criadoEm": "2026-10-08T06:37:55.831Z",
+      "cliente": {
+        "nome": "Cliente Teste",
+        "email": "qa.evidencias@example.invalid",
+        "cep": "01310100"
+      },
+      "itens": [
+        {
+          "produtoId": "P001",
+          "nome": "Camiseta Essencial",
+          "precoUnitario": 59.9,
+          "quantidade": 6,
+          "total": 359.4
+        }
+      ],
+      "subtotal": 359.4,
+      "desconto": 0,
+      "frete": 0,
+      "freteGratis": true,
+      "valorFaltanteFreteGratis": 0,
+      "total": 359.4,
+      "cupom": null
+    }
+  },
+  {
+    "id": "CT-CA04-220",
+    "timestampUTC": "2026-10-08T06:37:55.855938+00:00",
+    "method": "POST",
+    "url": "https://verzel-store.qa-test-verzel-store.workers.dev/api/pedidos",
+    "request": {
+      "cliente": {
+        "nome": "Cliente Teste",
+        "email": "qa.evidencias@example.invalid",
+        "cep": "01310-100"
+      },
+      "itens": [
+        {
+          "produtoId": "P005",
+          "quantidade": 2
+        }
+      ],
+      "cupom": "VERAO2026"
+    },
+    "status": 422,
+    "response": {
+      "erro": {
+        "codigo": "CUPOM_EXPIRADO",
+        "mensagem": "Cupom expirado.",
+        "campo": "cupom"
+      }
+    }
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "execucao.md": {
+    "bytes": 3379,
+    "sha256": "4a6624d237c83aba507d6cac68092ed944e5bdf37761c03736dfc71c75bcb4cf"
+  },
+  "run-38017644876-npm-test.log": {
+    "bytes": 80513,
+    "sha256": "db513a54ab56c54ae9c2a81414cf6955ae7e51d2cf3ec8241b928a6ab06e75d7"
+  },
+  "run-38017714035-npm-test.log": {
+    "bytes": 82480,
+    "sha256": "1d9b7fdb2b6dd9971826a1f01c7bb1fbe4068017cb3f64faab73223c51746c94"
+  },
+  "run-38017762921-npm-test.log": {
+    "bytes": 82474,
+    "sha256": "ab66a26f2c18795eeb2085219ecde627f762e668a4e31800d7f0a0d44c81d7b2"
+  },
+  "runs.json": {
+    "bytes": 8839,
+    "sha256": "b57e447e1f6035535bc6ba3fb2c4ad240af09eb5d58c9378d47c8a46884f7811"
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "execucao-2026-10-08.log": {
+    "bytes": 52556,
+    "sha256": "857ce70781aa8d368d105c98957c963f2d5ec98e7a9c38528aeee762c36d53bc"
+  },
+  "CT-CA10-206-tentativa-2-trace.zip": {
+    "bytes": 10831,
+    "sha256": "9965ae30223dd3749e2472519256275e7678ac041a87552cc1a22d9971f28aed"
+  },
+  "execucao-completa-2026-10-08.zip": {
+    "bytes": 6999895,
+    "sha256": "fb3db02aa2abba3a611788dc55999ad390d4d509eb2aae6479111d872a66f381"
+  },
+  "CT-CA06-001-tentativa-2-CT-CA06-001-com-cupom-edc8fd97f15ec91d30978e59fd51c78837080bee.png": {
+    "bytes": 85757,
+    "sha256": "3808e1a8cc467a171b301aee05d8d1b5f17caa19de4cdb2574660771b3180f0f"
+  },
+  "CT-CA07-001-tentativa-1-CT-CA07-001-2adac37a888a48dbfdad4020f6db535f56b1d34a.png": {
+    "bytes": 92866,
+    "sha256": "3cdef2405dcf5226e4b1f9264c50911ae5f1eb5d49ef9f2dc32b56e908928d07"
+  },
+  "CT-CA06-001-tentativa-2-error-context.md": {
+    "bytes": 9032,
+    "sha256": "408a4ed149261eefea2acd31e891cebd44eabc7060f75765b7adef4fd76f2786"
+  },
+  "CT-CA10-220-tentativa-2-trace.zip": {
+    "bytes": 10027,
+    "sha256": "5b010ad4c46db89aa9b1818780d6860209782056cc249f9f7c01e79c8d2a26f5"
+  },
+  "CT-CA06-001-tentativa-2-test-failed-1.png": {
+    "bytes": 83114,
+    "sha256": "24c041f150a5d95230973c89f72e342b8634bf74956e65c265d6793e60d8a760"
+  },
+  "CT-CA08-201-tentativa-2-error-context.md": {
+    "bytes": 8648,
+    "sha256": "e6bd7033d8a5036d874a81f97502cf2c7b0cd08a0d04d54676559634b5218527"
+  },
+  "CT-CA06-201-tentativa-2-trace.zip": {
+    "bytes": 11255,
+    "sha256": "f869b319d9f5cf4455e380aae7b86418b33d8a718f31ecefaef0be4b79f52280"
+  },
+  "CT-CA08-203-tentativa-1-error-context.md": {
+    "bytes": 5650,
+    "sha256": "40276ea29961804853cce75ca43aa58dca6af88234a6e7534d776ee32ae40fc5"
+  },
+  "CT-CA04-202-tentativa-2-error-context.md": {
+    "bytes": 8706,
+    "sha256": "66bf9d00fe8a48036a6c42cd0c95fc5aa600d83a6258f3824122108a8b45527f"
+  },
+  "CT-CA06-001-tentativa-2-video.webm": {
+    "bytes": 388443,
+    "sha256": "4785da4f9d18bb3c67d6bdd4c420552f1efb24b24012e0f7f5214bca19edcc5e"
+  },
+  "CT-CA06-001-tentativa-1-test-failed-1.png": {
+    "bytes": 83114,
+    "sha256": "24c041f150a5d95230973c89f72e342b8634bf74956e65c265d6793e60d8a760"
+  },
+  "CT-CA06-201-tentativa-1-error-context.md": {
+    "bytes": 8654,
+    "sha256": "61be8b74dd6adada00e151add6284ff2ac20da217ab4aa094fbdb72187555d9c"
+  },
+  "CT-CA03-001-tentativa-1-CT-CA03-001-e3f020fbee670808b658a41e3eb16537ed626d2a.png": {
+    "bytes": 87071,
+    "sha256": "97c981314319d44f04c9cd1d41f0b7803a99499c8a9033686e2f0f566eee444f"
+  },
+  "CT-CA06-001-tentativa-1-CT-CA06-001-sem-cupom-155affb712f597090f7d6a5b5e79e8a39917eddc.png": {
+    "bytes": 82712,
+    "sha256": "ca4e8cf88c451fe1d8e3a89d367358f2678a9b3947264c6c0e76940832d2de1f"
+  },
+  "CT-CA05-001-tentativa-1-cupom-removido-9e4ed6b5161ab202c7d6dbecc6e21a0ece9574c4.png": {
+    "bytes": 81484,
+    "sha256": "d0d7da2a9e2d65ccdac41d7df2f0ea5ecc141ba8e36ba35ec01492365b2b123d"
+  },
+  "CT-CA10-220-tentativa-2-error-context.md": {
+    "bytes": 5454,
+    "sha256": "8535e32669a58829d4d6b9b6b143b0bac465a997f4bc39c781757d0ef1bc82d8"
+  },
+  "CT-CA10-206-tentativa-1-error-context.md": {
+    "bytes": 7783,
+    "sha256": "4e0117efb6e38827bcce0e50cffde044269a7dd39de0a72a6dbfa62cf789b160"
+  },
+  "execucao-2026-10-08.md": {
+    "bytes": 23516,
+    "sha256": "e29ba43fc0e5885bb488ca923b4a8994bec910791f96f914265d222b81595b59"
+  },
+  "CT-CA04-202-tentativa-1-error-context.md": {
+    "bytes": 8706,
+    "sha256": "66bf9d00fe8a48036a6c42cd0c95fc5aa600d83a6258f3824122108a8b45527f"
+  },
+  "exploracao-manual-2026-10-08.md": {
+    "bytes": 2117,
+    "sha256": "debe55b432d4945d23eb1f8472f98f41aac0d80bb630f265605e6a7ccff0d398"
+  },
+  "CT-CA08-201-tentativa-2-trace.zip": {
+    "bytes": 11330,
+    "sha256": "b98a81493e2b725ed5864da472860eb6372fa5a077095d29718c7add32c2f0db"
+  },
+  "CT-CA06-001-tentativa-2-trace.zip": {
+    "bytes": 1158021,
+    "sha256": "b97868ab6b307a8f0280d42ed95034d6963bd38f9909dade56dacf52a2fff3e2"
+  },
+  "CT-CA08-201-tentativa-1-error-context.md": {
+    "bytes": 8648,
+    "sha256": "e6bd7033d8a5036d874a81f97502cf2c7b0cd08a0d04d54676559634b5218527"
+  },
+  "CT-CA08-203-tentativa-2-error-context.md": {
+    "bytes": 5650,
+    "sha256": "40276ea29961804853cce75ca43aa58dca6af88234a6e7534d776ee32ae40fc5"
+  },
+  "api-2026-10-08.json": {
+    "bytes": 10373,
+    "sha256": "4784ccc39ce57307b9d2b47344d368c30b31f63112e2717a6175980bf12a7bc0"
+  },
+  "CT-CA07-002-tentativa-1-produto-removido-765fe32554653a3efcf50eea36d47ed8e7676b84.png": {
+    "bytes": 82105,
+    "sha256": "0aea3d983fe6ea28688f03890ac5381a4930499223c5527dcc59adb5f9efb663"
+  },
+  "CT-CA04-001-tentativa-1-CT-CA04-001-627f3287014d6fa76e84eefd1372bd6ab9e9e03c.png": {
+    "bytes": 86313,
+    "sha256": "145d09af7c0901c098fe06d94751848cf95d2dd11210a2b784e5856e7d287b6b"
+  },
+  "CT-CA08-203-tentativa-2-trace.zip": {
+    "bytes": 10319,
+    "sha256": "32c686e895d47b887ce33bbbf780b1b3a801a16a1abe2660fcb5ccb1416aa63d"
+  },
+  "CT-CA06-001-tentativa-1-video.webm": {
+    "bytes": 281008,
+    "sha256": "f18f337a9cf9603eafc1ca8d1f29876435d019c45d8b2fc4504710c21adf5266"
+  },
+  "CT-CA06-201-tentativa-2-error-context.md": {
+    "bytes": 8654,
+    "sha256": "61be8b74dd6adada00e151add6284ff2ac20da217ab4aa094fbdb72187555d9c"
+  },
+  "CT-CA10-220-tentativa-1-error-context.md": {
+    "bytes": 5454,
+    "sha256": "8535e32669a58829d4d6b9b6b143b0bac465a997f4bc39c781757d0ef1bc82d8"
+  },
+  "CT-CA04-202-tentativa-2-trace.zip": {
+    "bytes": 11372,
+    "sha256": "576a18e11a23da2b6c138474b28e119542dd78e4e20d0b8973f3e36c0d72b9bc"
+  },
+  "CT-CA10-206-tentativa-2-error-context.md": {
+    "bytes": 7783,
+    "sha256": "4e0117efb6e38827bcce0e50cffde044269a7dd39de0a72a6dbfa62cf789b160"
+  },
+  "resultados-2026-10-08.json": {
+    "bytes": 353959,
+    "sha256": "1cc1fac244ffacce67b45c43713113eefca17f290617267fef21384c74099b21"
+  },
+  "prevalidacao-2026-10-08.json": {
+    "bytes": 354334,
+    "sha256": "4e024e23907253453b85f1a089a22326187f10f2ccb368d95a71be6b31240280"
+  },
+  "CT-CA06-001-tentativa-2-CT-CA06-001-sem-cupom-90e71a38f51817c2d574cbad099b0279a5e80195.png": {
+    "bytes": 82712,
+    "sha256": "ca4e8cf88c451fe1d8e3a89d367358f2678a9b3947264c6c0e76940832d2de1f"
+  },
+  "CT-CA06-001-tentativa-1-CT-CA06-001-com-cupom-c648bf47892e9ba9b87f1f388f14ce8e97681cfb.png": {
+    "bytes": 85757,
+    "sha256": "3808e1a8cc467a171b301aee05d8d1b5f17caa19de4cdb2574660771b3180f0f"
+  },
+  "codigo-2026-10-08.json": {
+    "bytes": 2905,
+    "sha256": "ef8a877604d1961ba7889cbf1d5b31e30fe8f8b444cad224222c6a8823e0097f"
+  },
+  "CT-CA01-001-tentativa-1-CT-CA01-001-1032a84ba50ccefe2f51719435e9b4ecca718333.png": {
+    "bytes": 84162,
+    "sha256": "f9ce7dd0aa34bbac3bf47e8147ea40b1de884f80593152d9aafe7fcf78971109"
+  },
+  "CT-CA06-001-tentativa-1-error-context.md": {
+    "bytes": 9032,
+    "sha256": "5767267636a7e499d8e32119ad14fc6d8be7cf6a2fbe2697f3e0070a7e913d45"
+  }
+}

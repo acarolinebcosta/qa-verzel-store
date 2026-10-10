@@ -1,117 +1,102 @@
 # QA Verzel Store
 
-Suíte de testes da entrega **VZS-142 — Cupom de desconto e frete grátis**, baseada na documentação da Verzel Store **2.3.0**, publicada em **30/09/2026**. Reúne cenários em português, testes de API e interface com Playwright, BDD executável, exploração documentada e relatórios de execução.
+Suíte de testes da entrega **VZS-142 — Cupom de desconto e frete grátis**, baseada na [documentação oficial 2.3.0](https://verzel-store.qa-test-verzel-store.workers.dev/documentacao), publicada em 30/09/2026. Testa a [loja pública](https://verzel-store.qa-test-verzel-store.workers.dev/) e sua API real, com TypeScript, Playwright, BDD, contratos Zod e evidências versionadas.
 
-- [Loja](https://verzel-store.qa-test-verzel-store.workers.dev/)
-- [Documentação e critérios de aceite](https://verzel-store.qa-test-verzel-store.workers.dev/documentacao)
-- [API — catálogo](https://verzel-store.qa-test-verzel-store.workers.dev/api/produtos)
+**Execução consolidada de 08/10/2026: 70 testes, 61 PASSOU e 9 FALHOU**, sem bloqueados, ignorados, instáveis ou timeout. As nove falhas reproduzem três defeitos do produto; as expectativas oficiais foram mantidas. A suíte foi publicada no GitHub e o CI de 09/10/2026 reproduziu os mesmos 61 aprovados e 9 reprovados. Instalação, TypeScript e upload de evidências passaram. [Resultado real do CI](docs/evidencias/ci-2026-10-09/execucao.md).
 
-## Entregas
+## Entregáveis
 
-| Entrega | Local |
+| Entrega | Arquivo |
 | --- | --- |
-| Cenários em Gherkin e dados concretos | [docs/01-cenarios-teste.md](docs/01-cenarios-teste.md) |
-| Registro de execução manual, exploratória e API | [docs/02-execucao-testes.md](docs/02-execucao-testes.md) |
-| Bugs e exemplo ilustrativo | [docs/03-bugs.md](docs/03-bugs.md) |
-| Evidências | [docs/evidencias/](docs/evidencias/) |
-| Execução automatizada auditada | [Relatório de 07/10/2026](docs/evidencias/execucao-2026-10-07.md) |
-| Charter exploratório | [docs/exploratorio/charter-cupom-frete.md](docs/exploratorio/charter-cupom-frete.md) |
-| Automação TypeScript | [automation/](automation/) |
-| Integração contínua | [.github/workflows/playwright.yml](.github/workflows/playwright.yml) |
+| Requisitos, interpretações e hipóteses investigadas | [Análise](docs/00-analise-requisitos.md) |
+| Gherkin, estratégia por risco e matriz CA01–CA11 | [Cenários e rastreabilidade](docs/01-cenarios-teste.md) |
+| Resultados automáticos, manuais e exploratórios | [Execução](docs/02-execucao-testes.md) |
+| Três defeitos confirmados, passos e evidências | [Bugs](docs/03-bugs.md) |
+| Apoio de IA e revisão humana pendente | [Uso de IA](docs/04-uso-de-ia.md) |
+| Inventário do que está pronto e do que falta | [Revisão final](docs/05-revisao-final.md) |
+| Missão, risco, RCRCRC e tempo real da exploração | [Charter](docs/exploratorio/charter-cupom-frete.md) |
+| Resultado individual dos 70 casos | [Relatório consolidado](docs/evidencias/consolidada-2026-10-08/execucao.md) |
+| HTML, traces, vídeos e resultados completos | [Artefatos da rodada](docs/evidencias/consolidada-2026-10-08/artefatos-completos.zip) |
+| Integridade de evidências e código executado | [Manifesto SHA-256](docs/evidencias/consolidada-2026-10-08/manifesto.json), [código](docs/evidencias/consolidada-2026-10-08/codigo.json) |
+| Integração contínua configurada | [GitHub Actions](.github/workflows/playwright.yml) |
 
-O registro de execução identifica o que foi efetivamente verificado. Cenários ainda não executados ficam como **Pendente**. O exemplo em bugs é explicitamente ilustrativo e não representa um defeito encontrado.
+## Execução e resultado
 
-A execução auditada em **07/10/2026** teve **77 testes: 68 aprovados e 9 falhas**, sem testes ignorados ou instáveis. As falhas reproduzem dois defeitos: cobrança de frete exatamente no subtotal de R$ 200,00 e aceitação de seis unidades por produto na API. A verificação TypeScript e a auditoria automática de acessibilidade crítica do carrinho passaram. A suíte mantém os valores esperados da documentação e, enquanto os defeitos persistirem no ambiente, termina com falha.
+| Camada | Executados | PASSOU | FALHOU |
+| --- | ---: | ---: | ---: |
+| API | 52 | 44 | 8 |
+| E2E | 13 | 12 | 1 |
+| BDD | 5 | 5 | 0 |
+| Total | 70 | 61 | 9 |
 
-## Como rodar a automação
+Os três cenários mínimos foram implementados e efetivamente executados:
 
-Requisitos: Node.js 20 ou superior, npm e acesso ao ambiente público.
+| ID | Critérios | Esperado | Resultado |
+| --- | --- | --- | --- |
+| CT-CA01-001 | CA01, CA07, CA09 | P005×1; desconto 10,00; frete 19,90; total 109,90 | PASSOU |
+| CT-CA08-001 | CA01, CA06, CA08 | P005×2; total 200,00 sem cupom e 180,00 com cupom; frete zero | FALHOU — BUG-001; total 219,90/199,90 |
+| CT-CA09-001 | CA01, CA07, CA09 | P005+P008; desconto 15,00; frete 19,90; total 154,90 | PASSOU |
+
+**BUG-001:** frete cobrado exatamente em subtotal 200,00. **BUG-002:** API aceita seis unidades por produto. **BUG-003:** propriedades obrigatórias ausentes retornam códigos diferentes de ITEM_INVALIDO. Código de saída 1 da suíte é o resultado real desses defeitos.
+
+Também foram executados normalização isolada de caixa/trim e combinada, cupom inválido/expirado em cálculo/pedido, fronteira 199,90 com cupom, limite 5/6, negativos estruturais, erros 400/404/405/422, cliente/CEP e centavos 239,70→215,73. BDD cobre cinco transições diferentes das specs E2E. A acessibilidade crítica do carrinho é complementar e passou; não substitui avaliação humana completa.
+
+## Como executar
+
+Requisitos: Node.js 20+, npm e acesso à loja/API públicas. O CI usa Node 22 e Ubuntu; a execução local auditada usa Node 26.6.0 em macOS arm64.
 
 ```bash
 cd automation
-npm install
-npx playwright install
+npm ci
+npx playwright install chromium
 cp .env.example .env
-npm test
-```
-
-Em Linux/CI, instale também as dependências do navegador com `npx playwright install --with-deps chromium`. O arquivo `.env` é local e não deve ser versionado. Confira os valores de `.env.example` antes de executar em outro ambiente.
-
-O script `pretest` gera os testes a partir das features com `bddgen`. Os scripts `test:headed`, `test:smoke`, `test:regression` e `test:bdd` também preparam o BDD antes da execução. Os testes de API usam os endpoints documentados; os testes de interface usam Chromium e contextos isolados.
-
-```bash
-npm run test:smoke
-npm run test:regression
-npm run test:headed
 npm run typecheck
-```
-
-Para executar uma camada isolada, use `npm run test:api`, `npm run test:e2e` ou `npm run test:bdd`.
-
-## Relatório
-
-Após executar os testes:
-
-```bash
+npm test
 npm run report
 ```
 
-O relatório HTML fica em `automation/playwright-report/`. O reporter customizado gera `docs/execucao-automatica.md`, com o resultado real de cada teste. O arquivo é regenerado em cada execução e ignorado pelo Git. Screenshots, vídeos e traces de falhas ficam em `automation/test-results/`; a configuração captura screenshot apenas na falha, mantém vídeo de falhas e trace na primeira repetição.
+Em Linux, use `npx playwright install --with-deps chromium`. O arquivo `.env` é local e ignorado pelo Git. Os valores padrão de [.env.example](automation/.env.example) correspondem ao contrato público; não contêm credenciais.
 
-O workflow publica os relatórios e evidências como artefatos do GitHub Actions mesmo quando testes falham. Falhas de comportamento continuam causando falha da suíte; defeitos conhecidos não são marcados como resultado esperado para tornar o CI verde. As evidências selecionadas para a entrega ficam em `docs/evidencias/`, com [relatório datado](docs/evidencias/execucao-2026-10-07.md), JSON, log, screenshots e traces de API. O [manifesto SHA-256](docs/evidencias/manifesto-sha256.json) permite conferir os arquivos exportados.
+`pretest` executa bddgen antes de Playwright. Os comandos `test:smoke`, `test:regression`, `test:headed` e `test:bdd` também preparam BDD. Para uma camada, execute `npm run test:api`, `npm run test:e2e` ou `npm run test:bdd`. Não há mocks, sleeps arbitrários, testes ignorados ou falhas marcadas como esperadas.
 
-## Estrutura da suíte
+## Arquitetura
 
-```mermaid
-flowchart LR
-  Dados[Dados e factories] --> Servicos[Serviços de API]
-  Servicos --> API[Testes API e contratos Zod]
-  Fixtures[Fixtures de carrinho] --> BDD[Features e steps BDD]
-  Fixtures --> E2E[Testes E2E e acessibilidade]
-  API --> Reporter[Reporter Markdown e HTML]
-  BDD --> Reporter
-  E2E --> Reporter
-  CI[GitHub Actions] --> API
-  CI --> BDD
-  CI --> E2E
-```
+| Camada | Responsabilidade |
+| --- | --- |
+| automation/pages | Localizadores e comportamento de interface |
+| automation/services | Chamadas aos endpoints HTTP documentados |
+| automation/fixtures | Contexto isolado e preparação de carrinho |
+| automation/data e factories | Cupons, catálogo e cliente fictício de pedido |
+| automation/schemas | Contratos separados de sucesso/erro e precisão de centavos |
+| automation/support | Ambiente e comparação monetária numérica |
+| automation/features e steps | Gherkin executável e transições BDD |
+| automation/tests | Specs funcionais de API, E2E e acessibilidade complementar |
+| automation/reporters | Resultados Markdown, IDs, hipóteses e anexos |
 
-As features em `automation/features/` são a parte executável do Gherkin. O documento de cenários amplia o roteiro para execução manual, API e exploração; nem todo cenário descrito nele implica um teste automatizado individual.
+AuthService sem função foi removido; AuthSpec foi adaptado para catálogo em produtos.spec.ts; UsuarioFactory foi renomeada para cliente.factory.ts. Não há login, cadastro, estoque, pagamento online nem consulta/persistência de pedido. Carrinho por aba, API sem estado, número fictício, ausência de cobrança/e-mail são simplificações oficiais.
 
-## Decisões e ambiguidades
+## Regras e decisões de QA
 
-1. **A documentação do ambiente é a fonte das regras.** Os valores sugeridos no prompt eram exemplos. Foram substituídos por `BEMVINDO10` (10%), `VERAO2026` (expirado em 31/03/2026), limiar de frete de R$ 200,00 e frete fixo de R$ 19,90.
-2. **Não existe valor mínimo de cupom.** O cenário “cupom abaixo do valor mínimo” verifica que um cupom válido continua aplicando desconto abaixo do mínimo de **frete grátis**. Com subtotal de R$ 100,00, são esperados desconto de R$ 10,00, frete de R$ 19,90 e total de R$ 109,90.
-3. **Não existe cupom exclusivo de frete grátis.** “Frete grátis com cupom” significa usar `BEMVINDO10` em um carrinho cujo subtotal antes do desconto seja pelo menos R$ 200,00. Com subtotal de R$ 200,00, desconto de R$ 20,00 e total de R$ 180,00, o frete permanece grátis.
-4. **O cupom não incide sobre o frete.** A fórmula é `total = subtotal - desconto + frete`; todos os valores são comparados com duas casas decimais. A elegibilidade de frete usa o subtotal antes do desconto e é recalculada ao alterar o carrinho.
-5. **Cupons não acumulam.** Há um único campo de cupom. A interface exige remover o cupom atual antes de uma nova aplicação; a API aceita um único código. Concatenar códigos não é um mecanismo de acumulação documentado.
-6. **A API diferencia cálculo e confirmação.** `POST /api/carrinho/calcular` retorna HTTP 200 para cupom inválido ou expirado, sem desconto e com o motivo em `cupom.mensagem`. `POST /api/pedidos` rejeita esses cupons com HTTP 422 e `CUPOM_INVALIDO` ou `CUPOM_EXPIRADO`. Não há endpoint independente de autenticação, validação ou aplicação de cupom.
-7. **Fronteiras usam o catálogo real.** R$ 199,90 é produzido por P005×1 + P004×1 + P008×1; R$ 200,00 por P005×2; o menor subtotal acima do limiar permitido pelo catálogo e limite de cinco unidades por produto é R$ 209,40, produzido por P006×5 + P001×1. R$ 200,01 e R$ 200,10 não são produzíveis com os dados fixos sem alterar preços ou exceder limites. Esses valores não são simulados como se o ambiente os aceitasse.
-8. **Isolamento e simplificações são esperados.** O carrinho pertence à aba do navegador; outra aba/navegador/janela anônima começa vazio. API e pedidos não persistem dados entre chamadas. Número de pedido é fictício. Não há estoque, envio de e-mail ou cobrança. Login, cadastro de clientes, pagamento online e consulta de pedidos estão fora do escopo. Arquivos de autenticação exigidos na estrutura apenas documentam essa ausência; não inventam endpoints.
-9. **Escopo.** A suíte cobre regras funcionais, contratos e violações críticas de acessibilidade. Não executa carga, estresse ou testes de segurança. A auditoria automática de acessibilidade não substitui uma avaliação humana completa.
+- BEMVINDO10 aplica 10% sobre produtos; VERAO2026 expirou em 31/03/2026. Não há mínimo de cupom ou cupom exclusivo de frete.
+- Frete grátis considera subtotal antes do desconto, inclusive 200,00. Abaixo disso: 19,90 e faltante para 200. Fórmula: total = subtotal - desconto + frete.
+- 199,90 com desconto 19,99 é útil para o lado cobrado, mas não diferencia a ordem do cálculo. O caso discriminante usa 209,40→188,46, que deve manter frete zero e passou. A falha em 200 não prova inversão geral da ordem.
+- CA09 usa frete positivo: 150 com desconto 15 e frete 19,90 resulta em 154,90. Desconto indevido também sobre frete resultaria em 152,91.
+- Cupom inválido/expirado: cálculo 200 sem desconto e mensagem; pedido 422. Itens inválidos: 422; JSON malformado: 400.
+- API compara números com `toBeCloseTo(..., 2)` após Zod. UI verifica prefixo R$, vírgula e duas casas decimais. Não se exige representação textual do número JSON.
+- Hipóteses de cupom vazio/null/espaços, ID minúsculo e descarte ao esvaziar têm observação real separada, sem bugs presumidos. [Interpretações e dados](docs/00-analise-requisitos.md).
 
-## Uso de IA
+## Evidências e CI
 
-Codex apoiou o planejamento, a implementação, a execução e a revisão da suíte. Os resultados têm evidências; a validação final humana permanece pendente. O processo está descrito em [docs/04-uso-de-ia.md](docs/04-uso-de-ia.md).
+Playwright produz HTML em `automation/playwright-report/`, JSON e anexos em `automation/test-results/`. O reporter gera `docs/execucao-automatica.md`, ignorado e regenerado em cada rodada. Configuração: trace na primeira repetição, screenshot de falha e vídeo retido em falha; os três mínimos também têm capturas explícitas.
 
-## Fluxo de branches e PRs
+A pasta [consolidada-2026-10-08](docs/evidencias/consolidada-2026-10-08/) preserva 49 evidências mais o próprio manifesto SHA-256 (50 arquivos): JSON, log, sondagens, código, screenshots, traces, vídeos e ZIP com o HTML completo. As execuções anteriores de [07/10](docs/evidencias/execucao-2026-10-07.md) e [08/10 às 03:35](docs/evidencias/execucao-2026-10-08.md) permanecem intactas; suas contagens não são somadas.
 
-A organização adota `main` para a versão estável, com proteção contra alterações diretas, e `develop` para integrar o trabalho. Cada branch temática parte de `develop` e abre um PR para ela. Os sete PRs são integrados na ordem abaixo para respeitar as dependências entre as entregas.
+O workflow executa npm ci, instala Chromium, verifica TypeScript e executa a suíte. O upload inclui todos os relatórios e evidências mesmo quando testes falham, sem mascarar o status. **Pipeline remota: EXECUTADA — FALHOU em npm test pelos três defeitos do produto**. O [run consolidado](https://github.com/acarolinebcosta/qa-verzel-store/actions/runs/38017644876) registrou 70 testes, 61 aprovados e 9 reprovados; preparação, TypeScript e upload passaram. [Logs e metadados preservados](docs/evidencias/ci-2026-10-09/execucao.md).
 
-| PR temático | Branch → destino | Escopo | Exemplo de commit |
-| --- | --- | --- | --- |
-| 1 — Estrutura | `chore/setup` → `develop` | Pastas, dependências e configuração inicial | `chore: configurar estrutura da automação` |
-| 2 — Cenários | `docs/cenarios` → `develop` | Gherkin e planejamento de testes | `docs: documentar cenários de cupom e frete` |
-| 3 — Serviços | `feature/services` → `develop` | Serviços de API, contratos, dados e fixtures | `feat: adicionar serviços e fixtures` |
-| 4 — Interface | `test/e2e` → `develop` | Testes E2E, steps BDD e acessibilidade | `test: automatizar fluxos de interface` |
-| 5 — API | `test/api` → `develop` | Testes funcionais e contratos da API | `test: validar regras e contratos da API` |
-| 6 — CI e relatório | `ci/reporter` → `develop` | Reporter Markdown e GitHub Actions | `chore(ci): configurar pipeline e reporter` |
-| 7 — Entrega final | `docs/final` → `develop` | README, resultados, bugs e evidências | `docs: consolidar a documentação da entrega` |
+## Git e publicação
 
-Depois da integração dos sete PRs, um PR de release promove `develop` para `main`. A tag `v1.0.0` identifica o commit publicado na `main`. A branch `ci/reporter` usa `chore(ci)` nos commits: `ci` é o escopo, e o tipo é `chore`.
+Repositório público: [acarolinebcosta/qa-verzel-store](https://github.com/acarolinebcosta/qa-verzel-store). Branches temáticas e fix/qa-final publicadas. Na consulta de 09/10/2026, os PRs #1, #3, #4, #5 e #6 estão integrados em main; [#7 — documentação](https://github.com/acarolinebcosta/qa-verzel-store/pull/7) e [#2 — suíte consolidada](https://github.com/acarolinebcosta/qa-verzel-store/pull/2) permanecem abertos, nessa ordem de integração.
 
-A reorganização está em andamento; a criação, os merges, a proteção e a tag devem ser confirmados no GitHub. A release preserva os resultados reais da suíte e os dois bugs documentados.
+O histórico original foi preservado. A integração atual foi conduzida por PRs para main. Sincronização de develop, proteção de main e tag v1.0.0 permanecem pendentes; a confirmação de identidade GitHub para proteção não foi verificada novamente. Revisão humana: NÃO EXECUTADO nesta sessão. Os três bugs aguardam correção no produto e reteste. [Estado completo da entrega](docs/05-revisao-final.md).
 
-## Publicação
-
-Repositório público: [acarolinebcosta/qa-verzel-store](https://github.com/acarolinebcosta/qa-verzel-store). A entrega fica na raiz, com `docs/`, `automation/` e `.github/` no mesmo nível, e a organização por PRs está em curso. Acompanhe as execuções e baixe os relatórios em [GitHub Actions](https://github.com/acarolinebcosta/qa-verzel-store/actions). O CI falha enquanto os dois defeitos documentados permanecerem na loja.
+Codex apoiou planejamento, implementação, execução e documentação; as sessões são identificadas por executor e evidências. [Uso de IA](docs/04-uso-de-ia.md).
