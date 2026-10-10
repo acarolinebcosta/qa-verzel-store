@@ -122,6 +122,12 @@ Na UI, CT-HIP-001 confirmou “Informe um cupom.” para espaços. CT-HIP-002 co
 - **08/10/2026, 03:35:41–03:36:04:** versão anterior com 58 testes, 51 aprovados e 7 falhas de BUG-001/BUG-002. [Relatório](evidencias/execucao-2026-10-08.md), [artefatos completos](evidencias/execucao-completa-2026-10-08.zip) e [manifesto](evidencias/manifesto-2026-10-08.json). IDs antigos permanecem somente como histórico. A pré-validação dessa versão teve timeout de assertions suaves; foi corrigida antes da execução final de 58 testes, sem alterar o resultado financeiro esperado.
 - **08/10/2026, 04:03:09–04:03:35:** consolidado com 70 testes. O aumento das falhas de sete para nove vem dos dois novos testes de contrato de itens obrigatórios, não de regressão da automação. As rodadas não são somadas.
 
-Revisão humana: **NÃO EXECUTADO**. Pipeline GitHub Actions: **NÃO EXECUTADO**. Envio da suíte, PRs, proteção e tag: **BLOQUEADOS** por falta de acesso de escrita e autorização da extensão, além da confirmação de identidade no GitHub. O repositório público existe com o commit inicial; a suíte atual ainda está local. Esse bloqueio de publicação não altera a contagem dos testes nem indica indisponibilidade da loja.
+## GitHub Actions — 09/10/2026
+
+Versão consolidada 39a123c, PR #2, 23:38:06–23:38:28 America/Sao_Paulo: **70 testes, 61 PASSOU e 9 FALHOU**. Checkout, Node, npm ci, Chromium, TypeScript e upload de evidências passaram; npm test retornou 1 pelos mesmos BUG-001/002/003. As duas versões intermediárias dos PRs #5 e #7 executaram 77 testes, 68 aprovados e 9 reprovados; esses resultados são históricos e não são somados à versão consolidada.
+
+[Relatório e logs do CI](evidencias/ci-2026-10-09/execucao.md) · [Run consolidado](https://github.com/acarolinebcosta/qa-verzel-store/actions/runs/38017644876).
+
+Revisão humana: **NÃO EXECUTADO nesta sessão**. Branches e PRs publicados; PRs #1/#3/#4/#5/#6 integrados em main, #7/#2 abertos na consulta de 09/10. Proteção, tag e sincronização de develop permanecem pendentes.
 
 [Execução consolidada](evidencias/consolidada-2026-10-08/execucao.md) · [JSON](evidencias/consolidada-2026-10-08/resultados.json) · [HTML/traces/vídeos](evidencias/consolidada-2026-10-08/artefatos-completos.zip) · [Manifesto](evidencias/consolidada-2026-10-08/manifesto.json).

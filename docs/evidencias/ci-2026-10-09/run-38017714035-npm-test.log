@@ -1,0 +1,754 @@
+2026-10-10T02:39:10.5433375Z ##[group]Run npm test
+2026-10-10T02:39:10.5433657Z [36;1mnpm test[0m
+2026-10-10T02:39:10.5498142Z shell: /usr/bin/bash -e {0}
+2026-10-10T02:39:10.5498408Z env:
+2026-10-10T02:39:10.5498713Z   BASE_URL: https://verzel-store.qa-test-verzel-store.workers.dev
+2026-10-10T02:39:10.5499077Z ##[endgroup]
+2026-10-10T02:39:10.6562591Z 
+2026-10-10T02:39:10.6563082Z > qa-verzel-store@1.0.0 pretest
+2026-10-10T02:39:10.6563666Z > npm run bddgen
+2026-10-10T02:39:10.6563921Z 
+2026-10-10T02:39:10.7555472Z 
+2026-10-10T02:39:10.7557052Z > qa-verzel-store@1.0.0 bddgen
+2026-10-10T02:39:10.7557586Z > bddgen
+2026-10-10T02:39:10.7557797Z 
+2026-10-10T02:39:11.7173815Z 
+2026-10-10T02:39:11.7174446Z > qa-verzel-store@1.0.0 test
+2026-10-10T02:39:11.7175249Z > playwright test
+2026-10-10T02:39:11.7175512Z 
+2026-10-10T02:39:13.1744832Z 
+2026-10-10T02:39:13.1745505Z Running 77 tests using 2 workers
+2026-10-10T02:39:13.1747024Z 
+2026-10-10T02:39:14.0288893Z   ✓   2 [chromium] › tests/api/auth.spec.ts:19:7 › API pública — autenticação fora do escopo documentado › consulta um produto público pelo ID @regression (149ms)
+2026-10-10T02:39:14.0409816Z   ✓   1 [chromium] › tests/api/auth.spec.ts:6:7 › API pública — autenticação fora do escopo documentado › lista o catálogo sem credenciais @smoke @regression (172ms)
+2026-10-10T02:39:14.1398981Z   ✓   3 [chromium] › tests/api/auth.spec.ts:27:7 › API pública — autenticação fora do escopo documentado › produto inexistente responde 404 com contrato de erro @regression (92ms)
+2026-10-10T02:39:14.1404055Z   ✓   4 [chromium] › tests/api/carrinho.spec.ts:28:9 › Frete e cálculo do carrinho na API @regression › CA06/CA07: fronteira de subtotal R$ 199.90 sem cupom @smoke (76ms)
+2026-10-10T02:39:14.2625573Z   ✓   5 [chromium] › tests/api/carrinho.spec.ts:28:9 › Frete e cálculo do carrinho na API @regression › CA06/CA07: fronteira de subtotal R$ 209.40 sem cupom @smoke (105ms)
+2026-10-10T02:39:14.2775167Z   ✘   6 [chromium] › tests/api/carrinho.spec.ts:28:9 › Frete e cálculo do carrinho na API @regression › CA06/CA07: fronteira de subtotal R$ 200.00 sem cupom @smoke (103ms)
+2026-10-10T02:39:14.3616718Z   ✓   7 [chromium] › tests/api/carrinho.spec.ts:42:9 › Frete e cálculo do carrinho na API @regression › CA08: cupom preserva regra de frete sobre subtotal R$ 199.90 (77ms)
+2026-10-10T02:39:14.4792554Z   ✘   8 [chromium] › tests/api/carrinho.spec.ts:42:9 › Frete e cálculo do carrinho na API @regression › CA08: cupom preserva regra de frete sobre subtotal R$ 200.00 (93ms)
+2026-10-10T02:39:15.1946612Z   ✘   9 [chromium] › tests/api/carrinho.spec.ts:28:9 › Frete e cálculo do carrinho na API @regression › CA06/CA07: fronteira de subtotal R$ 200.00 sem cupom @smoke (retry #1) (170ms)
+2026-10-10T02:39:15.4923769Z   ✘  10 [chromium] › tests/api/carrinho.spec.ts:42:9 › Frete e cálculo do carrinho na API @regression › CA08: cupom preserva regra de frete sobre subtotal R$ 200.00 (retry #1) (197ms)
+2026-10-10T02:39:16.0509910Z   ✓  11 [chromium] › tests/api/carrinho.spec.ts:42:9 › Frete e cálculo do carrinho na API @regression › CA08: cupom preserva regra de frete sobre subtotal R$ 209.40 (133ms)
+2026-10-10T02:39:16.1929114Z   ✓  12 [chromium] › tests/api/carrinho.spec.ts:64:7 › Frete e cálculo do carrinho na API @regression › CA11: arredonda subtotal, desconto e total para centavos (124ms)
+2026-10-10T02:39:16.2813905Z   ✓  14 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita itens ausentes com erro documentado (74ms)
+2026-10-10T02:39:16.3592527Z   ✓  13 [chromium] › tests/api/carrinho.spec.ts:55:7 › Frete e cálculo do carrinho na API @regression › CA10: aceita exatamente cinco unidades por produto (148ms)
+2026-10-10T02:39:16.3840522Z   ✓  15 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita carrinho vazio com erro documentado (90ms)
+2026-10-10T02:39:16.4480215Z   ✓  16 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita item sem objeto com erro documentado (75ms)
+2026-10-10T02:39:16.5066729Z   ✓  17 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita produto inexistente com erro documentado (102ms)
+2026-10-10T02:39:16.5629859Z   ✘  18 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita CA10: seis unidades com erro documentado (97ms)
+2026-10-10T02:39:16.5957634Z   ✓  19 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita quantidade zero com erro documentado (79ms)
+2026-10-10T02:39:16.6732057Z   ✓  20 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita quantidade negativa com erro documentado (68ms)
+2026-10-10T02:39:16.7855616Z   ✓  21 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita quantidade fracionária com erro documentado (103ms)
+2026-10-10T02:39:16.8615555Z   ✓  22 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita quantidade textual com erro documentado (66ms)
+2026-10-10T02:39:16.9739031Z   ✓  23 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita produto duplicado com erro documentado (99ms)
+2026-10-10T02:39:17.0803333Z   ✓  24 [chromium] › tests/api/carrinho.spec.ts:102:7 › Frete e cálculo do carrinho na API @regression › JSON malformado responde 400 (95ms)
+2026-10-10T02:39:17.1933313Z   ✓  25 [chromium] › tests/api/cupom.spec.ts:11:7 › Cupons na API @regression › CA01/CA09: 10% sobre produtos mantém frete de R$ 19,90 @smoke (98ms)
+2026-10-10T02:39:17.2833795Z   ✓  27 [chromium] › tests/api/cupom.spec.ts:27:9 › Cupons na API @regression › CA02: normaliza caixa e espaços em "bemvindo10" (81ms)
+2026-10-10T02:39:17.3737447Z   ✘  26 [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita CA10: seis unidades com erro documentado (retry #1) (151ms)
+2026-10-10T02:39:17.3750625Z   ✓  28 [chromium] › tests/api/cupom.spec.ts:27:9 › Cupons na API @regression › CA02: normaliza caixa e espaços em "  bemvindo10  " (82ms)
+2026-10-10T02:39:17.4763395Z   ✓  29 [chromium] › tests/api/cupom.spec.ts:42:9 › Cupons na API @regression › CA03: CUPOM_INVALIDO calcula sem desconto e informa o motivo (91ms)
+2026-10-10T02:39:17.5605672Z   ✓  30 [chromium] › tests/api/cupom.spec.ts:42:9 › Cupons na API @regression › CA04: VERAO2026 calcula sem desconto e informa o motivo (75ms)
+2026-10-10T02:39:17.6895305Z   ✓  31 [chromium] › tests/api/cupom.spec.ts:52:7 › Cupons na API @regression › CA05: remove e reaplica o cupom sem acumular desconto entre chamadas (117ms)
+2026-10-10T02:39:17.7821779Z   ✓  32 [chromium] › tests/api/cupom.spec.ts:68:7 › Cupons na API @regression › CA05: dois códigos em um campo não acumulam cupons (83ms)
+2026-10-10T02:39:17.8700321Z   ✓  33 [chromium] › tests/api/cupom.spec.ts:79:7 › Cupons na API @regression › cupom não exige valor mínimo para desconto (78ms)
+2026-10-10T02:39:17.9661613Z   ✓  34 [chromium] › tests/api/pedidos.spec.ts:10:7 › Confirmação fictícia de pedidos na API @regression › confirma pedido válido com cliente fictício e CEP normalizado @smoke (85ms)
+2026-10-10T02:39:18.0904224Z   ✓  35 [chromium] › tests/api/pedidos.spec.ts:23:7 › Confirmação fictícia de pedidos na API @regression › confirma pedido sem cupom (113ms)
+2026-10-10T02:39:18.1760671Z   ✓  36 [chromium] › tests/api/cupom.spec.ts:27:9 › Cupons na API @regression › CA02: normaliza caixa e espaços em "\tbemvindo10\n" (130ms)
+2026-10-10T02:39:18.1915319Z   ✘  37 [chromium] › tests/api/pedidos.spec.ts:29:7 › Confirmação fictícia de pedidos na API @regression › CA06/CA08: pedido de R$ 200 com cupom confirma com frete grátis (89ms)
+2026-10-10T02:39:18.3074104Z   ✓  38 [chromium] › tests/api/pedidos.spec.ts:44:9 › Confirmação fictícia de pedidos na API @regression › pedido com CUPOM_INVALIDO responde 422 CUPOM_INVALIDO (109ms)
+2026-10-10T02:39:18.4093900Z   ✓  39 [chromium] › tests/api/pedidos.spec.ts:44:9 › Confirmação fictícia de pedidos na API @regression › pedido com VERAO2026 responde 422 CUPOM_EXPIRADO (89ms)
+2026-10-10T02:39:18.5828677Z   ✓  40 [chromium] › tests/api/pedidos.spec.ts:56:9 › Confirmação fictícia de pedidos na API @regression › rejeita cliente.nome inválido com detalhe do campo (155ms)
+2026-10-10T02:39:18.6904017Z   ✓  41 [chromium] › tests/api/pedidos.spec.ts:56:9 › Confirmação fictícia de pedidos na API @regression › rejeita cliente.email inválido com detalhe do campo (93ms)
+2026-10-10T02:39:18.7731263Z   ✓  42 [chromium] › tests/api/pedidos.spec.ts:56:9 › Confirmação fictícia de pedidos na API @regression › rejeita cliente.cep inválido com detalhe do campo (71ms)
+2026-10-10T02:39:18.8828348Z   ✘  43 [chromium] › tests/api/pedidos.spec.ts:65:7 › Confirmação fictícia de pedidos na API @regression › CA10: pedido rejeita seis unidades do mesmo produto (93ms)
+2026-10-10T02:39:19.0263604Z   ✘  44 [chromium] › tests/api/pedidos.spec.ts:29:7 › Confirmação fictícia de pedidos na API @regression › CA06/CA08: pedido de R$ 200 com cupom confirma com frete grátis (retry #1) (165ms)
+2026-10-10T02:39:19.8267055Z   ✘  45 [chromium] › tests/api/pedidos.spec.ts:65:7 › Confirmação fictícia de pedidos na API @regression › CA10: pedido rejeita seis unidades do mesmo produto (retry #1) (149ms)
+2026-10-10T02:39:19.9437622Z   ✓  46 [chromium] › tests/api/pedidos.spec.ts:74:7 › Confirmação fictícia de pedidos na API @regression › pedido rejeita produto duplicado (141ms)
+2026-10-10T02:39:21.9342270Z   ✓  48 [chromium] › tests/e2e/cupom.spec.ts:5:7 › Cupom de desconto na interface @regression › aplica 10% no subtotal, sem descontar o frete @smoke (1.2s)
+2026-10-10T02:39:22.4938872Z   ✓  47 [chromium] › tests/e2e/acessibilidade.spec.ts:4:5 › carrinho sem violações críticas de acessibilidade @regression (1.8s)
+2026-10-10T02:39:22.7129521Z   ✓  49 [chromium] › tests/e2e/cupom.spec.ts:16:9 › Cupom de desconto na interface @regression › rejeita cupom inválido sem alterar os valores @smoke (763ms)
+2026-10-10T02:39:23.3070929Z   ✓  50 [chromium] › tests/e2e/cupom.spec.ts:16:9 › Cupom de desconto na interface @regression › rejeita cupom expirado sem alterar os valores @smoke (790ms)
+2026-10-10T02:39:23.5051878Z   ✓  51 [chromium] › tests/e2e/cupom.spec.ts:24:9 › Cupom de desconto na interface @regression › normaliza maiúsculas e espaços: "bemvindo10" (772ms)
+2026-10-10T02:39:24.0500584Z   ✓  52 [chromium] › tests/e2e/cupom.spec.ts:24:9 › Cupom de desconto na interface @regression › normaliza maiúsculas e espaços: "  bemvindo10  " (728ms)
+2026-10-10T02:39:24.3025091Z   ✓  53 [chromium] › tests/e2e/cupom.spec.ts:31:7 › Cupom de desconto na interface @regression › aceita cupom em subtotal abaixo do limite de frete grátis (782ms)
+2026-10-10T02:39:25.0790903Z   ✓  54 [chromium] › tests/e2e/cupom.spec.ts:40:7 › Cupom de desconto na interface @regression › remove cupom e restaura o total original (1.0s)
+2026-10-10T02:39:25.3010951Z   ✓  55 [chromium] › tests/e2e/cupom.spec.ts:49:7 › Cupom de desconto na interface @regression › permite somente um cupom por vez (979ms)
+2026-10-10T02:39:25.8260605Z   ✓  56 [chromium] › tests/e2e/cupom.spec.ts:60:7 › Cupom de desconto na interface @regression › exige um código ao enviar campo vazio (730ms)
+2026-10-10T02:39:26.3412227Z   ✓  57 [chromium] › tests/e2e/cupom.spec.ts:66:7 › Cupom de desconto na interface @regression › recalcula desconto ao aumentar e diminuir a quantidade (1.0s)
+2026-10-10T02:39:26.6339187Z   ✓  58 [chromium] › tests/e2e/frete-gratis.spec.ts:16:9 › Frete e limites do carrinho @regression › subtotal abaixo de R$ 200: frete conforme CA06/CA07 (787ms)
+2026-10-10T02:39:27.2264559Z   ✓  60 [chromium] › tests/e2e/frete-gratis.spec.ts:16:9 › Frete e limites do carrinho @regression › subtotal acima de R$ 200: frete conforme CA06/CA07 (577ms)
+2026-10-10T02:39:35.1853638Z   ✘  59 [chromium] › tests/e2e/frete-gratis.spec.ts:16:9 › Frete e limites do carrinho @regression › subtotal exatamente de R$ 200: frete conforme CA06/CA07 (8.8s)
+2026-10-10T02:39:36.2728566Z   ✘  61 [chromium] › tests/e2e/frete-gratis.spec.ts:33:7 › Frete e limites do carrinho @regression › mantém frete grátis com cupom no limite de R$ 200 @smoke (9.0s)
+2026-10-10T02:39:44.9723690Z   ✘  62 [chromium] › tests/e2e/frete-gratis.spec.ts:16:9 › Frete e limites do carrinho @regression › subtotal exatamente de R$ 200: frete conforme CA06/CA07 (retry #1) (9.0s)
+2026-10-10T02:39:46.4018930Z   ✘  63 [chromium] › tests/e2e/frete-gratis.spec.ts:33:7 › Frete e limites do carrinho @regression › mantém frete grátis com cupom no limite de R$ 200 @smoke (retry #1) (9.3s)
+2026-10-10T02:39:46.6099540Z   ✓  64 [chromium] › tests/e2e/frete-gratis.spec.ts:44:7 › Frete e limites do carrinho @regression › volta a cobrar frete quando remoção reduz o subtotal (995ms)
+2026-10-10T02:39:47.6771066Z   ✓  65 [chromium] › tests/e2e/frete-gratis.spec.ts:70:7 › Frete e limites do carrinho @regression › esvazia o carrinho e remove o cupom (1.0s)
+2026-10-10T02:39:48.1455634Z   ✓  66 [chromium] › tests/e2e/frete-gratis.spec.ts:57:7 › Frete e limites do carrinho @regression › limita a cinco unidades na vitrine e no carrinho (902ms)
+2026-10-10T02:39:49.7849410Z   ✓  67 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:10:7 › Cupom de desconto no carrinho › Aplicar cupom válido sem desconto sobre o frete @regression @cupom @smoke (1.2s)
+2026-10-10T02:39:50.1623955Z   ✓  68 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:18:9 › Cupom de desconto no carrinho › Rejeitar códigos sem direito ao desconto › Exemplos: #1 @regression @cupom @smoke (1.0s)
+2026-10-10T02:39:50.5746701Z   ✓  69 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:24:9 › Cupom de desconto no carrinho › Rejeitar códigos sem direito ao desconto › Exemplos: #2 @regression @cupom @smoke (764ms)
+2026-10-10T02:39:51.1216635Z   ✓  70 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:34:9 › Cupom de desconto no carrinho › Normalizar o código válido › Exemplos: #1 @regression @cupom (923ms)
+2026-10-10T02:39:51.4141945Z   ✓  71 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:40:9 › Cupom de desconto no carrinho › Normalizar o código válido › Exemplos: #2 @regression @cupom (816ms)
+2026-10-10T02:39:51.9457115Z   ✓  72 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:46:9 › Cupom de desconto no carrinho › Normalizar o código válido › Exemplos: #3 @regression @cupom (795ms)
+2026-10-10T02:39:52.2464767Z   ✓  73 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:54:7 › Cupom de desconto no carrinho › Remover o cupom aplicado @regression @cupom (811ms)
+2026-10-10T02:39:52.8457666Z   ✓  74 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:61:7 › Cupom de desconto no carrinho › Impedir o acúmulo de cupons @regression @cupom (877ms)
+2026-10-10T02:39:52.9992459Z   ✓  75 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:68:7 › Cupom de desconto no carrinho › Exigir um código preenchido @regression @cupom (727ms)
+2026-10-10T02:39:53.9124591Z   ✓  76 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:74:7 › Cupom de desconto no carrinho › Recalcular o desconto ao alterar a quantidade @regression @cupom (1.0s)
+2026-10-10T02:39:54.2343151Z   ✓  77 [chromium-bdd] › .features-gen/features/cupom.feature.spec.js:83:7 › Cupom de desconto no carrinho › Aplicar desconto abaixo do limite de frete grátis @regression @cupom (1.2s)
+2026-10-10T02:39:54.7269392Z   ✓  78 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:8:9 › Frete calculado sobre o subtotal anterior ao desconto › Verificar valores na fronteira de frete grátis › Exemplos: #1 @regression @frete (787ms)
+2026-10-10T02:39:55.3157140Z   ✓  80 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:18:9 › Frete calculado sobre o subtotal anterior ao desconto › Verificar valores na fronteira de frete grátis › Exemplos: #3 @regression @frete (566ms)
+2026-10-10T02:39:55.8919439Z   ✓  81 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:25:7 › Frete calculado sobre o subtotal anterior ao desconto › Informar o valor faltante abaixo do limite @regression @frete (561ms)
+2026-10-10T02:40:03.1409075Z   ✘  79 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:13:9 › Frete calculado sobre o subtotal anterior ao desconto › Verificar valores na fronteira de frete grátis › Exemplos: #2 @regression @frete (8.9s)
+2026-10-10T02:40:04.9466448Z   ✘  82 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:30:7 › Frete calculado sobre o subtotal anterior ao desconto › Preservar frete grátis com cupom no subtotal de R$ 200,00 @regression @frete @smoke @bug-001 (9.0s)
+2026-10-10T02:40:12.9050272Z   ✘  83 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:13:9 › Frete calculado sobre o subtotal anterior ao desconto › Verificar valores na fronteira de frete grátis › Exemplos: #2 @regression @frete (retry #1) (9.0s)
+2026-10-10T02:40:14.3133361Z   ✓  85 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:36:7 › Frete calculado sobre o subtotal anterior ao desconto › Recalcular frete ao reduzir a quantidade @regression @frete (770ms)
+2026-10-10T02:40:15.0134002Z   ✘  84 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:30:7 › Frete calculado sobre o subtotal anterior ao desconto › Preservar frete grátis com cupom no subtotal de R$ 200,00 @regression @frete @smoke @bug-001 (retry #1) (9.2s)
+2026-10-10T02:40:15.0609372Z   ✓  86 [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:44:7 › Frete calculado sobre o subtotal anterior ao desconto › Respeitar o limite de cinco unidades por produto @regression @frete (724ms)
+2026-10-10T02:40:15.1042960Z 
+2026-10-10T02:40:15.1050453Z 
+2026-10-10T02:40:15.1062421Z   1) [chromium] › tests/api/carrinho.spec.ts:28:9 › Frete e cálculo do carrinho na API @regression › CA06/CA07: fronteira de subtotal R$ 200.00 sem cupom @smoke 
+2026-10-10T02:40:15.1063574Z 
+2026-10-10T02:40:15.1063897Z     Error: expect(received).toMatchObject(expected)
+2026-10-10T02:40:15.1064327Z 
+2026-10-10T02:40:15.1064549Z     - Expected  - 3
+2026-10-10T02:40:15.1064972Z     + Received  + 3
+2026-10-10T02:40:15.1065208Z 
+2026-10-10T02:40:15.1065358Z       Object {
+2026-10-10T02:40:15.1065726Z         "cupom": null,
+2026-10-10T02:40:15.1070203Z         "desconto": 0,
+2026-10-10T02:40:15.1070637Z     -   "frete": 0,
+2026-10-10T02:40:15.1071045Z     -   "freteGratis": true,
+2026-10-10T02:40:15.1071489Z     +   "frete": 19.9,
+2026-10-10T02:40:15.1071903Z     +   "freteGratis": false,
+2026-10-10T02:40:15.1072394Z         "subtotal": 200,
+2026-10-10T02:40:15.1072816Z     -   "total": 200,
+2026-10-10T02:40:15.1073204Z     +   "total": 219.9,
+2026-10-10T02:40:15.1073683Z         "valorFaltanteFreteGratis": 0,
+2026-10-10T02:40:15.1074180Z       }
+2026-10-10T02:40:15.1074362Z 
+2026-10-10T02:40:15.1074841Z       31 |       const response = await new CarrinhoService(request).calcular(itens);
+2026-10-10T02:40:15.1075688Z       32 |       expect(response.status()).toBe(200);
+2026-10-10T02:40:15.1076869Z     > 33 |       expect(schemaResumoCarrinho.parse(await response.json())).toMatchObject({
+2026-10-10T02:40:15.1077820Z          |                                                                 ^
+2026-10-10T02:40:15.1078593Z       34 |         subtotal, desconto: 0, frete, freteGratis: frete === 0,
+2026-10-10T02:40:15.1079332Z       35 |         valorFaltanteFreteGratis: faltante,
+2026-10-10T02:40:15.1080107Z       36 |         total: Number((subtotal + frete).toFixed(2)), cupom: null,
+2026-10-10T02:40:15.1081275Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/api/carrinho.spec.ts:33:65
+2026-10-10T02:40:15.1082004Z 
+2026-10-10T02:40:15.1083124Z     Error Context: test-results/api-carrinho-Frete-e-cálcu-d661f-al-R-200-00-sem-cupom-smoke-chromium/error-context.md
+2026-10-10T02:40:15.1084026Z 
+2026-10-10T02:40:15.1084760Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1085304Z 
+2026-10-10T02:40:15.1085953Z     Error: expect(received).toMatchObject(expected)
+2026-10-10T02:40:15.1086766Z 
+2026-10-10T02:40:15.1086949Z     - Expected  - 3
+2026-10-10T02:40:15.1087358Z     + Received  + 3
+2026-10-10T02:40:15.1087584Z 
+2026-10-10T02:40:15.1087741Z       Object {
+2026-10-10T02:40:15.1088102Z         "cupom": null,
+2026-10-10T02:40:15.1088513Z         "desconto": 0,
+2026-10-10T02:40:15.1088911Z     -   "frete": 0,
+2026-10-10T02:40:15.1089286Z     -   "freteGratis": true,
+2026-10-10T02:40:15.1089751Z     +   "frete": 19.9,
+2026-10-10T02:40:15.1090156Z     +   "freteGratis": false,
+2026-10-10T02:40:15.1090542Z         "subtotal": 200,
+2026-10-10T02:40:15.1090870Z     -   "total": 200,
+2026-10-10T02:40:15.1091170Z     +   "total": 219.9,
+2026-10-10T02:40:15.1091610Z         "valorFaltanteFreteGratis": 0,
+2026-10-10T02:40:15.1092063Z       }
+2026-10-10T02:40:15.1092227Z 
+2026-10-10T02:40:15.1092679Z       31 |       const response = await new CarrinhoService(request).calcular(itens);
+2026-10-10T02:40:15.1093345Z       32 |       expect(response.status()).toBe(200);
+2026-10-10T02:40:15.1094248Z     > 33 |       expect(schemaResumoCarrinho.parse(await response.json())).toMatchObject({
+2026-10-10T02:40:15.1095211Z          |                                                                 ^
+2026-10-10T02:40:15.1096257Z       34 |         subtotal, desconto: 0, frete, freteGratis: frete === 0,
+2026-10-10T02:40:15.1097041Z       35 |         valorFaltanteFreteGratis: faltante,
+2026-10-10T02:40:15.1098135Z       36 |         total: Number((subtotal + frete).toFixed(2)), cupom: null,
+2026-10-10T02:40:15.1099271Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/api/carrinho.spec.ts:33:65
+2026-10-10T02:40:15.1100040Z 
+2026-10-10T02:40:15.1101169Z     Error Context: test-results/api-carrinho-Frete-e-cálcu-d661f-al-R-200-00-sem-cupom-smoke-chromium-retry1/error-context.md
+2026-10-10T02:40:15.1102138Z 
+2026-10-10T02:40:15.1102944Z     attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1104500Z     test-results/api-carrinho-Frete-e-cálcu-d661f-al-R-200-00-sem-cupom-smoke-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1105496Z     Usage:
+2026-10-10T02:40:15.1105709Z 
+2026-10-10T02:40:15.1107185Z         npx playwright show-trace test-results/api-carrinho-Frete-e-cálcu-d661f-al-R-200-00-sem-cupom-smoke-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1108211Z 
+2026-10-10T02:40:15.1108878Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1109384Z 
+2026-10-10T02:40:15.1110856Z   2) [chromium] › tests/api/carrinho.spec.ts:42:9 › Frete e cálculo do carrinho na API @regression › CA08: cupom preserva regra de frete sobre subtotal R$ 200.00 
+2026-10-10T02:40:15.1111940Z 
+2026-10-10T02:40:15.1112263Z     Error: expect(received).toMatchObject(expected)
+2026-10-10T02:40:15.1112685Z 
+2026-10-10T02:40:15.1112857Z     - Expected  - 3
+2026-10-10T02:40:15.1113253Z     + Received  + 3
+2026-10-10T02:40:15.1113484Z 
+2026-10-10T02:40:15.1113893Z       Object {
+2026-10-10T02:40:15.1114298Z         "desconto": 20,
+2026-10-10T02:40:15.1114702Z     -   "frete": 0,
+2026-10-10T02:40:15.1115095Z     -   "freteGratis": true,
+2026-10-10T02:40:15.1115540Z     +   "frete": 19.9,
+2026-10-10T02:40:15.1116310Z     +   "freteGratis": false,
+2026-10-10T02:40:15.1116778Z         "subtotal": 200,
+2026-10-10T02:40:15.1117202Z     -   "total": 180,
+2026-10-10T02:40:15.1117601Z     +   "total": 199.9,
+2026-10-10T02:40:15.1118089Z         "valorFaltanteFreteGratis": 0,
+2026-10-10T02:40:15.1118584Z       }
+2026-10-10T02:40:15.1118785Z 
+2026-10-10T02:40:15.1119073Z       45 |       expect(response.status()).toBe(200);
+2026-10-10T02:40:15.1119837Z       46 |       const desconto = Number((subtotal * 0.1).toFixed(2));
+2026-10-10T02:40:15.1120850Z     > 47 |       expect(schemaResumoCarrinho.parse(await response.json())).toMatchObject({
+2026-10-10T02:40:15.1121793Z          |                                                                 ^
+2026-10-10T02:40:15.1122580Z       48 |         subtotal, desconto, frete, freteGratis: frete === 0,
+2026-10-10T02:40:15.1123344Z       49 |         valorFaltanteFreteGratis: faltante,
+2026-10-10T02:40:15.1124145Z       50 |         total: Number((subtotal - desconto + frete).toFixed(2)),
+2026-10-10T02:40:15.1125298Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/api/carrinho.spec.ts:47:65
+2026-10-10T02:40:15.1126374Z 
+2026-10-10T02:40:15.1127464Z     Error Context: test-results/api-carrinho-Frete-e-cálcu-257a3-ete-sobre-subtotal-R-200-00-chromium/error-context.md
+2026-10-10T02:40:15.1128360Z 
+2026-10-10T02:40:15.1129073Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1129640Z 
+2026-10-10T02:40:15.1129955Z     Error: expect(received).toMatchObject(expected)
+2026-10-10T02:40:15.1130356Z 
+2026-10-10T02:40:15.1130527Z     - Expected  - 3
+2026-10-10T02:40:15.1130913Z     + Received  + 3
+2026-10-10T02:40:15.1131147Z 
+2026-10-10T02:40:15.1131315Z       Object {
+2026-10-10T02:40:15.1131682Z         "desconto": 20,
+2026-10-10T02:40:15.1132081Z     -   "frete": 0,
+2026-10-10T02:40:15.1132487Z     -   "freteGratis": true,
+2026-10-10T02:40:15.1132909Z     +   "frete": 19.9,
+2026-10-10T02:40:15.1133304Z     +   "freteGratis": false,
+2026-10-10T02:40:15.1133751Z         "subtotal": 200,
+2026-10-10T02:40:15.1134158Z     -   "total": 180,
+2026-10-10T02:40:15.1134553Z     +   "total": 199.9,
+2026-10-10T02:40:15.1135309Z         "valorFaltanteFreteGratis": 0,
+2026-10-10T02:40:15.1135795Z       }
+2026-10-10T02:40:15.1136228Z 
+2026-10-10T02:40:15.1136527Z       45 |       expect(response.status()).toBe(200);
+2026-10-10T02:40:15.1137261Z       46 |       const desconto = Number((subtotal * 0.1).toFixed(2));
+2026-10-10T02:40:15.1138251Z     > 47 |       expect(schemaResumoCarrinho.parse(await response.json())).toMatchObject({
+2026-10-10T02:40:15.1139189Z          |                                                                 ^
+2026-10-10T02:40:15.1139980Z       48 |         subtotal, desconto, frete, freteGratis: frete === 0,
+2026-10-10T02:40:15.1140723Z       49 |         valorFaltanteFreteGratis: faltante,
+2026-10-10T02:40:15.1141521Z       50 |         total: Number((subtotal - desconto + frete).toFixed(2)),
+2026-10-10T02:40:15.1142712Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/api/carrinho.spec.ts:47:65
+2026-10-10T02:40:15.1143488Z 
+2026-10-10T02:40:15.1144693Z     Error Context: test-results/api-carrinho-Frete-e-cálcu-257a3-ete-sobre-subtotal-R-200-00-chromium-retry1/error-context.md
+2026-10-10T02:40:15.1145676Z 
+2026-10-10T02:40:15.1146747Z     attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1148401Z     test-results/api-carrinho-Frete-e-cálcu-257a3-ete-sobre-subtotal-R-200-00-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1149376Z     Usage:
+2026-10-10T02:40:15.1149576Z 
+2026-10-10T02:40:15.1150993Z         npx playwright show-trace test-results/api-carrinho-Frete-e-cálcu-257a3-ete-sobre-subtotal-R-200-00-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1152028Z 
+2026-10-10T02:40:15.1152765Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1153292Z 
+2026-10-10T02:40:15.1154497Z   3) [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita CA10: seis unidades com erro documentado 
+2026-10-10T02:40:15.1155510Z 
+2026-10-10T02:40:15.1155912Z     Error: expect(received).toBe(expected) // Object.is equality
+2026-10-10T02:40:15.1156733Z 
+2026-10-10T02:40:15.1156916Z     Expected: 422
+2026-10-10T02:40:15.1157312Z     Received: 200
+2026-10-10T02:40:15.1157548Z 
+2026-10-10T02:40:15.1157700Z        95 |       }
+2026-10-10T02:40:15.1158484Z        96 |       const response = await new CarrinhoService(request).calcularPayload(payload);
+2026-10-10T02:40:15.1159442Z     >  97 |       expect(response.status()).toBe(422);
+2026-10-10T02:40:15.1160100Z           |                                 ^
+2026-10-10T02:40:15.1160971Z        98 |       expect(schemaErro.parse(await response.json()).erro.codigo).toBe(codigo);
+2026-10-10T02:40:15.1161752Z        99 |     });
+2026-10-10T02:40:15.1162119Z       100 |   }
+2026-10-10T02:40:15.1163001Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/api/carrinho.spec.ts:97:33
+2026-10-10T02:40:15.1163746Z 
+2026-10-10T02:40:15.1165071Z     Error Context: test-results/api-carrinho-Frete-e-cálcu-65797-idades-com-erro-documentado-chromium/error-context.md
+2026-10-10T02:40:15.1166195Z 
+2026-10-10T02:40:15.1166906Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1167464Z 
+2026-10-10T02:40:15.1167840Z     Error: expect(received).toBe(expected) // Object.is equality
+2026-10-10T02:40:15.1168319Z 
+2026-10-10T02:40:15.1168477Z     Expected: 422
+2026-10-10T02:40:15.1168830Z     Received: 200
+2026-10-10T02:40:15.1169036Z 
+2026-10-10T02:40:15.1169200Z        95 |       }
+2026-10-10T02:40:15.1169971Z        96 |       const response = await new CarrinhoService(request).calcularPayload(payload);
+2026-10-10T02:40:15.1170916Z     >  97 |       expect(response.status()).toBe(422);
+2026-10-10T02:40:15.1171542Z           |                                 ^
+2026-10-10T02:40:15.1172383Z        98 |       expect(schemaErro.parse(await response.json()).erro.codigo).toBe(codigo);
+2026-10-10T02:40:15.1173154Z        99 |     });
+2026-10-10T02:40:15.1173523Z       100 |   }
+2026-10-10T02:40:15.1174406Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/api/carrinho.spec.ts:97:33
+2026-10-10T02:40:15.1175181Z 
+2026-10-10T02:40:15.1176610Z     Error Context: test-results/api-carrinho-Frete-e-cálcu-65797-idades-com-erro-documentado-chromium-retry1/error-context.md
+2026-10-10T02:40:15.1177627Z 
+2026-10-10T02:40:15.1178445Z     attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1180200Z     test-results/api-carrinho-Frete-e-cálcu-65797-idades-com-erro-documentado-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1181112Z     Usage:
+2026-10-10T02:40:15.1181279Z 
+2026-10-10T02:40:15.1182390Z         npx playwright show-trace test-results/api-carrinho-Frete-e-cálcu-65797-idades-com-erro-documentado-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1183362Z 
+2026-10-10T02:40:15.1183811Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1184132Z 
+2026-10-10T02:40:15.1185137Z   4) [chromium] › tests/api/pedidos.spec.ts:29:7 › Confirmação fictícia de pedidos na API @regression › CA06/CA08: pedido de R$ 200 com cupom confirma com frete grátis 
+2026-10-10T02:40:15.1186479Z 
+2026-10-10T02:40:15.1186812Z     Error: expect(received).toMatchObject(expected)
+2026-10-10T02:40:15.1187224Z 
+2026-10-10T02:40:15.1187399Z     - Expected  - 3
+2026-10-10T02:40:15.1187775Z     + Received  + 3
+2026-10-10T02:40:15.1187996Z 
+2026-10-10T02:40:15.1188156Z       Object {
+2026-10-10T02:40:15.1188516Z         "desconto": 20,
+2026-10-10T02:40:15.1188906Z     -   "frete": 0,
+2026-10-10T02:40:15.1189283Z     -   "freteGratis": true,
+2026-10-10T02:40:15.1189699Z     +   "frete": 19.9,
+2026-10-10T02:40:15.1190086Z     +   "freteGratis": false,
+2026-10-10T02:40:15.1190506Z         "subtotal": 200,
+2026-10-10T02:40:15.1190892Z     -   "total": 180,
+2026-10-10T02:40:15.1191261Z     +   "total": 199.9,
+2026-10-10T02:40:15.1191645Z       }
+2026-10-10T02:40:15.1191818Z 
+2026-10-10T02:40:15.1191959Z       33 |     });
+2026-10-10T02:40:15.1192426Z       34 |     expect(response.status()).toBe(201);
+2026-10-10T02:40:15.1193270Z     > 35 |     expect(schemaPedido.parse(await response.json())).toMatchObject({
+2026-10-10T02:40:15.1194123Z          |                                                       ^
+2026-10-10T02:40:15.1194964Z       36 |       subtotal: 200, desconto: 20, frete: 0, freteGratis: true, total: 180,
+2026-10-10T02:40:15.1195643Z       37 |     });
+2026-10-10T02:40:15.1196240Z       38 |   });
+2026-10-10T02:40:15.1197114Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/api/pedidos.spec.ts:35:55
+2026-10-10T02:40:15.1197853Z 
+2026-10-10T02:40:15.1198940Z     Error Context: test-results/api-pedidos-Confirmação-fi-f049b-m-confirma-com-frete-grátis-chromium/error-context.md
+2026-10-10T02:40:15.1199881Z 
+2026-10-10T02:40:15.1200617Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1201410Z 
+2026-10-10T02:40:15.1201715Z     Error: expect(received).toMatchObject(expected)
+2026-10-10T02:40:15.1202125Z 
+2026-10-10T02:40:15.1202292Z     - Expected  - 3
+2026-10-10T02:40:15.1202683Z     + Received  + 3
+2026-10-10T02:40:15.1202921Z 
+2026-10-10T02:40:15.1203076Z       Object {
+2026-10-10T02:40:15.1203445Z         "desconto": 20,
+2026-10-10T02:40:15.1203858Z     -   "frete": 0,
+2026-10-10T02:40:15.1204253Z     -   "freteGratis": true,
+2026-10-10T02:40:15.1204713Z     +   "frete": 19.9,
+2026-10-10T02:40:15.1205130Z     +   "freteGratis": false,
+2026-10-10T02:40:15.1205595Z         "subtotal": 200,
+2026-10-10T02:40:15.1206264Z     -   "total": 180,
+2026-10-10T02:40:15.1206670Z     +   "total": 199.9,
+2026-10-10T02:40:15.1207043Z       }
+2026-10-10T02:40:15.1207224Z 
+2026-10-10T02:40:15.1207360Z       33 |     });
+2026-10-10T02:40:15.1207825Z       34 |     expect(response.status()).toBe(201);
+2026-10-10T02:40:15.1208681Z     > 35 |     expect(schemaPedido.parse(await response.json())).toMatchObject({
+2026-10-10T02:40:15.1209513Z          |                                                       ^
+2026-10-10T02:40:15.1210360Z       36 |       subtotal: 200, desconto: 20, frete: 0, freteGratis: true, total: 180,
+2026-10-10T02:40:15.1211047Z       37 |     });
+2026-10-10T02:40:15.1211406Z       38 |   });
+2026-10-10T02:40:15.1212301Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/api/pedidos.spec.ts:35:55
+2026-10-10T02:40:15.1213047Z 
+2026-10-10T02:40:15.1214430Z     Error Context: test-results/api-pedidos-Confirmação-fi-f049b-m-confirma-com-frete-grátis-chromium-retry1/error-context.md
+2026-10-10T02:40:15.1215427Z 
+2026-10-10T02:40:15.1216477Z     attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1218096Z     test-results/api-pedidos-Confirmação-fi-f049b-m-confirma-com-frete-grátis-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1219091Z     Usage:
+2026-10-10T02:40:15.1219294Z 
+2026-10-10T02:40:15.1220434Z         npx playwright show-trace test-results/api-pedidos-Confirmação-fi-f049b-m-confirma-com-frete-grátis-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1221401Z 
+2026-10-10T02:40:15.1222091Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1222639Z 
+2026-10-10T02:40:15.1223943Z   5) [chromium] › tests/api/pedidos.spec.ts:65:7 › Confirmação fictícia de pedidos na API @regression › CA10: pedido rejeita seis unidades do mesmo produto 
+2026-10-10T02:40:15.1224944Z 
+2026-10-10T02:40:15.1225316Z     Error: expect(received).toBe(expected) // Object.is equality
+2026-10-10T02:40:15.1225777Z 
+2026-10-10T02:40:15.1225932Z     Expected: 422
+2026-10-10T02:40:15.1226572Z     Received: 201
+2026-10-10T02:40:15.1226776Z 
+2026-10-10T02:40:15.1227252Z       68 |       cliente: criarUsuario(), itens: [{ produtoId: 'P001', quantidade: 6 }],
+2026-10-10T02:40:15.1227953Z       69 |     });
+2026-10-10T02:40:15.1228698Z     > 70 |     expect(response.status()).toBe(422);
+2026-10-10T02:40:15.1229330Z          |                               ^
+2026-10-10T02:40:15.1230298Z       71 |     expect(schemaErro.parse(await response.json()).erro.codigo).toBe('QUANTIDADE_MAXIMA_EXCEDIDA');
+2026-10-10T02:40:15.1231091Z       72 |   });
+2026-10-10T02:40:15.1231406Z       73 |
+2026-10-10T02:40:15.1232232Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/api/pedidos.spec.ts:70:31
+2026-10-10T02:40:15.1232662Z 
+2026-10-10T02:40:15.1233292Z     Error Context: test-results/api-pedidos-Confirmação-fi-0baeb-s-unidades-do-mesmo-produto-chromium/error-context.md
+2026-10-10T02:40:15.1233784Z 
+2026-10-10T02:40:15.1234152Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1234624Z 
+2026-10-10T02:40:15.1234996Z     Error: expect(received).toBe(expected) // Object.is equality
+2026-10-10T02:40:15.1235472Z 
+2026-10-10T02:40:15.1235646Z     Expected: 422
+2026-10-10T02:40:15.1236299Z     Received: 201
+2026-10-10T02:40:15.1236526Z 
+2026-10-10T02:40:15.1237011Z       68 |       cliente: criarUsuario(), itens: [{ produtoId: 'P001', quantidade: 6 }],
+2026-10-10T02:40:15.1237708Z       69 |     });
+2026-10-10T02:40:15.1238192Z     > 70 |     expect(response.status()).toBe(422);
+2026-10-10T02:40:15.1238758Z          |                               ^
+2026-10-10T02:40:15.1239697Z       71 |     expect(schemaErro.parse(await response.json()).erro.codigo).toBe('QUANTIDADE_MAXIMA_EXCEDIDA');
+2026-10-10T02:40:15.1240624Z       72 |   });
+2026-10-10T02:40:15.1240958Z       73 |
+2026-10-10T02:40:15.1241794Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/api/pedidos.spec.ts:70:31
+2026-10-10T02:40:15.1242509Z 
+2026-10-10T02:40:15.1243652Z     Error Context: test-results/api-pedidos-Confirmação-fi-0baeb-s-unidades-do-mesmo-produto-chromium-retry1/error-context.md
+2026-10-10T02:40:15.1244632Z 
+2026-10-10T02:40:15.1245398Z     attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1247259Z     test-results/api-pedidos-Confirmação-fi-0baeb-s-unidades-do-mesmo-produto-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1248209Z     Usage:
+2026-10-10T02:40:15.1248403Z 
+2026-10-10T02:40:15.1249539Z         npx playwright show-trace test-results/api-pedidos-Confirmação-fi-0baeb-s-unidades-do-mesmo-produto-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1250547Z 
+2026-10-10T02:40:15.1251462Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1251984Z 
+2026-10-10T02:40:15.1253199Z   6) [chromium] › tests/e2e/frete-gratis.spec.ts:16:9 › Frete e limites do carrinho @regression › subtotal exatamente de R$ 200: frete conforme CA06/CA07 
+2026-10-10T02:40:15.1254169Z 
+2026-10-10T02:40:15.1254469Z     Error: expect(locator).toHaveText(expected) failed
+2026-10-10T02:40:15.1254874Z 
+2026-10-10T02:40:15.1255899Z     Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1257344Z     Expected: "Grátis"
+2026-10-10T02:40:15.1257764Z     Received: "R$ 19,90"
+2026-10-10T02:40:15.1258123Z     Timeout:  8000ms
+2026-10-10T02:40:15.1258332Z 
+2026-10-10T02:40:15.1258476Z     Call log:
+2026-10-10T02:40:15.1259936Z       - Expect "toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 8000ms
+2026-10-10T02:40:15.1262156Z       - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1263689Z         20 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+2026-10-10T02:40:15.1264377Z            - unexpected value "R$ 19,90"
+2026-10-10T02:40:15.1264969Z 
+2026-10-10T02:40:15.1264979Z 
+2026-10-10T02:40:15.1265214Z        at ../pages/carrinho.page.ts:71
+2026-10-10T02:40:15.1265515Z 
+2026-10-10T02:40:15.1265932Z       69 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+2026-10-10T02:40:15.1266842Z       70 |     );
+2026-10-10T02:40:15.1267936Z     > 71 |     await expect(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+2026-10-10T02:40:15.1268891Z          |                                       ^
+2026-10-10T02:40:15.1269706Z       72 |     await expect(this.valor('Total')).toHaveText(moeda(esperado.total));
+2026-10-10T02:40:15.1270398Z       73 |   }
+2026-10-10T02:40:15.1270714Z       74 |
+2026-10-10T02:40:15.1271753Z         at CarrinhoPage.esperarResumo (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/pages/carrinho.page.ts:71:39)
+2026-10-10T02:40:15.1273331Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/e2e/frete-gratis.spec.ts:23:7
+2026-10-10T02:40:15.1274086Z 
+2026-10-10T02:40:15.1274884Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1276540Z     test-results/e2e-frete-gratis-Frete-e-l-e5c3a-00-frete-conforme-CA06-CA07-chromium/test-failed-1.png
+2026-10-10T02:40:15.1278071Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1278589Z 
+2026-10-10T02:40:15.1279328Z     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1280909Z     test-results/e2e-frete-gratis-Frete-e-l-e5c3a-00-frete-conforme-CA06-CA07-chromium/video.webm
+2026-10-10T02:40:15.1282380Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1282925Z 
+2026-10-10T02:40:15.1283771Z     Error Context: test-results/e2e-frete-gratis-Frete-e-l-e5c3a-00-frete-conforme-CA06-CA07-chromium/error-context.md
+2026-10-10T02:40:15.1284609Z 
+2026-10-10T02:40:15.1285192Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1285631Z 
+2026-10-10T02:40:15.1285884Z     Error: expect(locator).toHaveText(expected) failed
+2026-10-10T02:40:15.1286797Z 
+2026-10-10T02:40:15.1287445Z     Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1288254Z     Expected: "Grátis"
+2026-10-10T02:40:15.1288517Z     Received: "R$ 19,90"
+2026-10-10T02:40:15.1288784Z     Timeout:  8000ms
+2026-10-10T02:40:15.1288922Z 
+2026-10-10T02:40:15.1289013Z     Call log:
+2026-10-10T02:40:15.1289858Z       - Expect "toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 8000ms
+2026-10-10T02:40:15.1291163Z       - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1292370Z         20 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+2026-10-10T02:40:15.1292819Z            - unexpected value "R$ 19,90"
+2026-10-10T02:40:15.1293034Z 
+2026-10-10T02:40:15.1293039Z 
+2026-10-10T02:40:15.1293184Z        at ../pages/carrinho.page.ts:71
+2026-10-10T02:40:15.1293392Z 
+2026-10-10T02:40:15.1293670Z       69 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+2026-10-10T02:40:15.1294115Z       70 |     );
+2026-10-10T02:40:15.1294780Z     > 71 |     await expect(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+2026-10-10T02:40:15.1295395Z          |                                       ^
+2026-10-10T02:40:15.1296303Z       72 |     await expect(this.valor('Total')).toHaveText(moeda(esperado.total));
+2026-10-10T02:40:15.1296763Z       73 |   }
+2026-10-10T02:40:15.1296981Z       74 |
+2026-10-10T02:40:15.1297644Z         at CarrinhoPage.esperarResumo (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/pages/carrinho.page.ts:71:39)
+2026-10-10T02:40:15.1298617Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/e2e/frete-gratis.spec.ts:23:7
+2026-10-10T02:40:15.1299084Z 
+2026-10-10T02:40:15.1299589Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1300657Z     test-results/e2e-frete-gratis-Frete-e-l-e5c3a-00-frete-conforme-CA06-CA07-chromium-retry1/test-failed-1.png
+2026-10-10T02:40:15.1301619Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1301952Z 
+2026-10-10T02:40:15.1302622Z     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1303404Z     test-results/e2e-frete-gratis-Frete-e-l-e5c3a-00-frete-conforme-CA06-CA07-chromium-retry1/video.webm
+2026-10-10T02:40:15.1304234Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1304519Z 
+2026-10-10T02:40:15.1305026Z     Error Context: test-results/e2e-frete-gratis-Frete-e-l-e5c3a-00-frete-conforme-CA06-CA07-chromium-retry1/error-context.md
+2026-10-10T02:40:15.1305556Z 
+2026-10-10T02:40:15.1306218Z     attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1307052Z     test-results/e2e-frete-gratis-Frete-e-l-e5c3a-00-frete-conforme-CA06-CA07-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1307587Z     Usage:
+2026-10-10T02:40:15.1307695Z 
+2026-10-10T02:40:15.1308214Z         npx playwright show-trace test-results/e2e-frete-gratis-Frete-e-l-e5c3a-00-frete-conforme-CA06-CA07-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1308758Z 
+2026-10-10T02:40:15.1309108Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1309575Z 
+2026-10-10T02:40:15.1310251Z   7) [chromium] › tests/e2e/frete-gratis.spec.ts:33:7 › Frete e limites do carrinho @regression › mantém frete grátis com cupom no limite de R$ 200 @smoke 
+2026-10-10T02:40:15.1310800Z 
+2026-10-10T02:40:15.1310977Z     Error: expect(locator).toHaveText(expected) failed
+2026-10-10T02:40:15.1311204Z 
+2026-10-10T02:40:15.1311757Z     Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1312429Z     Expected: "Grátis"
+2026-10-10T02:40:15.1312679Z     Received: "R$ 19,90"
+2026-10-10T02:40:15.1312909Z     Timeout:  8000ms
+2026-10-10T02:40:15.1313035Z 
+2026-10-10T02:40:15.1313121Z     Call log:
+2026-10-10T02:40:15.1313899Z       - Expect "toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 8000ms
+2026-10-10T02:40:15.1315124Z       - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1316199Z         20 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+2026-10-10T02:40:15.1316732Z            - unexpected value "R$ 19,90"
+2026-10-10T02:40:15.1316934Z 
+2026-10-10T02:40:15.1316941Z 
+2026-10-10T02:40:15.1317071Z        at ../pages/carrinho.page.ts:71
+2026-10-10T02:40:15.1317260Z 
+2026-10-10T02:40:15.1317515Z       69 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+2026-10-10T02:40:15.1317911Z       70 |     );
+2026-10-10T02:40:15.1318511Z     > 71 |     await expect(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+2026-10-10T02:40:15.1319058Z          |                                       ^
+2026-10-10T02:40:15.1319498Z       72 |     await expect(this.valor('Total')).toHaveText(moeda(esperado.total));
+2026-10-10T02:40:15.1319875Z       73 |   }
+2026-10-10T02:40:15.1320083Z       74 |
+2026-10-10T02:40:15.1320654Z         at CarrinhoPage.esperarResumo (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/pages/carrinho.page.ts:71:39)
+2026-10-10T02:40:15.1321511Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/e2e/frete-gratis.spec.ts:40:5
+2026-10-10T02:40:15.1321918Z 
+2026-10-10T02:40:15.1322316Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1323223Z     test-results/e2e-frete-gratis-Frete-e-l-9bfb8-om-no-limite-de-R-200-smoke-chromium/test-failed-1.png
+2026-10-10T02:40:15.1324032Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1324312Z 
+2026-10-10T02:40:15.1324691Z     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1325384Z     test-results/e2e-frete-gratis-Frete-e-l-9bfb8-om-no-limite-de-R-200-smoke-chromium/video.webm
+2026-10-10T02:40:15.1326474Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1326765Z 
+2026-10-10T02:40:15.1327238Z     Error Context: test-results/e2e-frete-gratis-Frete-e-l-9bfb8-om-no-limite-de-R-200-smoke-chromium/error-context.md
+2026-10-10T02:40:15.1327741Z 
+2026-10-10T02:40:15.1328104Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1328400Z 
+2026-10-10T02:40:15.1328584Z     Error: expect(locator).toHaveText(expected) failed
+2026-10-10T02:40:15.1328817Z 
+2026-10-10T02:40:15.1329371Z     Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1330042Z     Expected: "Grátis"
+2026-10-10T02:40:15.1330267Z     Received: "R$ 19,90"
+2026-10-10T02:40:15.1330494Z     Timeout:  8000ms
+2026-10-10T02:40:15.1330629Z 
+2026-10-10T02:40:15.1330862Z     Call log:
+2026-10-10T02:40:15.1331650Z       - Expect "toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 8000ms
+2026-10-10T02:40:15.1332847Z       - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1333666Z         20 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+2026-10-10T02:40:15.1334057Z            - unexpected value "R$ 19,90"
+2026-10-10T02:40:15.1334247Z 
+2026-10-10T02:40:15.1334253Z 
+2026-10-10T02:40:15.1334386Z        at ../pages/carrinho.page.ts:71
+2026-10-10T02:40:15.1334563Z 
+2026-10-10T02:40:15.1334811Z       69 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+2026-10-10T02:40:15.1335187Z       70 |     );
+2026-10-10T02:40:15.1335762Z     > 71 |     await expect(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+2026-10-10T02:40:15.1336475Z          |                                       ^
+2026-10-10T02:40:15.1336906Z       72 |     await expect(this.valor('Total')).toHaveText(moeda(esperado.total));
+2026-10-10T02:40:15.1337279Z       73 |   }
+2026-10-10T02:40:15.1337466Z       74 |
+2026-10-10T02:40:15.1338038Z         at CarrinhoPage.esperarResumo (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/pages/carrinho.page.ts:71:39)
+2026-10-10T02:40:15.1339079Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/tests/e2e/frete-gratis.spec.ts:40:5
+2026-10-10T02:40:15.1339697Z 
+2026-10-10T02:40:15.1340133Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1340932Z     test-results/e2e-frete-gratis-Frete-e-l-9bfb8-om-no-limite-de-R-200-smoke-chromium-retry1/test-failed-1.png
+2026-10-10T02:40:15.1341754Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1342047Z 
+2026-10-10T02:40:15.1342425Z     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1343144Z     test-results/e2e-frete-gratis-Frete-e-l-9bfb8-om-no-limite-de-R-200-smoke-chromium-retry1/video.webm
+2026-10-10T02:40:15.1343918Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1344289Z 
+2026-10-10T02:40:15.1344830Z     Error Context: test-results/e2e-frete-gratis-Frete-e-l-9bfb8-om-no-limite-de-R-200-smoke-chromium-retry1/error-context.md
+2026-10-10T02:40:15.1345479Z 
+2026-10-10T02:40:15.1346178Z     attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1347259Z     test-results/e2e-frete-gratis-Frete-e-l-9bfb8-om-no-limite-de-R-200-smoke-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1347907Z     Usage:
+2026-10-10T02:40:15.1348226Z 
+2026-10-10T02:40:15.1348808Z         npx playwright show-trace test-results/e2e-frete-gratis-Frete-e-l-9bfb8-om-no-limite-de-R-200-smoke-chromium-retry1/trace.zip
+2026-10-10T02:40:15.1349543Z 
+2026-10-10T02:40:15.1349975Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1413941Z 
+2026-10-10T02:40:15.1416925Z   8) [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:13:9 › Frete calculado sobre o subtotal anterior ao desconto › Verificar valores na fronteira de frete grátis › Exemplos: #2 @regression @frete › Então o resumo deve apresentar subtotal "200,00", desconto "0,00", frete "0,00" e total "200,00" 
+2026-10-10T02:40:15.1418980Z 
+2026-10-10T02:40:15.1419325Z     Error: expect(locator).toHaveText(expected) failed
+2026-10-10T02:40:15.1419777Z 
+2026-10-10T02:40:15.1420765Z     Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1422005Z     Expected: "Grátis"
+2026-10-10T02:40:15.1422404Z     Received: "R$ 19,90"
+2026-10-10T02:40:15.1422809Z     Timeout:  8000ms
+2026-10-10T02:40:15.1423035Z 
+2026-10-10T02:40:15.1423178Z     Call log:
+2026-10-10T02:40:15.1424564Z       - Expect "toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 8000ms
+2026-10-10T02:40:15.1427191Z       - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1428741Z         20 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+2026-10-10T02:40:15.1429421Z            - unexpected value "R$ 19,90"
+2026-10-10T02:40:15.1429753Z 
+2026-10-10T02:40:15.1429762Z 
+2026-10-10T02:40:15.1429980Z        at ../pages/carrinho.page.ts:71
+2026-10-10T02:40:15.1430308Z 
+2026-10-10T02:40:15.1430828Z       69 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+2026-10-10T02:40:15.1431488Z       70 |     );
+2026-10-10T02:40:15.1432536Z     > 71 |     await expect(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+2026-10-10T02:40:15.1433531Z          |                                       ^
+2026-10-10T02:40:15.1434299Z       72 |     await expect(this.valor('Total')).toHaveText(moeda(esperado.total));
+2026-10-10T02:40:15.1434970Z       73 |   }
+2026-10-10T02:40:15.1435293Z       74 |
+2026-10-10T02:40:15.1436592Z         at CarrinhoPage.esperarResumo (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/pages/carrinho.page.ts:71:39)
+2026-10-10T02:40:15.1438276Z         at Object.<anonymous> (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/steps/cupom.steps.ts:97:3)
+2026-10-10T02:40:15.1439931Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/.features-gen/features/frete-gratis.feature.spec.js:15:7
+2026-10-10T02:40:15.1441064Z 
+2026-10-10T02:40:15.1441826Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1443404Z     test-results/features-frete-gratis.feat-1fadb--de-frete-grátis-Exemplos-2-chromium-bdd/test-failed-1.png
+2026-10-10T02:40:15.1444940Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1445462Z 
+2026-10-10T02:40:15.1446433Z     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1447971Z     test-results/features-frete-gratis.feat-1fadb--de-frete-grátis-Exemplos-2-chromium-bdd/video.webm
+2026-10-10T02:40:15.1449388Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1449922Z 
+2026-10-10T02:40:15.1450992Z     Error Context: test-results/features-frete-gratis.feat-1fadb--de-frete-grátis-Exemplos-2-chromium-bdd/error-context.md
+2026-10-10T02:40:15.1451945Z 
+2026-10-10T02:40:15.1452723Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1453269Z 
+2026-10-10T02:40:15.1453587Z     Error: expect(locator).toHaveText(expected) failed
+2026-10-10T02:40:15.1453989Z 
+2026-10-10T02:40:15.1454949Z     Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1456506Z     Expected: "Grátis"
+2026-10-10T02:40:15.1457170Z     Received: "R$ 19,90"
+2026-10-10T02:40:15.1457619Z     Timeout:  8000ms
+2026-10-10T02:40:15.1457855Z 
+2026-10-10T02:40:15.1457998Z     Call log:
+2026-10-10T02:40:15.1459433Z       - Expect "toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 8000ms
+2026-10-10T02:40:15.1461643Z       - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1463208Z         20 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+2026-10-10T02:40:15.1463901Z            - unexpected value "R$ 19,90"
+2026-10-10T02:40:15.1464230Z 
+2026-10-10T02:40:15.1464249Z 
+2026-10-10T02:40:15.1464479Z        at ../pages/carrinho.page.ts:71
+2026-10-10T02:40:15.1464814Z 
+2026-10-10T02:40:15.1465257Z       69 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+2026-10-10T02:40:15.1466186Z       70 |     );
+2026-10-10T02:40:15.1467302Z     > 71 |     await expect(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+2026-10-10T02:40:15.1468304Z          |                                       ^
+2026-10-10T02:40:15.1469089Z       72 |     await expect(this.valor('Total')).toHaveText(moeda(esperado.total));
+2026-10-10T02:40:15.1469761Z       73 |   }
+2026-10-10T02:40:15.1470345Z       74 |
+2026-10-10T02:40:15.1471394Z         at CarrinhoPage.esperarResumo (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/pages/carrinho.page.ts:71:39)
+2026-10-10T02:40:15.1473027Z         at Object.<anonymous> (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/steps/cupom.steps.ts:97:3)
+2026-10-10T02:40:15.1474669Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/.features-gen/features/frete-gratis.feature.spec.js:15:7
+2026-10-10T02:40:15.1475557Z 
+2026-10-10T02:40:15.1476598Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1478006Z     test-results/features-frete-gratis.feat-1fadb--de-frete-grátis-Exemplos-2-chromium-bdd-retry1/test-failed-1.png
+2026-10-10T02:40:15.1478870Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1479164Z 
+2026-10-10T02:40:15.1479546Z     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1480399Z     test-results/features-frete-gratis.feat-1fadb--de-frete-grátis-Exemplos-2-chromium-bdd-retry1/video.webm
+2026-10-10T02:40:15.1481209Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1481489Z 
+2026-10-10T02:40:15.1482089Z     Error Context: test-results/features-frete-gratis.feat-1fadb--de-frete-grátis-Exemplos-2-chromium-bdd-retry1/error-context.md
+2026-10-10T02:40:15.1482621Z 
+2026-10-10T02:40:15.1483195Z     attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1484044Z     test-results/features-frete-gratis.feat-1fadb--de-frete-grátis-Exemplos-2-chromium-bdd-retry1/trace.zip
+2026-10-10T02:40:15.1484581Z     Usage:
+2026-10-10T02:40:15.1484692Z 
+2026-10-10T02:40:15.1485338Z         npx playwright show-trace test-results/features-frete-gratis.feat-1fadb--de-frete-grátis-Exemplos-2-chromium-bdd-retry1/trace.zip
+2026-10-10T02:40:15.1485914Z 
+2026-10-10T02:40:15.1486596Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1486898Z 
+2026-10-10T02:40:15.1488324Z   9) [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:30:7 › Frete calculado sobre o subtotal anterior ao desconto › Preservar frete grátis com cupom no subtotal de R$ 200,00 @regression @frete @smoke @bug-001 › Então o resumo deve apresentar subtotal "200,00", desconto "20,00", frete "0,00" e total "180,00" 
+2026-10-10T02:40:15.1489468Z 
+2026-10-10T02:40:15.1489646Z     Error: expect(locator).toHaveText(expected) failed
+2026-10-10T02:40:15.1489881Z 
+2026-10-10T02:40:15.1490612Z     Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1491819Z     Expected: "Grátis"
+2026-10-10T02:40:15.1492210Z     Received: "R$ 19,90"
+2026-10-10T02:40:15.1492594Z     Timeout:  8000ms
+2026-10-10T02:40:15.1492809Z 
+2026-10-10T02:40:15.1492937Z     Call log:
+2026-10-10T02:40:15.1494253Z       - Expect "toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 8000ms
+2026-10-10T02:40:15.1496417Z       - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1497325Z         20 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+2026-10-10T02:40:15.1497727Z            - unexpected value "R$ 19,90"
+2026-10-10T02:40:15.1497923Z 
+2026-10-10T02:40:15.1497929Z 
+2026-10-10T02:40:15.1498073Z        at ../pages/carrinho.page.ts:71
+2026-10-10T02:40:15.1498260Z 
+2026-10-10T02:40:15.1498514Z       69 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+2026-10-10T02:40:15.1498897Z       70 |     );
+2026-10-10T02:40:15.1499683Z     > 71 |     await expect(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+2026-10-10T02:40:15.1500222Z          |                                       ^
+2026-10-10T02:40:15.1500678Z       72 |     await expect(this.valor('Total')).toHaveText(moeda(esperado.total));
+2026-10-10T02:40:15.1501062Z       73 |   }
+2026-10-10T02:40:15.1501260Z       74 |
+2026-10-10T02:40:15.1501845Z         at CarrinhoPage.esperarResumo (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/pages/carrinho.page.ts:71:39)
+2026-10-10T02:40:15.1502754Z         at Object.<anonymous> (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/steps/cupom.steps.ts:97:3)
+2026-10-10T02:40:15.1503648Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/.features-gen/features/frete-gratis.feature.spec.js:33:5
+2026-10-10T02:40:15.1504130Z 
+2026-10-10T02:40:15.1504535Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1505316Z     test-results/features-frete-gratis.feat-37d59-pom-no-subtotal-de-R-200-00-chromium-bdd/test-failed-1.png
+2026-10-10T02:40:15.1506436Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1506741Z 
+2026-10-10T02:40:15.1507135Z     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1507861Z     test-results/features-frete-gratis.feat-37d59-pom-no-subtotal-de-R-200-00-chromium-bdd/video.webm
+2026-10-10T02:40:15.1508783Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1509074Z 
+2026-10-10T02:40:15.1509562Z     Error Context: test-results/features-frete-gratis.feat-37d59-pom-no-subtotal-de-R-200-00-chromium-bdd/error-context.md
+2026-10-10T02:40:15.1510074Z 
+2026-10-10T02:40:15.1510431Z     Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1510732Z 
+2026-10-10T02:40:15.1510908Z     Error: expect(locator).toHaveText(expected) failed
+2026-10-10T02:40:15.1511143Z 
+2026-10-10T02:40:15.1511685Z     Locator:  getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1512374Z     Expected: "Grátis"
+2026-10-10T02:40:15.1512601Z     Received: "R$ 19,90"
+2026-10-10T02:40:15.1512829Z     Timeout:  8000ms
+2026-10-10T02:40:15.1512962Z 
+2026-10-10T02:40:15.1513055Z     Call log:
+2026-10-10T02:40:15.1513837Z       - Expect "toHaveText" getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition') with timeout 8000ms
+2026-10-10T02:40:15.1515046Z       - waiting for getByRole('region', { name: 'Resumo do pedido', exact: true }).getByRole('term').filter({ hasText: /^Frete$/ }).locator('..').getByRole('definition')
+2026-10-10T02:40:15.1516314Z         20 × locator resolved to <dd data-valor="frete">R$ 19,90</dd>
+2026-10-10T02:40:15.1516731Z            - unexpected value "R$ 19,90"
+2026-10-10T02:40:15.1516925Z 
+2026-10-10T02:40:15.1516931Z 
+2026-10-10T02:40:15.1517060Z        at ../pages/carrinho.page.ts:71
+2026-10-10T02:40:15.1517377Z 
+2026-10-10T02:40:15.1517860Z       69 |       esperado.desconto > 0 ? `- ${moeda(esperado.desconto)}` : moeda(0),
+2026-10-10T02:40:15.1518482Z       70 |     );
+2026-10-10T02:40:15.1519130Z     > 71 |     await expect(this.valor('Frete')).toHaveText(esperado.frete === 0 ? 'Grátis' : moeda(esperado.frete));
+2026-10-10T02:40:15.1519671Z          |                                       ^
+2026-10-10T02:40:15.1520113Z       72 |     await expect(this.valor('Total')).toHaveText(moeda(esperado.total));
+2026-10-10T02:40:15.1520488Z       73 |   }
+2026-10-10T02:40:15.1520684Z       74 |
+2026-10-10T02:40:15.1521263Z         at CarrinhoPage.esperarResumo (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/pages/carrinho.page.ts:71:39)
+2026-10-10T02:40:15.1522171Z         at Object.<anonymous> (/home/runner/work/qa-verzel-store/qa-verzel-store/automation/steps/cupom.steps.ts:97:3)
+2026-10-10T02:40:15.1523060Z         at /home/runner/work/qa-verzel-store/qa-verzel-store/automation/.features-gen/features/frete-gratis.feature.spec.js:33:5
+2026-10-10T02:40:15.1523536Z 
+2026-10-10T02:40:15.1523948Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1524937Z     test-results/features-frete-gratis.feat-37d59-pom-no-subtotal-de-R-200-00-chromium-bdd-retry1/test-failed-1.png
+2026-10-10T02:40:15.1525815Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1526454Z 
+2026-10-10T02:40:15.1526868Z     attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1527632Z     test-results/features-frete-gratis.feat-37d59-pom-no-subtotal-de-R-200-00-chromium-bdd-retry1/video.webm
+2026-10-10T02:40:15.1528456Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1528734Z 
+2026-10-10T02:40:15.1529250Z     Error Context: test-results/features-frete-gratis.feat-37d59-pom-no-subtotal-de-R-200-00-chromium-bdd-retry1/error-context.md
+2026-10-10T02:40:15.1529812Z 
+2026-10-10T02:40:15.1530198Z     attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1531263Z     test-results/features-frete-gratis.feat-37d59-pom-no-subtotal-de-R-200-00-chromium-bdd-retry1/trace.zip
+2026-10-10T02:40:15.1532317Z     Usage:
+2026-10-10T02:40:15.1532516Z 
+2026-10-10T02:40:15.1533551Z         npx playwright show-trace test-results/features-frete-gratis.feat-37d59-pom-no-subtotal-de-R-200-00-chromium-bdd-retry1/trace.zip
+2026-10-10T02:40:15.1534633Z 
+2026-10-10T02:40:15.1535327Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-10T02:40:15.1536350Z 
+2026-10-10T02:40:15.1536500Z   9 failed
+2026-10-10T02:40:15.1537917Z     [chromium] › tests/api/carrinho.spec.ts:28:9 › Frete e cálculo do carrinho na API @regression › CA06/CA07: fronteira de subtotal R$ 200.00 sem cupom @smoke 
+2026-10-10T02:40:15.1539280Z     [chromium] › tests/api/carrinho.spec.ts:42:9 › Frete e cálculo do carrinho na API @regression › CA08: cupom preserva regra de frete sobre subtotal R$ 200.00 
+2026-10-10T02:40:15.1541269Z     [chromium] › tests/api/carrinho.spec.ts:92:9 › Frete e cálculo do carrinho na API @regression › rejeita CA10: seis unidades com erro documentado 
+2026-10-10T02:40:15.1543573Z     [chromium] › tests/api/pedidos.spec.ts:29:7 › Confirmação fictícia de pedidos na API @regression › CA06/CA08: pedido de R$ 200 com cupom confirma com frete grátis 
+2026-10-10T02:40:15.1545834Z     [chromium] › tests/api/pedidos.spec.ts:65:7 › Confirmação fictícia de pedidos na API @regression › CA10: pedido rejeita seis unidades do mesmo produto 
+2026-10-10T02:40:15.1548275Z     [chromium] › tests/e2e/frete-gratis.spec.ts:16:9 › Frete e limites do carrinho @regression › subtotal exatamente de R$ 200: frete conforme CA06/CA07 
+2026-10-10T02:40:15.1550456Z     [chromium] › tests/e2e/frete-gratis.spec.ts:33:7 › Frete e limites do carrinho @regression › mantém frete grátis com cupom no limite de R$ 200 @smoke 
+2026-10-10T02:40:15.1553505Z     [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:13:9 › Frete calculado sobre o subtotal anterior ao desconto › Verificar valores na fronteira de frete grátis › Exemplos: #2 @regression @frete 
+2026-10-10T02:40:15.1557002Z     [chromium-bdd] › .features-gen/features/frete-gratis.feature.spec.js:30:7 › Frete calculado sobre o subtotal anterior ao desconto › Preservar frete grátis com cupom no subtotal de R$ 200,00 @regression @frete @smoke @bug-001 
+2026-10-10T02:40:15.1557959Z   68 passed (1.0m)
+2026-10-10T02:40:15.2502259Z ##[error]Process completed with exit code 1.
+

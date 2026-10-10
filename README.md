@@ -2,7 +2,7 @@
 
 Suíte de testes da entrega **VZS-142 — Cupom de desconto e frete grátis**, baseada na [documentação oficial 2.3.0](https://verzel-store.qa-test-verzel-store.workers.dev/documentacao), publicada em 30/09/2026. Testa a [loja pública](https://verzel-store.qa-test-verzel-store.workers.dev/) e sua API real, com TypeScript, Playwright, BDD, contratos Zod e evidências versionadas.
 
-**Execução consolidada de 08/10/2026: 70 testes, 61 PASSOU e 9 FALHOU**, sem bloqueados, ignorados, instáveis ou timeout. As nove falhas reproduzem três defeitos do produto; as expectativas oficiais foram mantidas. A implementação local está pronta para revisão. A suíte atual ainda não foi publicada no repositório público, e a pipeline remota não foi executada.
+**Execução consolidada de 08/10/2026: 70 testes, 61 PASSOU e 9 FALHOU**, sem bloqueados, ignorados, instáveis ou timeout. As nove falhas reproduzem três defeitos do produto; as expectativas oficiais foram mantidas. A suíte foi publicada no GitHub e o CI de 09/10/2026 reproduziu os mesmos 61 aprovados e 9 reprovados. Instalação, TypeScript e upload de evidências passaram. [Resultado real do CI](docs/evidencias/ci-2026-10-09/execucao.md).
 
 ## Entregáveis
 
@@ -91,14 +91,12 @@ Playwright produz HTML em `automation/playwright-report/`, JSON e anexos em `aut
 
 A pasta [consolidada-2026-10-08](docs/evidencias/consolidada-2026-10-08/) preserva 49 evidências mais o próprio manifesto SHA-256 (50 arquivos): JSON, log, sondagens, código, screenshots, traces, vídeos e ZIP com o HTML completo. As execuções anteriores de [07/10](docs/evidencias/execucao-2026-10-07.md) e [08/10 às 03:35](docs/evidencias/execucao-2026-10-08.md) permanecem intactas; suas contagens não são somadas.
 
-O workflow executa npm ci, instala Chromium, verifica TypeScript e executa a suíte. O upload inclui todos os relatórios e evidências mesmo quando testes falham, sem mascarar o status. **Pipeline remota: NÃO EXECUTADO**; arquivo configurado não é evidência de um run bem-sucedido.
+O workflow executa npm ci, instala Chromium, verifica TypeScript e executa a suíte. O upload inclui todos os relatórios e evidências mesmo quando testes falham, sem mascarar o status. **Pipeline remota: EXECUTADA — FALHOU em npm test pelos três defeitos do produto**. O [run consolidado](https://github.com/acarolinebcosta/qa-verzel-store/actions/runs/38017644876) registrou 70 testes, 61 aprovados e 9 reprovados; preparação, TypeScript e upload passaram. [Logs e metadados preservados](docs/evidencias/ci-2026-10-09/execucao.md).
 
 ## Git e publicação
 
-Repositório público criado: [acarolinebcosta/qa-verzel-store](https://github.com/acarolinebcosta/qa-verzel-store). No último estado verificado, main e develop remotos contêm somente o commit inicial. **A suíte atual permanece local em fix/qa-final; não há PR, tag ou proteção concluída.** [GitHub Actions](https://github.com/acarolinebcosta/qa-verzel-store/actions) ainda não executou esta suíte.
+Repositório público: [acarolinebcosta/qa-verzel-store](https://github.com/acarolinebcosta/qa-verzel-store). Branches temáticas e fix/qa-final publicadas. Na consulta de 09/10/2026, os PRs #1, #3, #4, #5 e #6 estão integrados em main; [#7 — documentação](https://github.com/acarolinebcosta/qa-verzel-store/pull/7) e [#2 — suíte consolidada](https://github.com/acarolinebcosta/qa-verzel-store/pull/2) permanecem abertos, nessa ordem de integração.
 
-O histórico original foi preservado. O plano autorizado de sete branches temáticas (chore/setup, docs/cenarios, feature/services, test/e2e, test/api, ci/reporter, docs/final) está preparado localmente, seguido das correções em fix/qa-final. PRs devem integrar develop antes de promover a release para main. A proteção de main e a tag v1.0.0 são pendências, sem alegação de terem sido criadas.
-
-Publicação está BLOQUEADA pela ausência de integração com escrita e pelas permissões pendentes do navegador/extensão; a proteção também aguarda confirmação de identidade GitHub. Revisão humana: NÃO EXECUTADO. Os bugs precisam de correção no produto e reteste. [Estado completo da entrega](docs/05-revisao-final.md).
+O histórico original foi preservado. A integração atual foi conduzida por PRs para main. Sincronização de develop, proteção de main e tag v1.0.0 permanecem pendentes; a confirmação de identidade GitHub para proteção não foi verificada novamente. Revisão humana: NÃO EXECUTADO nesta sessão. Os três bugs aguardam correção no produto e reteste. [Estado completo da entrega](docs/05-revisao-final.md).
 
 Codex apoiou planejamento, implementação, execução e documentação; as sessões são identificadas por executor e evidências. [Uso de IA](docs/04-uso-de-ia.md).

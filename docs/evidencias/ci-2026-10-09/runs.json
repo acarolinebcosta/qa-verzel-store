@@ -1,0 +1,302 @@
+[
+  {
+    "runId": 38017644876,
+    "jobId": 114111390502,
+    "pr": 2,
+    "branch": "fix/qa-final",
+    "sha": "39a123c37c3a1accaebc819fad2ac652fc209209",
+    "total": 70,
+    "passed": 61,
+    "failed": 9,
+    "jobs": [
+      {
+        "id": 114111390502,
+        "name": "qa",
+        "status": "completed",
+        "conclusion": "failure",
+        "run_id": 38017644876,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Run npm ci",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Run npx playwright install --with-deps chromium",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Run npm run typecheck",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Run npm test",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 7
+          },
+          {
+            "name": "Relatórios e evidências",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 15
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17
+          }
+        ]
+      }
+    ],
+    "url": "https://github.com/acarolinebcosta/qa-verzel-store/actions/runs/38017644876",
+    "artifactId": 11656449884,
+    "artifactUrl": "https://github.com/acarolinebcosta/qa-verzel-store/actions/runs/38017644876/artifacts/11656449884",
+    "summaryLines": [
+      "2026-10-10T02:37:35.2100006Z ##[group]Operating System",
+      "2026-10-10T02:37:35.2100368Z Ubuntu",
+      "2026-10-10T02:37:37.9206018Z node: v22.23.3",
+      "2026-10-10T02:37:37.9206328Z npm: 10.9.9",
+      "2026-10-10T02:38:06.6131163Z Running 70 tests using 2 workers",
+      "2026-10-10T02:38:28.6070689Z   9 failed",
+      "2026-10-10T02:38:28.6077023Z   61 passed (22.6s)"
+    ]
+  },
+  {
+    "runId": 38017714035,
+    "jobId": 114111607505,
+    "pr": 5,
+    "branch": "ci/reporter",
+    "sha": "c4dc54aee4baa2e3d5adeb6dfe182faa97094b67",
+    "total": 77,
+    "passed": 68,
+    "failed": 9,
+    "jobs": [
+      {
+        "id": 114111607505,
+        "name": "qa",
+        "status": "completed",
+        "conclusion": "failure",
+        "run_id": 38017714035,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Run npm ci",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Run npx playwright install --with-deps chromium",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Run npm run typecheck",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Run npm test",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 7
+          },
+          {
+            "name": "Relatórios e evidências",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 15
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17
+          }
+        ]
+      }
+    ],
+    "url": "https://github.com/acarolinebcosta/qa-verzel-store/actions/runs/38017714035",
+    "artifactId": 11656987874,
+    "artifactUrl": "https://github.com/acarolinebcosta/qa-verzel-store/actions/runs/38017714035/artifacts/11656987874",
+    "summaryLines": [
+      "2026-10-10T02:38:45.1617679Z ##[group]Operating System",
+      "2026-10-10T02:38:45.1618383Z Ubuntu",
+      "2026-10-10T02:38:47.0726653Z node: v22.23.3",
+      "2026-10-10T02:38:47.0727813Z npm: 10.9.9",
+      "2026-10-10T02:39:13.1745505Z Running 77 tests using 2 workers",
+      "2026-10-10T02:40:15.1536500Z   9 failed",
+      "2026-10-10T02:40:15.1557959Z   68 passed (1.0m)"
+    ]
+  },
+  {
+    "runId": 38017762921,
+    "jobId": 114111756860,
+    "pr": 7,
+    "branch": "docs/final",
+    "sha": "e01b9bb1a237a747e849f06e44b2ac97a0a68bbc",
+    "total": 77,
+    "passed": 68,
+    "failed": 9,
+    "jobs": [
+      {
+        "id": 114111756860,
+        "name": "qa",
+        "status": "completed",
+        "conclusion": "failure",
+        "run_id": 38017762921,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Run npm ci",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Run npx playwright install --with-deps chromium",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Run npm run typecheck",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Run npm test",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 7
+          },
+          {
+            "name": "Relatórios e evidências",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Post Run actions/setup-node@v4",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 15
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17
+          }
+        ]
+      }
+    ],
+    "url": "https://github.com/acarolinebcosta/qa-verzel-store/actions/runs/38017762921",
+    "artifactId": 11657415210,
+    "artifactUrl": "https://github.com/acarolinebcosta/qa-verzel-store/actions/runs/38017762921/artifacts/11657415210",
+    "summaryLines": [
+      "2026-10-10T02:39:35.0210868Z ##[group]Operating System",
+      "2026-10-10T02:39:35.0211663Z Ubuntu",
+      "2026-10-10T02:39:37.2159654Z node: v22.23.3",
+      "2026-10-10T02:39:37.2161192Z npm: 10.9.9",
+      "2026-10-10T02:40:07.3124965Z Running 77 tests using 2 workers",
+      "2026-10-10T02:41:08.2857624Z   9 failed",
+      "2026-10-10T02:41:08.2870558Z   68 passed (1.0m)"
+    ]
+  }
+]

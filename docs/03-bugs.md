@@ -100,3 +100,7 @@ BUG-001 permanece aberto: frete 19,90 na fronteira 200, inclusive com cupom expi
 70 testes: 61 PASSOU e 9 FALHOU. BUG-001 permanece aberto em cinco casos, BUG-002 em dois e BUG-003 em dois. Todas as falhas se repetiram no retry. [Relatório atual](evidencias/consolidada-2026-10-08/execucao.md), [artefatos completos](evidencias/consolidada-2026-10-08/artefatos-completos.zip) e [manifesto](evidencias/consolidada-2026-10-08/manifesto.json).
 
 CT-CA08-202 passou com subtotal 209,40, desconto 20,94 e frete zero: permanece sem evidência de falha geral da ordem de cálculo. CT-CA10-001 passou com bloqueio da sexta unidade na UI. Cupom vazio/null, IDs minúsculos e descarte do cupom ao esvaziar são observações de hipóteses, não novos bugs.
+
+## Reteste no GitHub Actions — 09/10/2026
+
+O [run consolidado](https://github.com/acarolinebcosta/qa-verzel-store/actions/runs/38017644876), commit 39a123c, reproduziu 61 aprovados e 9 falhas: cinco de BUG-001, duas de BUG-002 e duas de BUG-003. Todas se repetiram no retry. Instalação, TypeScript e upload passaram; os três bugs permanecem abertos. [Logs e metadados do CI](evidencias/ci-2026-10-09/execucao.md).

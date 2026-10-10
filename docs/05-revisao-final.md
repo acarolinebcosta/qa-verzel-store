@@ -1,6 +1,6 @@
 # Revisão final e estado da entrega
 
-Implementação e verificação locais do prompt consolidado concluídas em **08/10/2026**. Publicação da suíte, CI remoto e revisão humana ainda pendentes. Este relatório distingue as entregas de QA dos defeitos do produto.
+Implementação e verificação locais do prompt consolidado concluídas em **08/10/2026**. Branches e PRs publicados; CI remoto executado em 09/10/2026 com 61 aprovados e 9 falhas dos mesmos três defeitos. Integração dos PRs finais e revisão humana ainda pendentes. Este relatório distingue as entregas de QA dos defeitos do produto.
 
 ## O que está pronto
 
@@ -15,7 +15,7 @@ Implementação e verificação locais do prompt consolidado concluídas em **08
 | Exploração | [Charter](exploratorio/charter-cupom-frete.md), RCRCRC, tempos reais/limites de coleta e sessões por agente; nenhuma execução humana inventada |
 | Evidências atuais | [49 evidências manifestadas](evidencias/consolidada-2026-10-08/manifesto.json), mais o manifesto (50 arquivos): screenshots, 9 traces de retry, 2 vídeos de falha UI, JSON, log, sondagens, código e ZIP com HTML completo |
 | Histórico preservado | Rodadas anteriores 07/10 e 08/10 às 03:35; sete commits temáticos e correção 419c46e mantidos |
-| CI configurado | [.github/workflows/playwright.yml](../.github/workflows/playwright.yml): npm ci, Chromium, typecheck, npm test e upload completo mesmo em falha |
+| CI executado | [Run consolidado e logs reais](evidencias/ci-2026-10-09/execucao.md): 70 testes, 61 PASSOU, 9 FALHOU; npm ci, Chromium, TypeScript e upload passaram |
 | Documentação de uso | [README](../README.md) com comandos, resultados, arquitetura, links e limitações; [uso de IA](04-uso-de-ia.md) breve, sem comentários de autoria no código |
 
 ## Problemas do código original e ajustes realizados
@@ -36,18 +36,16 @@ Implementação e verificação locais do prompt consolidado concluídas em **08
 
 | Pendência | Estado | Próxima ação / dependência |
 | --- | --- | --- |
-| Enviar a suíte ao GitHub | BLOQUEADO | A integração disponível retorna 403 sem escrita; navegador/extensão requerem autorização de acesso ao GitHub e a arquivos locais |
-| Publicar PRs e integrar develop/main | NÃO EXECUTADO | Branches/commits e textos de PR preparados localmente; depende do envio autorizado e da revisão |
-| Proteger main e publicar tag de release | BLOQUEADO / NÃO EXECUTADO | Proteção aguarda confirmação de identidade GitHub; nenhuma regra ou tag concluída |
-| Executar GitHub Actions | NÃO EXECUTADO | Depende de publicar workflow e executar evento push/PR/dispatch; resultado remoto ainda desconhecido |
-| Revisão humana da suíte | NÃO EXECUTADO | Revisar documentação, evidências, bugs e PRs |
+| Enviar a suíte ao GitHub | CONCLUÍDO | Branches temáticas e fix/qa-final publicadas |
+| Integrar PRs finais | EM ANDAMENTO | #1/#3/#4/#5/#6 integrados em main; integrar [#7](https://github.com/acarolinebcosta/qa-verzel-store/pull/7), depois [#2](https://github.com/acarolinebcosta/qa-verzel-store/pull/2); sincronizar develop após a consolidação |
+| Proteger main e publicar tag de release | PENDENTE | Nenhuma regra ou tag concluída nesta sessão; confirmação de identidade GitHub não verificada novamente |
+| Executar GitHub Actions | EXECUTADO — FALHOU | 61 PASSOU e 9 FALHOU na versão consolidada; falhas correspondem a BUG-001/002/003, com evidências enviadas |
+| Revisão humana da suíte | NÃO EXECUTADO nesta sessão | Revisar documentação, evidências, bugs e PRs |
 | Corrigir os três defeitos na loja e retestar | PENDENTE — produto | Responsável pelo produto corrige BUG-001/002/003; a suíte mantém as expectativas para reteste |
 
-Não falta implementar um dos três mínimos nem executar a suíte local. Os nove resultados FALHOU são defeitos do produto e não tornam a implementação de QA ausente. A execução remota ainda precisa ser observada; não se presume resultado verde nem aprovação.
+A implementação e as execuções local e remota estão concluídas. O CI reproduziu os defeitos do produto e enviou as evidências; seu status permanece FALHOU. [Relatório do CI](evidencias/ci-2026-10-09/execucao.md).
 
-A revisão automática de permissões rejeitou conceder acesso ao origin inteiro do GitHub sem autorização explícita. Não houve tentativa de contornar esse bloqueio. A confirmação de identidade para proteção de branch é outro requisito de acesso pendente.
-
-Repositório público criado: [acarolinebcosta/qa-verzel-store](https://github.com/acarolinebcosta/qa-verzel-store). Último estado remoto verificado: main e develop apenas no commit inicial 2cae235. A suíte e as correções atuais continuam locais em fix/qa-final. Nenhum PR, proteção ou tag desta entrega foi publicado.
+Repositório público: [acarolinebcosta/qa-verzel-store](https://github.com/acarolinebcosta/qa-verzel-store). Estado dos PRs consultado em 09/10/2026: #1/#3/#4/#5/#6 integrados em main, #7/#2 abertos. A suíte consolidada está na branch fix/qa-final. Proteção e tag permanecem pendentes.
 
 ## Resultado auditado
 
