@@ -1,0 +1,6 @@
+[
+  { "codigo": "BEMVINDO10", "esperado": "sucesso", "percentual": 10 },
+  { "codigo": "  bemvindo10  ", "esperado": "sucesso", "percentual": 10 },
+  { "codigo": "CUPOM_INEXISTENTE_QA", "esperado": "erro", "mensagem": "Cupom inválido." },
+  { "codigo": "VERAO2026", "esperado": "erro", "mensagem": "Cupom expirado." }
+]
